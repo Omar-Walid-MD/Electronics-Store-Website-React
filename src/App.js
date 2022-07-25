@@ -3,6 +3,7 @@ import searchIcon from "./img/search.png"
 import './App.css';
 import { useEffect, useState } from 'react';
 import OverviewDisplay from './OverviewDisplay';
+import OfferDisplay from './OfferDisplay';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
       </header>
       <div className="page-container">
         <OverviewDisplay />
+        <OfferDisplay />
       </div>
     </div>
   );

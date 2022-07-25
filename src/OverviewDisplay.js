@@ -1,4 +1,4 @@
-import featureImgList from "./img/features/export.js"
+import featureImgList from "./img/export.js"
 import { useEffect, useState } from 'react';
 
 function OverviewDisplay()
@@ -43,7 +43,7 @@ function OverviewDisplay()
         }, 4000);
       }
     
-      function GetFeaturePanels()
+      function getFeaturePanels()
       {
         let resultList = [];
         for (const key in featureList)
@@ -87,16 +87,15 @@ function OverviewDisplay()
         for (var i = 0; i < length; i++) {
         result += chars[Math.floor(Math.random() * 9)];
         }
-        console.log(result)
         return result;
       }
 
     return (
-        <section className="front-container">
-          <h1 className="front-title">Store Title</h1>
+        <section className="overview-section-container">
+          <h1 className="overview-section-title">Store Title</h1>
           <div className="feature-panels">
             {
-              GetFeaturePanels().map((feature,index)=>
+              getFeaturePanels().map((feature,index)=>
               <div className="feature-panel-container" order={index} key={index}>
                   <div className="feature-panel" key={makeId(3)}>
                     <img className="feature-image" src={feature.img}/>
