@@ -41,10 +41,9 @@ function OfferDisplay()
         // },
     ];
 
-    let loopedOfferList = [offerList[offerList.length-1],...offerList];
 
-    let maxCount = loopedOfferList.length;
-    let first = 2 - Math.ceil(maxCount/2)
+    let maxCount = offerList.length;
+    let first =  1 - Math.ceil(maxCount/2)
     let counter = first;
     let offset = 0;
 
@@ -52,7 +51,6 @@ function OfferDisplay()
     let size = 0;
     let margin = "";
     let index  = counter + Math.ceil(maxCount/2) - 1;
-    let LastChange = 0;
 
     if(maxCount%2==0)
     {
@@ -60,6 +58,7 @@ function OfferDisplay()
     }
 
     const offerGroup = useRef(null);
+    const gotoGroup = useRef(null);
     
     function slideOnMount()
     {
@@ -69,65 +68,36 @@ function OfferDisplay()
             size = offers[0].clientWidth;
             margin = parseInt(getComputedStyle(offers[0]).margin.slice(0,-2));
         }
-
-        //offerGroup.current.style.transition = "transform 0.4s ease-in-out";
         offerGroup.current.style.transform = "translateX(" + (-(size+margin*2)*first + offset*(size+margin*2)) + "px)";
-
+        gotoGroup.current.querySelectorAll(".goto-offer-radio")[index].checked = true;
     }
     
     function slide(change)
     {
-        if(change===1)
-        {
-            if(counter >= first+maxCount-1) return
-        }
-        else
-        {
-            if(counter <= first-2) return
-        }
 
+        if(index==0 && change==-1)
+        {
+            counter = first + maxCount;
+        }
+        if(index==first+maxCount+1 && change==1)
+        {
+            counter = first - 1;
+        }
         counter+=change;
         offerGroup.current.style.transition = "transform 0.4s ease-in-out";
         offerGroup.current.style.transform = "translateX(" + (-(size+margin*2)*counter + offset*(size+margin*2)) + "px)";
         index  = counter + Math.ceil(maxCount/2) - 1;
-        LastChange = change
 
-        slideEnd();
+        gotoGroup.current.querySelectorAll(".goto-offer-radio")[index].checked = true;
     }
 
-    function slideEnd()
+    function slideTo(i)
     {
-        
-        
-        // if(index==0)
-        // {
-        //     if(LastChange===-1)
-        //     {
-        //         counter = first - 1
-        //     }
-        //     else
-        //     {         
-        //         counter = maxCount - Math.ceil(maxCount/2);
-                
-        //     }
-        //     console.log(LastChange);
-        //     offerGroup.current.style.transition = "none";
-        //     offerGroup.current.style.transform = "translateX(" + (-(size+margin*2)*counter + offset*(size+margin*2)) + "px)";
-        // }
-        if(index==maxCount)
-        {
-            counter = first-1;
-            offerGroup.current.style.transition = "none";
-            offerGroup.current.style.transform = "translateX(" + (-(size+margin*2)*counter + offset*(size+margin*2)) + "px)";
-            counter++;
-            offerGroup.current.style.transition = "transform 0.4s ease-in-out";
-            offerGroup.current.style.transform = "translateX(" + (-(size+margin*2)*counter + offset*(size+margin*2)) + "px)";
-        }
-        
-        console.log("stopped at index: " + index );
-        
+        counter = i - Math.ceil(maxCount/2) + 1;
+        offerGroup.current.style.transition = "transform 0.4s ease-in-out";
+        offerGroup.current.style.transform = "translateX(" + (-(size+margin*2)*counter + offset*(size+margin*2)) + "px)";
+        index  = counter + Math.ceil(maxCount/2) - 1;
     }
-    
 
 
     function makeId(length) {
@@ -151,7 +121,7 @@ function OfferDisplay()
                 
                 <div className="offers-group" ref={offerGroup}>
                     {
-                        loopedOfferList.map((offer)=>
+                        offerList.map((offer)=>
                         <div className="offer-panel-container" key={makeId(5)}>
                             <img className="offer-image" src={offer.img}/>
                             <div className="offer-desc">{offer.desc}</div>
@@ -159,6 +129,7 @@ function OfferDisplay()
                         )
                     }
                 </div>
+
                 <div className="offer-buttons-container">
                     <div className="offer-button" onClick={function(){slide(-1)}}>
                         <div className="offer-button-circle">
@@ -168,10 +139,24 @@ function OfferDisplay()
                     </div>
                     <div className="offer-button" onClick={function(){slide(1)}}>
                         <div className="offer-button-circle">
-                        <img className="offer-button-icon" src={rightArrow} />
+                            <img className="offer-button-icon" src={rightArrow} />
                         </div>
                         <div className="offer-button-shadow" end="right"></div>
                     </div>
+                </div>
+
+                <div className="goto-offer-group" ref={gotoGroup}>
+                    {
+                        offerList.map((offer,index)=>
+                            <label htmlFor={"offer-"+index}>
+                                <div className="goto-offer-container" key={makeId(5)}>
+                                    <input className="goto-offer-radio" type="radio" name="offer-goto" id={"offer-"+index} onClick={function(){slideTo(index)}}/>
+                                    <div className="goto-offer-box"></div>
+                                </div>
+                            </label>
+                        
+                        )
+                    }
                 </div>
             </div>
         </section>

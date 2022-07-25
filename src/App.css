@@ -169,7 +169,7 @@
 
   justify-content: center; align-items: center;
 
-  /* overflow: hidden; */
+  overflow: hidden;
 
   position: relative;
 
@@ -271,4 +271,41 @@
 {
   position: absolute;
   right: 0;
+}
+
+.goto-offer-group
+{
+  width: auto;
+
+  position: absolute;
+  bottom: 20px;
+  
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; align-items: center;
+}
+.goto-offer-container
+{
+  margin: 0 10px;
+
+  display: flex;
+  justify-content: center; align-items: center;
+}
+.goto-offer-radio
+{
+  position: absolute;
+  opacity: 0;
+  margin: 0;
+
+  
+}
+.goto-offer-radio:checked +.goto-offer-box
+{
+  height: 25px; width: 25px;
+  background-color: orange;
+}
+.goto-offer-box
+{
+  height: 20px; width: 20px;
+  background-color: white;
 }
