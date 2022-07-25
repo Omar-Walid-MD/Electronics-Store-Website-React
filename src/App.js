@@ -1,23 +1,30 @@
 import logo from './logo.svg';
+import searchIcon from "./img/search.png"
 import './App.css';
+import { useEffect, useState } from 'react';
+import OverviewDisplay from './OverviewDisplay';
 
 function App() {
+
+  
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+        <div className="nav-bar">
+          <h1 className="logo">Store Title</h1>
+          <div className="search-bar-container">
+            <img className="search-icon" src={searchIcon} alt="search-icon" />
+            <input className="search-bar" type="search" />
+          </div>
+          <div>
+            <h3>More</h3>
+          </div>
+        </div>
       </header>
+      <div className="page-container">
+        <OverviewDisplay />
+      </div>
     </div>
   );
 }
