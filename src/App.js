@@ -4,10 +4,11 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import OverviewDisplay from './OverviewDisplay';
 import OfferDisplay from './OfferDisplay';
+import CategorySection from './CategorySection';
+import BrandSection from './BrandSection';
+import BranchSection from './BranchSection';
 
 function App() {
-
-  
 
   return (
     <div className="App">
@@ -26,6 +27,9 @@ function App() {
       <div className="page-container">
         <OverviewDisplay />
         <OfferDisplay />
+        <CategorySection />
+        <BrandSection />
+        <BranchSection />
       </div>
     </div>
   );

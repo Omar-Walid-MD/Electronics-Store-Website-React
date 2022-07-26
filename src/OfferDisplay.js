@@ -148,7 +148,7 @@ function OfferDisplay()
                 <div className="goto-offer-group" ref={gotoGroup}>
                     {
                         offerList.map((offer,index)=>
-                            <label htmlFor={"offer-"+index}>
+                            <label htmlFor={"offer-"+index} key={index}>
                                 <div className="goto-offer-container" key={makeId(5)}>
                                     <input className="goto-offer-radio" type="radio" name="offer-goto" id={"offer-"+index} onClick={function(){slideTo(index)}}/>
                                     <div className="goto-offer-box"></div>
