@@ -77,7 +77,7 @@ function OverviewDisplay()
     
         updateFeatureIndex();
 
-        return console.log("re-rendered");
+        // return console.log("re-rendered");
     
       },[featureindex]);
 

@@ -6,7 +6,7 @@ import { useEffect, useState, useRef } from 'react';
 
 function OfferDisplay()
 {
-    const offerList = [
+    const offerArray = [
         {
             img: offerTemp,
             desc: "This is our first offer", 
@@ -41,9 +41,12 @@ function OfferDisplay()
         // },
     ];
 
+    const [offerList,setOfferList] = useState([offerArray[offerArray.length-1],...offerArray,offerArray[0]]);
+
+    //Variables
 
     let maxCount = offerList.length;
-    let first =  1 - Math.ceil(maxCount/2)
+    let first =  1 - Math.ceil(maxCount/2) + 1
     let counter = first;
     let offset = 0;
 
@@ -51,6 +54,8 @@ function OfferDisplay()
     let size = 0;
     let margin = "";
     let index  = counter + Math.ceil(maxCount/2) - 1;
+
+    let transitioning = false;
 
     if(maxCount%2==0)
     {
@@ -69,26 +74,61 @@ function OfferDisplay()
             margin = parseInt(getComputedStyle(offers[0]).margin.slice(0,-2));
         }
         offerGroup.current.style.transform = "translateX(" + (-(size+margin*2)*first + offset*(size+margin*2)) + "px)";
-        gotoGroup.current.querySelectorAll(".goto-offer-radio")[index].checked = true;
+        gotoGroup.current.querySelectorAll(".goto-offer-radio")[index-1].checked = true;
     }
     
     function slide(change)
     {
-
-        if(index==0 && change==-1)
+        if(!transitioning)
         {
-            counter = first + maxCount;
-        }
-        if(index==first+maxCount+1 && change==1)
-        {
-            counter = first - 1;
-        }
-        counter+=change;
-        offerGroup.current.style.transition = "transform 0.4s ease-in-out";
-        offerGroup.current.style.transform = "translateX(" + (-(size+margin*2)*counter + offset*(size+margin*2)) + "px)";
-        index  = counter + Math.ceil(maxCount/2) - 1;
+            transitioning = true;
+            counter+=change;
+            offerGroup.current.style.transition = "transform 0.4s ease-in-out";
+            offerGroup.current.style.transform = "translateX(" + (-(size+margin*2)*counter + offset*(size+margin*2)) + "px)";
 
-        gotoGroup.current.querySelectorAll(".goto-offer-radio")[index].checked = true;
+            index  = counter + Math.ceil(maxCount/2) - 1;
+            console.log(index);
+
+            if(index>0&&index<maxCount-1)
+            {
+                gotoGroup.current.querySelectorAll(".goto-offer-radio")[index-1].checked = true;
+            }
+            else if(index===maxCount-1)
+            {
+                gotoGroup.current.querySelectorAll(".goto-offer-radio")[0].checked = true;
+            }
+            else if(index===0)
+            {
+                gotoGroup.current.querySelectorAll(".goto-offer-radio")[maxCount+1-Math.ceil(maxCount/2)].checked = true;
+            }
+
+        }
+        
+    }
+
+    function slideLoop()
+    {
+        if(index===maxCount-1)
+        {
+
+            counter=first;
+            index  = counter + Math.ceil(maxCount/2) - 1;
+
+            offerGroup.current.style.transition = "none";
+            offerGroup.current.style.transform = "translateX(" + (-(size+margin*2)*counter + offset*(size+margin*2)) + "px)";
+        }
+        else if(index===0)
+        {
+            counter = maxCount - Math.ceil(maxCount/2) - 1;
+            index  = counter + Math.ceil(maxCount/2) - 1;
+
+            offerGroup.current.style.transition = "none";
+            offerGroup.current.style.transform = "translateX(" + (-(size+margin*2)*counter + offset*(size+margin*2)) + "px)";
+
+        }
+        transitioning = false;
+        offerGroup.current.style.transition = "none";
+        
     }
 
     function slideTo(i)
@@ -119,7 +159,7 @@ function OfferDisplay()
             
             <div className="offers-group-container">
                 
-                <div className="offers-group" ref={offerGroup}>
+                <div className="offers-group" ref={offerGroup} onTransitionEnd={slideLoop}>
                     {
                         offerList.map((offer)=>
                         <div className="offer-panel-container" key={makeId(5)}>
@@ -147,7 +187,7 @@ function OfferDisplay()
 
                 <div className="goto-offer-group" ref={gotoGroup}>
                     {
-                        offerList.map((offer,index)=>
+                        offerArray.map((offer,index)=>
                             <label htmlFor={"offer-"+index} key={index}>
                                 <div className="goto-offer-container" key={makeId(5)}>
                                     <input className="goto-offer-radio" type="radio" name="offer-goto" id={"offer-"+index} onClick={function(){slideTo(index)}}/>
