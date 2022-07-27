@@ -534,9 +534,34 @@
 }
 .branches-map-pointer
 {
-  height: 30px; width: 30px;
-  background-color: red;
-
   position: absolute;
   top:50%;
+
+  display: flex;
+  justify-content: center; align-items: center;
+
+  background-color: blue;
+
+}
+.branches-map-pointer-image
+{
+  height: 30px;
+  --offset: 30px;
+    
+  position: absolute;
+  top: calc(0% - var(--offset));
+
+  transition: all;
+  transition-duration: 0.2s;
+}
+.branches-radio
+{
+  opacity: 0;
+  position: absolute;
+  margin: 0;
+}
+.branches-radio:checked +.branches-map-pointer-image
+{
+  height: 50px;
+  --offset: 50px;
 }

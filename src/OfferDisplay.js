@@ -27,18 +27,18 @@ function OfferDisplay()
             img: offerTemp,
             desc: "This is our fifth offer", 
         },
-        // {
-        //     img: offerTemp,
-        //     desc: "This is our sixth offer", 
-        // },
-        // {
-        //     img: offerTemp,
-        //     desc: "This is our seventh offer", 
-        // },
-        // {
-        //     img: offerTemp,
-        //     desc: "This is our eighth offer", 
-        // },
+        {
+            img: offerTemp,
+            desc: "This is our sixth offer", 
+        },
+        {
+            img: offerTemp,
+            desc: "This is our seventh offer", 
+        },
+        {
+            img: offerTemp,
+            desc: "This is our eighth offer", 
+        },
     ];
 
     const [offerList,setOfferList] = useState([offerArray[offerArray.length-1],...offerArray,offerArray[0]]);
@@ -99,7 +99,7 @@ function OfferDisplay()
             }
             else if(index===0)
             {
-                gotoGroup.current.querySelectorAll(".goto-offer-radio")[maxCount+1-Math.ceil(maxCount/2)].checked = true;
+                gotoGroup.current.querySelectorAll(".goto-offer-radio")[maxCount+2-Math.ceil(maxCount/2)].checked = true;
             }
 
         }
