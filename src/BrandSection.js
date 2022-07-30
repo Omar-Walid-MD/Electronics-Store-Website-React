@@ -24,6 +24,26 @@ function BrandSection()
             name: "NuclAI",
             logo: "nuclai-logo.png",
         },
+        {
+            name: "Mory",
+            logo: "mory-logo.png",
+        },
+        {
+            name: "Opal",
+            logo: "opal-logo.png",
+        },
+        {
+            name: "AURO",
+            logo: "auro-logo.png",
+        },
+        {
+            name: "Hot-Key",
+            logo: "hotkey-logo.png",
+        },
+        {
+            name: "Pixcel",
+            logo: "pixcel-logo.png",
+        },
 
     ];
 

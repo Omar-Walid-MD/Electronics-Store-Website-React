@@ -2,6 +2,16 @@
 {
   color:white
 }
+
+/* -------------------------------------------------------------------------------------------------------------------------------- */
+/* NAV BAR
+  -Bar container
+  -Search bar
+  -Options container
+  -Profile options
+  -Extras dropdown menu*/
+
+
 .nav-bar
 {
   width: 100%; height: 100px;
@@ -21,6 +31,7 @@
 
   z-index: 2;
 }
+/* ---------------------------------------------------------- */
 .search-bar-container
 {
   width: 50%;
@@ -28,6 +39,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  
 }
 .search-icon
 {
@@ -44,6 +56,390 @@
   padding: 0 10px;
   outline: none;
 }
+/* ---------------------------------------------------------- */
+.nav-bar-options-container
+{
+  width: 350px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; align-items: center;
+
+  margin-right: 25px;
+
+}
+/* ---------------------------------------------------------- */
+.profile-icon
+{
+  height: 60px;
+}
+.login-register-container
+{
+  width: 125%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; align-items: center;
+
+}
+.account-button
+{
+  font-size: 15pt;
+  font-weight: 600;
+
+  padding: 5px 12px;
+  
+
+  border: 3px solid white;
+  border-radius: 20px;
+}
+.account-button:hover
+{
+  color: black  ;
+  background-color: white;
+}
+.login-button
+{
+  color: black;
+  background-color: white;
+}
+/* ---------------------------------------------------------- */
+.menu-container
+{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.menu-icon
+{
+  height: 60px;
+  transform: rotate(0deg);
+
+  transition: all 0.2s ease-in-out;
+}
+.menu-checkbox
+{
+  opacity: 0;
+  margin: 0;
+  position: absolute;
+}
+.menu-checkbox:checked ~.dropdown-menu-container
+{
+  visibility: visible;
+  transform: scaleY(100%);
+}
+.menu-checkbox:checked +label > .menu-icon
+{
+  transform: rotate(90deg);
+}
+.dropdown-menu-container
+{
+  height: auto; width: 200px;
+
+  position: absolute;
+  top: 100px;
+  visibility: hidden;
+
+  transform-origin: top;
+  transform: scaleY(0%);
+
+  transition: all 0.2s ease-in-out;
+
+  z-index: 4;
+}
+.dropdown-menu-option
+{
+  width: 100%; height: 60px;
+  background-color: darkblue;
+  
+  display: flex;
+  justify-content: center; align-items: center;
+
+  margin: 10px 0;
+}
+.dropdown-menu-option:hover
+{
+  background-color: cornflowerblue;
+  transform: scale(105%);
+}
+
+
+
+
+
+
+/* -------------------------------------------------------------------------------------------------------------------------------- */
+/* SIDE BAR
+  -Bar container
+  -Bar header
+  -Bar content
+  -Bar footer*/
+
+
+.side-bar
+{
+  height: 90%; width: 500px;
+
+
+  position: fixed;
+  right: -500px;
+
+  z-index: 4;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; align-items: center;
+
+  box-shadow: 0 0 10px black;
+
+  box-sizing: border-box;
+  
+}
+/* ---------------------------------------------------------- */
+
+.side-bar-header
+{
+  width: 100%; height: 15%;
+
+  background-color: black;
+
+  display: flex;
+  justify-content: center; align-items: center;
+}
+/* ---------------------------------------------------------- */
+
+.side-bar-content
+{
+  width: 100%; height: 65%;
+  background-color: white;
+
+  display: flex;
+  justify-content: center; align-items: center;
+
+  overflow-y: scroll;
+}
+/* ---------------------------------------------------------- */
+.side-bar-footer
+{
+  width: 100%; height: 25%;
+
+  background-color: black;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center; align-items: center;
+
+  box-sizing: border-box;
+  padding: 40px;
+
+  z-index: 1;
+
+}
+
+/* -------------------------------------------------------------------------------------------------------------------------------- */
+/* SHOPPING CART:
+    -Empty warning
+    -List container
+    -Item container:
+      -Item name
+      -Item price
+      -Remove Item:
+        -Remove button
+        -Remove warning container:
+          -Remove warning label
+          -Remove warning buttons*/
+
+.shopping-cart-empty
+{
+  color: black;
+  text-align: center;
+}
+
+.shopping-cart-list
+{
+  width: 100%; height: 100%;
+
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.cart-item-container
+{
+  width: 100%; height: 150px;
+  background-color: lightgray;
+  
+  margin-bottom: 20px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; align-items: center;
+
+  box-sizing: border-box;
+  padding: 20px;
+
+  position: relative;
+}
+.cart-item-name
+{
+  color: black;
+  font-size: 15pt;
+  font-weight: 500;
+}
+.cart-item-price
+{
+  color: black;
+  font-size: 20pt;
+  font-weight: 700;
+}
+.remove-item-button
+{
+  height: 15px; width: 15px;
+  background-color: white;
+  position: absolute;
+
+  bottom: 10px; right: 10px;
+
+  padding: 5px;
+  border-radius: 50%;
+  border: 2px solid black;
+
+  display: flex;
+  justify-content: center; align-items: center;
+}
+.remove-item-button:hover
+{
+  background-color: dimgrey;
+}
+.remove-icon
+{
+  height: 10px;
+}
+.remove-item-warning
+{
+  height: 100%; width: 100%;
+
+  background-color: lightgray;
+
+  position: absolute;
+  left: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center; align-items: center;
+
+  visibility: hidden;
+  
+}
+.remove-item-warning-label
+{
+  color: red;
+}
+.remove-item-warning-buttons
+{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around; align-items: center;
+}
+.remove-item-warning-button
+{
+  color: black;
+
+  font-size: 10pt;
+  font-weight: 800;
+
+  padding: 5px 15px;
+
+  border-radius: 25px;
+}
+.remove-item-warning-button:hover
+{
+  background-color: gray;
+}
+
+
+
+
+.total-cost-label
+{
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; align-items: center;
+}
+.total-cost-label > h2
+{
+  margin: 0;
+}
+.checkout-button
+{
+  color: white;
+  background-color: deepskyblue;
+  font-size: 20pt;
+  font-weight: 800;
+
+  padding: 5px 15px;
+
+  border-radius: 25px;
+}
+.checkout-button:hover
+{
+  background-color: dodgerblue;
+}
+.checkout-button:active
+{
+  background-color: darkblue;
+}
+.checkout-button:disabled
+{
+  pointer-events: none;
+  background-color: grey;
+}
+
+
+.cart-button-container
+{
+  height: 75px; width: 125px;
+  
+  background-color: black;
+  
+  position: absolute;
+  bottom: 50px; left: -130px;
+
+  border-width: 5px 0 5px 5px;
+  border-color: white;
+  border-style: solid none solid solid;
+  border-radius: 20px 0px 0px 20px;
+
+  box-shadow: 0 5px 20px rgb(70, 70, 70);
+
+  display: flex;
+  align-items: center;
+
+  transition: transform 0.2s ease-in-out;
+
+  z-index: 0;
+}
+.cart-button-container:hover
+{
+  transform: scale(110%);
+}
+.cart-icon
+{
+  height: 40px;
+  float: left;
+  margin-left: 20px;
+}
+.cart-checkbox
+{
+  opacity: 0;
+  position: absolute;
+}
+
+
+
+
+
 
 .page-container
 {
@@ -608,4 +1004,14 @@
 .branch-desc
 {
   font-size: 13pt;
+}
+
+
+
+
+
+.footer-container
+{
+  height: 200px; width: 100%;
+  background-color: black;
 }
