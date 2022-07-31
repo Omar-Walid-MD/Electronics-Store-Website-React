@@ -13,8 +13,6 @@ import LoginPage from "./LoginPage";
 function HomePage({currentUser})
 {
     
- 
-
         var loggedIn = currentUser !== null;
 
         return (
@@ -55,16 +53,10 @@ function HomePage({currentUser})
                                         
                                     </div>
                                 </div>
-         
-                    
-                   
-                                
-
-
 
 
                             : <div className="login-register-container">
-                                <a className="account-button">Register</a>
+                                <Link to={"/register"} className="account-button">Register</Link>
                                 <Link to={"/login"} className="login-button account-button">Log in</Link>
                                 </div>
                             

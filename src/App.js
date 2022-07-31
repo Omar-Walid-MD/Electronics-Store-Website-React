@@ -1,12 +1,14 @@
 import logo from './logo.svg';
-import HomePage from './HomePage';
+import { useState, useEffect } from 'react';
 import { Routes, Route } from "react-router-dom";
+import { EasybaseProvider, useEasybase } from "easybase-react";
+import HomePage from './HomePage';
 import LoginPage from './LoginPage';
-import { useState } from 'react';
+import RegisterPage from './RegisterPage';
 
 function App() {
 
-  const userList = [
+  const [userList,setUserList] = useState([
     {
       firstName: "Omar",
       lastName: "Diab",
@@ -25,15 +27,18 @@ function App() {
       email: "mohammed.madinah49@yahoo.com",
       password: "mido123",
     },
-  ];
+  ]);
 
   const [currentUser,setCurrentUser] = useState(null);
 
   return (
-    <Routes>
-        <Route path="/" element={<HomePage currentUser={currentUser} />} />
-        <Route path="/login" element={<LoginPage handleUser={setCurrentUser} userList={userList} />} />
-    </Routes>
+    <EasybaseProvider>
+      <Routes>
+          <Route path="/" element={<HomePage currentUser={currentUser} />} />
+          <Route path="/login" element={<LoginPage handleUser={setCurrentUser} userList={userList} />} />
+          <Route path="/register" element={<RegisterPage handleUser={setCurrentUser} userList={userList} handleUserList={setUserList} />} />
+      </Routes>
+    </EasybaseProvider>
   )
 }
 

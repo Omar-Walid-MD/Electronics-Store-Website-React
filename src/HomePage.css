@@ -85,6 +85,8 @@
 }
 .account-button
 {
+  color: white;
+  text-decoration: none;
   font-size: 15pt;
   font-weight: 600;
 
