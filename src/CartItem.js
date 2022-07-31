@@ -28,6 +28,8 @@ function CartItem({ItemId,name,price,editList})
         // else 
     }
 
+   
+
     return (
         <div className="cart-item-container">
             <div className="cart-item-name">{name}</div>

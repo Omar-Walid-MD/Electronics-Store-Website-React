@@ -1,4 +1,4 @@
-*
+.home-page > *
 {
   color:white
 }
@@ -39,6 +39,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+
   
 }
 .search-icon
@@ -59,26 +60,27 @@
 /* ---------------------------------------------------------- */
 .nav-bar-options-container
 {
-  width: 350px;
+  width: auto;
   display: flex;
   flex-direction: row;
   justify-content: space-between; align-items: center;
+
 
   margin-right: 25px;
 
 }
 /* ---------------------------------------------------------- */
-.profile-icon
-{
-  height: 60px;
-}
+
 .login-register-container
 {
-  width: 125%;
+  width: 250px;
+
+  margin-right: 50px;
 
   display: flex;
   flex-direction: row;
   justify-content: space-between; align-items: center;
+
 
 }
 .account-button
@@ -87,7 +89,6 @@
   font-weight: 600;
 
   padding: 5px 12px;
-  
 
   border: 3px solid white;
   border-radius: 20px;
@@ -100,6 +101,93 @@
 .login-button
 {
   color: black;
+  background-color: white;
+
+  text-decoration: none;
+}
+
+
+.profile-menu-container
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-right: 50px;
+}
+.profile-icon
+{
+  height: 60px;
+}
+.profile-checkbox
+{
+  opacity: 0;
+  position: absolute;
+}
+.profile-checkbox:checked ~.profile-dropdown-container
+{
+  visibility: visible;
+  transform: scaleY(100%);
+}
+.profile-dropdown-container
+{
+  height: auto; width: auto;
+
+  background-color: dimgray;
+
+  box-sizing: border-box;
+
+  box-shadow: 0 5px 20px 0px black;
+
+  
+
+
+  position: absolute;
+  top: 100px;
+  visibility: hidden;
+
+  transform-origin: top;
+  transform: scaleY(0%);
+
+  transition: all 0.2s ease-in-out;
+}
+.profile-overview-info-container
+{
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profile-picture-container
+{
+  height: 120px; width: 120px;
+  background-color: lightgray;
+
+  border-radius: 50%;
+}
+.profile-overview-options-container
+{
+  line-height: 40px;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  font-size: 15pt;
+}
+.profile-overview-logout-container
+{
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.border-line
+{
+  width: 100%; height: 2px;
   background-color: white;
 }
 /* ---------------------------------------------------------- */
@@ -116,18 +204,19 @@
 
   transition: all 0.2s ease-in-out;
 }
+/* NOTE: now using focus instead of checked but keeping checkbox for now just in case focus is bugged */
 .menu-checkbox
 {
   opacity: 0;
   margin: 0;
   position: absolute;
 }
-.menu-checkbox:checked ~.dropdown-menu-container
+.menu-checkbox:focus ~.dropdown-menu-container
 {
   visibility: visible;
   transform: scaleY(100%);
 }
-.menu-checkbox:checked +label > .menu-icon
+.menu-checkbox:focus +label > .menu-icon
 {
   transform: rotate(90deg);
 }
@@ -236,24 +325,20 @@
 }
 
 /* -------------------------------------------------------------------------------------------------------------------------------- */
-/* SHOPPING CART:
+/* SHOPPING CART
     -Empty warning
     -List container
-    -Item container:
-      -Item name
-      -Item price
-      -Remove Item:
-        -Remove button
-        -Remove warning container:
-          -Remove warning label
-          -Remove warning buttons*/
+    -Item container
+    -Remove Item Button
+    -Remove Item Warning*/
+
 
 .shopping-cart-empty
 {
   color: black;
   text-align: center;
 }
-
+/* ---------------------------------------------------------- */
 .shopping-cart-list
 {
   width: 100%; height: 100%;
@@ -261,7 +346,7 @@
   box-sizing: border-box;
   padding: 20px;
 }
-
+/* ---------------------------------------------------------- */
 .cart-item-container
 {
   width: 100%; height: 150px;
@@ -290,6 +375,7 @@
   font-size: 20pt;
   font-weight: 700;
 }
+/* ---------------------------------------------------------- */
 .remove-item-button
 {
   height: 15px; width: 15px;
@@ -313,6 +399,7 @@
 {
   height: 10px;
 }
+/* ---------------------------------------------------------- */
 .remove-item-warning
 {
   height: 100%; width: 100%;
@@ -358,6 +445,11 @@
 
 
 
+/* -------------------------------------------------------------------------------------------------------------------------------- */
+/* CHECKOUT 
+    -Total cost label
+    -Checkout button*/
+
 
 .total-cost-label
 {
@@ -371,6 +463,7 @@
 {
   margin: 0;
 }
+/* ---------------------------------------------------------- */
 .checkout-button
 {
   color: white;
@@ -395,6 +488,12 @@
   pointer-events: none;
   background-color: grey;
 }
+
+
+/* -------------------------------------------------------------------------------------------------------------------------------- */
+/* CART BUTTON 
+    -Button Container
+    -Button*/
 
 
 .cart-button-container
@@ -424,6 +523,7 @@
 {
   transform: scale(110%);
 }
+/* ---------------------------------------------------------- */
 .cart-icon
 {
   height: 40px;
@@ -441,10 +541,21 @@
 
 
 
-.page-container
+/* -------------------------------------------------------------------------------------------------------------------------------- */
+/* PAGE CONTAINER */
+
+
+.home-page-container
 {
   margin-top: 100px;
 }
+
+
+/* -------------------------------------------------------------------------------------------------------------------------------- */
+/* OVERVIEW SECTION 
+    -Section Container
+    -Animated Panels*/
+
 .overview-section-container
 {
   width: 100%; height: 500px;
@@ -466,6 +577,7 @@
 
   z-index: 1;
 }
+/* ---------------------------------------------------------- */
 .feature-panels
 {
   width: 1500px;
@@ -515,7 +627,6 @@
   animation-name: panel-fade;
   animation-duration: 4s;
   animation-fill-mode: forwards;
-  /* animation-iteration-count: infinite; */
   
 }
 .feature-image
@@ -534,6 +645,15 @@
   position: absolute;
   bottom: 2em;
 }
+
+
+/* -------------------------------------------------------------------------------------------------------------------------------- */
+/* OFFER SECTION 
+    -Section Container
+    -Offers Group
+    -Control Arrows
+    -Control Boxes*/
+
 
 .offer-section-container
 {
@@ -558,11 +678,10 @@
 
   z-index: 1;
 }
-
+/* ---------------------------------------------------------- */
 .offers-group-container
 {
   
-
   height: 500px; width: 1200px;
 
   display: flex;
@@ -574,7 +693,6 @@
   position: relative;
 
 }
-
 .offers-group
 {
   
@@ -582,7 +700,6 @@
   flex-direction: row;
   
 }
-
 .offer-panel-container
 {
   
@@ -612,7 +729,7 @@
   position: absolute;
   bottom: 2em;
 }
-
+/* ---------------------------------------------------------- */
 .offer-buttons-container
 {
   display: flex;
@@ -645,7 +762,6 @@
   justify-content: center; align-items: center;
   
 }
-
 .offer-button-icon
 {
   height: 30px; width: auto;
@@ -672,7 +788,7 @@
   position: absolute;
   right: 0;
 }
-
+/* ---------------------------------------------------------- */
 .goto-offer-group
 {
   width: auto;
@@ -696,8 +812,6 @@
   position: absolute;
   opacity: 0;
   margin: 0;
-
-  
 }
 .goto-offer-radio:checked +.goto-offer-box
 {
@@ -714,6 +828,10 @@
 }
 
 
+/* -------------------------------------------------------------------------------------------------------------------------------- */
+/* CATEGORY SECTION 
+    -Section Container
+    -Category Group*/
 
 
 .category-section-container
@@ -739,6 +857,7 @@
 
   z-index: 1;
 }
+/* ---------------------------------------------------------- */
 .category-group
 {
   width: auto;
@@ -747,7 +866,6 @@
   grid-template-columns: repeat(5,20%);
 
 }
-
 .category-container
 {
   height: 150px; width: 250px;
@@ -767,7 +885,6 @@
 
   transition: all 0.2s;
 }
-
 .category-container:hover
 {
   transform: scale(1.05);
@@ -793,8 +910,10 @@
 
 
 
-
-
+/* -------------------------------------------------------------------------------------------------------------------------------- */
+/* BRAND SECTION 
+    -Section Container
+    -Brand Group*/
 
 
 .brand-section-container
@@ -820,15 +939,14 @@
 
   z-index: 1;
 }
+/* ---------------------------------------------------------- */
 .brand-group
 {
   width: auto;
 
   display: grid;
   grid-template-columns: repeat(5,20%);
-
 }
-
 .brand-container
 {
   height: 150px; width: 250px;
@@ -863,13 +981,13 @@
   height: 120px;
   opacity: 0.6;
 }
-/* .brand-name
-{
-  color: black;
 
-  position: absolute;
-  bottom: 5px;
-} */
+/* -------------------------------------------------------------------------------------------------------------------------------- */
+/* BRANCHES SECTION 
+    -Section Container
+    -Branches Map
+    -Map Pointers
+    -Branches Info*/
 
 
 .branches-section-container
@@ -903,6 +1021,7 @@
   flex-direction: row;
   justify-content: space-around; align-items: flex-start;
 }
+/* ---------------------------------------------------------- */
 .branches-map-container
 {
   width: 500px; height: 500px;
@@ -920,6 +1039,7 @@
   margin: 0;
   padding: 0;
 }
+/* ---------------------------------------------------------- */
 .branches-map-pointer-group
 {
   
@@ -928,9 +1048,6 @@
   position: absolute;
   top: 0; left: 0;
 }
-
-
-
 @keyframes pointer-selected
 {
   0%    {top: calc(0% - var(--offset));}
@@ -939,7 +1056,6 @@
   85%   {top: calc(10px - var(--offset)); transform: scaleY(75%);}
   100%  {top: calc(0% - var(--offset)); transform: scaleY(100%);}
 }
-
 .branches-map-pointer
 {
   position: absolute;
@@ -975,12 +1091,12 @@
 
   animation: pointer-selected 0.5s ease-in-out;
 }
-
 @keyframes branch-info-refresh
 {
   0% {opacity: 0;}
   100% {opacity: 1;}  
 }
+/* ---------------------------------------------------------- */
 .branches-info-container
 {
   width: 500px;
@@ -1009,7 +1125,8 @@
 
 
 
-
+/* -------------------------------------------------------------------------------------------------------------------------------- */
+/* FOOTER SECTION*/
 .footer-container
 {
   height: 200px; width: 100%;

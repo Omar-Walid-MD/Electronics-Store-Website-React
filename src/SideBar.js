@@ -3,8 +3,6 @@ import CartItem from "./CartItem";
 
 function SideBar()
 {
-    const [totalPrice,setTotalPrice] = useState(0);
-
     const [cartList,setCartList] = useState([
         {
             name: "Mobile Phone",
@@ -25,13 +23,12 @@ function SideBar()
     
     function calculateTotal()
     {
-        
-        setTotalPrice(0);
+        let total = 0;
         for(let i = 0; i < cartList.length; i++)
         {
-            setTotalPrice(x => x+=cartList[i].price);
+            total += cartList[i].price;
         }
-
+        return total;
     }
 
     const sideBar = useRef(null);
@@ -51,10 +48,16 @@ function SideBar()
         console.log(sideBar.current.style.width);
     }
 
+    function calculateTotal()
+    {
+        let total = 0;
+        for(let i = 0; i < cartList.length; i++)
+        {
+            total += cartList[i].price;
+        }
+        return total;
+    }
 
-    useEffect(()=>{
-        calculateTotal();
-    },[cartList]);
 
     return (
         <div className="side-bar" ref = {sideBar}>
@@ -75,7 +78,7 @@ function SideBar()
         </div>
         <div className="side-bar-footer">
             <div className="total-cost-label">
-                <h2>Total:</h2><h2>{totalPrice}</h2>
+                <h2>Total:</h2><h2>{calculateTotal()}</h2>
             </div>
             <button className="checkout-button" disabled={cartList.length==0}>Checkout</button>
         </div>
