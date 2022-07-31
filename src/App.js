@@ -1,7 +1,6 @@
 import logo from './logo.svg';
 import { useState, useEffect } from 'react';
 import { Routes, Route } from "react-router-dom";
-import { EasybaseProvider, useEasybase } from "easybase-react";
 import HomePage from './HomePage';
 import LoginPage from './LoginPage';
 import RegisterPage from './RegisterPage';
@@ -32,13 +31,11 @@ function App() {
   const [currentUser,setCurrentUser] = useState(null);
 
   return (
-    <EasybaseProvider>
-      <Routes>
-          <Route path="/" element={<HomePage currentUser={currentUser} />} />
-          <Route path="/login" element={<LoginPage handleUser={setCurrentUser} userList={userList} />} />
-          <Route path="/register" element={<RegisterPage handleUser={setCurrentUser} userList={userList} handleUserList={setUserList} />} />
-      </Routes>
-    </EasybaseProvider>
+    <Routes>
+        <Route path="/" element={<HomePage currentUser={currentUser} />} />
+        <Route path="/login" element={<LoginPage handleUser={setCurrentUser} userList={userList} />} />
+        <Route path="/register" element={<RegisterPage handleUser={setCurrentUser} userList={userList} handleUserList={setUserList} />} />
+    </Routes>
   )
 }
 
