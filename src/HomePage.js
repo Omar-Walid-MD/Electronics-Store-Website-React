@@ -14,11 +14,11 @@ import Footer from "./Footer";
 function HomePage({currentUser, handleUser})
 {
     
-    var loggedIn = currentUser && currentUser.loggedIn;
+    var loggedIn = currentUser && currentUser.userId !== 0;
 
     function logOut()
     {
-        let nullUser = {id: 0, loggedIn: false};
+        let nullUser = {id: 0, userId: 0};
         handleUser(nullUser);
 
         const axios = require('axios');

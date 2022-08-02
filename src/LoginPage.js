@@ -39,8 +39,8 @@ function LoginPage({handleUser,userList})
             {
                 if(userList[i].password===passwordValue)
                 {
-
-                    let loggedUser = {...userList[i], loggedIn: true};
+                    let userId = userList[i].id;
+                    let loggedUser = {id: 0, userId: userId};
                     console.log("Successfully logged in");
                     setSubmitted("success");
 
@@ -55,6 +55,16 @@ function LoginPage({handleUser,userList})
                         console.log(error);
                     });
 
+                    fetch('http://localhost:8000/users/'+userId)
+                    .then(res => {
+                        return res.json()
+                    })
+                    .then((data)=>{
+                        console.log("Current user: ");
+                        console.log(data);
+                    handleUser(data);
+                    
+                    })
 
                     handleUser(loggedUser);
                     navigate("/");

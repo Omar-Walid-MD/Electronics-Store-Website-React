@@ -1,10 +1,5 @@
 {
-  "currentUser": [
-    {
-      "id": 0,
-      "loggedIn": false
-    }
-  ],
+  "currentUser": [],
   "users": [
     {
       "id": 1,
@@ -26,6 +21,64 @@
       "lastName": "User",
       "email": "user@test.com",
       "password": "2020"
+    }
+  ],
+  "products": [
+    {
+      "id": "6124359531",
+      "name": "Buzz Phone B1",
+      "category": "smartphone",
+      "brand": "buzz",
+      "price": "100"
+    },
+    {
+      "id": "3458684934",
+      "name": "Buzz Phone B2",
+      "category": "smartphone",
+      "brand": "buzz",
+      "price": "120"
+    },
+    {
+      "id": "5921471598",
+      "name": "Buzz Phone B3",
+      "category": "smartphone",
+      "brand": "buzz",
+      "price": "140"
+    },
+    {
+      "id": "2989843834",
+      "name": "Buzz Phone B4",
+      "category": "smartphone",
+      "brand": "buzz",
+      "price": "160"
+    },
+    {
+      "id": "9287661888",
+      "name": "Buzz Tab B1",
+      "category": "tablet",
+      "brand": "buzz",
+      "price": "200"
+    },
+    {
+      "id": "6119347394",
+      "name": "Buzz Phone B5",
+      "category": "smartphone",
+      "brand": "buzz",
+      "price": "180"
+    },
+    {
+      "id": "2976317714",
+      "name": "Buzz Tab B2",
+      "category": "tablet",
+      "brand": "buzz",
+      "price": "250"
+    },
+    {
+      "id": "4637131441",
+      "name": "Buzz Tab B3",
+      "category": "tablet",
+      "brand": "buzz",
+      "price": "300"
     }
   ]
 }

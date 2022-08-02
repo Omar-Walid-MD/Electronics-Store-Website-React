@@ -4,12 +4,48 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from './HomePage';
 import LoginPage from './LoginPage';
 import RegisterPage from './RegisterPage';
+import AddProductPage from './AddProductPage';
+import ProductListPage from './ProductListPage';
+import EditProductPage from './EditProductPage';
 
 function App() {
 
   const [userList,setUserList] = useState(null);
 
   const [currentUser,setCurrentUser] = useState(null);
+
+  function handleCurrentUser()
+  {
+    fetch('http://localhost:8000/currentUser/0')
+    .then(res => {
+      return res.json()
+    })
+    .then((data)=>{
+      console.log(data);
+      const userId = data.userId;
+
+      if(userId===0)
+      {
+        setCurrentUser(data);
+      }
+      else
+      {
+        fetch('http://localhost:8000/users/'+userId)
+        .then(res => {
+          return res.json()
+        })
+        .then((data)=>{
+          console.log("Current user: ");
+          console.log(data);
+          setCurrentUser(data);
+          
+        })
+      }
+
+      
+    })
+
+  }
 
   useEffect(()=>{
     fetch('http://localhost:8000/users')
@@ -21,14 +57,9 @@ function App() {
       setUserList(data);
     })
 
-    fetch('http://localhost:8000/currentUser/0')
-    .then(res => {
-      return res.json()
-    })
-    .then((data)=>{
-      console.log(data);
-      setCurrentUser(data);
-    })
+    handleCurrentUser();
+
+    
   },[]);
 
   return (
@@ -36,6 +67,10 @@ function App() {
         <Route path="/" element={<HomePage currentUser={currentUser} handleUser={setCurrentUser} />} />
         <Route path="/login" element={<LoginPage handleUser={setCurrentUser} userList={userList} />} />
         <Route path="/register" element={<RegisterPage handleUser={setCurrentUser} userList={userList} handleUserList={setUserList} />} />
+        <Route path="/products" element={<ProductListPage />} />
+        <Route path="/add-product" element={<AddProductPage />} />
+        <Route path="/edit-product" element={<EditProductPage />} />
+
     </Routes>
   )
 }
