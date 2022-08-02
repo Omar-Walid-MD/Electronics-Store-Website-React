@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './LoginPage.css';
 
 function LoginPage({handleUser,userList})
@@ -39,9 +39,24 @@ function LoginPage({handleUser,userList})
             {
                 if(userList[i].password===passwordValue)
                 {
+
+                    let loggedUser = {...userList[i], loggedIn: true};
                     console.log("Successfully logged in");
                     setSubmitted("success");
-                    handleUser(userList[i]);
+
+                    const axios = require('axios');
+
+                    axios.put('http://localhost:8000/currentUser/0',
+                        loggedUser
+                    )
+                    .then(resp =>{
+                        console.log(resp.data);
+                    }).catch(error => {
+                        console.log(error);
+                    });
+
+
+                    handleUser(loggedUser);
                     navigate("/");
                     return;
                 }
@@ -93,7 +108,12 @@ function LoginPage({handleUser,userList})
                         
                     </form>
                 </div>
+                <div className="home-button-container">
+                    <Link to={"/"} className="home-button">Back to Home</Link>
+                </div>
             </div>
+            
+
         </div>
     )
 }

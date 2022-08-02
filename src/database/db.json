@@ -1,0 +1,31 @@
+{
+  "currentUser": [
+    {
+      "id": 0,
+      "loggedIn": false
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Omar",
+      "lastName": "Diab",
+      "email": "omar.madinah49@yahoo.com",
+      "password": "omar123"
+    },
+    {
+      "id": 20,
+      "firstName": "Mido",
+      "lastName": "Diab",
+      "email": "mido12@gemail.com",
+      "password": "mido12"
+    },
+    {
+      "id": "3483489429",
+      "firstName": "Test",
+      "lastName": "User",
+      "email": "user@test.com",
+      "password": "2020"
+    }
+  ]
+}

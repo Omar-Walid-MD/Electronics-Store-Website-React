@@ -7,32 +7,33 @@ import RegisterPage from './RegisterPage';
 
 function App() {
 
-  const [userList,setUserList] = useState([
-    {
-      firstName: "Omar",
-      lastName: "Diab",
-      email: "omar.madinah49@yahoo.com",
-      password: "omar123",
-    },
-    {
-      firstName: "Walid",
-      lastName: "Diab",
-      email: "walid.madinah49@yahoo.com",
-      password: "walid123",
-    },
-    {
-      firstName: "Mohammed",
-      lastName: "Diab",
-      email: "mohammed.madinah49@yahoo.com",
-      password: "mido123",
-    },
-  ]);
+  const [userList,setUserList] = useState(null);
 
   const [currentUser,setCurrentUser] = useState(null);
 
+  useEffect(()=>{
+    fetch('http://localhost:8000/users')
+    .then(res => {
+      return res.json()
+    })
+    .then((data)=>{
+      console.log(data);
+      setUserList(data);
+    })
+
+    fetch('http://localhost:8000/currentUser/0')
+    .then(res => {
+      return res.json()
+    })
+    .then((data)=>{
+      console.log(data);
+      setCurrentUser(data);
+    })
+  },[]);
+
   return (
     <Routes>
-        <Route path="/" element={<HomePage currentUser={currentUser} />} />
+        <Route path="/" element={<HomePage currentUser={currentUser} handleUser={setCurrentUser} />} />
         <Route path="/login" element={<LoginPage handleUser={setCurrentUser} userList={userList} />} />
         <Route path="/register" element={<RegisterPage handleUser={setCurrentUser} userList={userList} handleUserList={setUserList} />} />
     </Routes>

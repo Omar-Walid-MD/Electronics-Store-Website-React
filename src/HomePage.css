@@ -213,12 +213,12 @@
   margin: 0;
   position: absolute;
 }
-.menu-checkbox:focus ~.dropdown-menu-container
+.menu-checkbox:checked ~.dropdown-menu-container
 {
   visibility: visible;
   transform: scaleY(100%);
 }
-.menu-checkbox:focus +label > .menu-icon
+.menu-checkbox:checked +label > .menu-icon
 {
   transform: rotate(90deg);
 }
@@ -1131,6 +1131,84 @@
 /* FOOTER SECTION*/
 .footer-container
 {
-  height: 200px; width: 100%;
+  height: auto; width: 100%;
   background-color: black;
+
+  box-sizing: border-box;
+  padding: 30px 50px 80px 50px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around; align-items: flex-start;
+
+  position: relative;
+}
+.footer-list
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; align-items: flex-start;
+
+}
+.footer-link
+{
+  color: white;
+  text-decoration: none;
+}
+.footer-link:hover
+{
+  color: deepskyblue;
+}
+.footer-credits
+{
+  width: 100%; height: 20px;
+
+  font-size: 10pt;
+
+  background-color: dimgray;
+
+  display: flex;
+  justify-content: center; align-items: center;
+
+  box-sizing: border-box;
+  padding: 15px;
+
+  position: absolute;
+  bottom: 0;
+}
+.email-input
+{
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    padding: 5px 8px;
+    font-size: 12pt;
+    width: 150px;
+}
+.email-input::placeholder
+{
+    color: rgba(255, 255, 255, 0.6);
+}
+.email-input:focus
+{
+    outline: none;
+}
+.email-submit
+{
+    font-size: 12pt;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 20px;
+    margin: 0px 10px;
+    
+    transition-property: background-color;
+    transition-duration: 0.2s;
+}
+.email-submit:hover
+{
+    background-color: lightgray;
+}
+.email-submit[disabled]
+{
+    background-color: dimgray;
 }

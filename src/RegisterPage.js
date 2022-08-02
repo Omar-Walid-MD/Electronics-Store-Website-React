@@ -67,11 +67,19 @@ function RegisterPage({handleUser,userList,handleUserList})
             setSubmitted("success");
 
             let newUser = {
+                id: makeId(10),
                 firstName: firstNameValue,
                 lastName: lastNameValue,
                 email: emailValue,
                 password: passwordValue,
             };
+            
+            fetch('http://localhost:8000/users',{
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(newUser)
+            }).then(()=>{console.log("New User Added.")})
+            
             handleUserList(prevList => [...prevList,newUser]);
             handleUser(newUser);
             navigate("/");
@@ -84,6 +92,15 @@ function RegisterPage({handleUser,userList,handleUserList})
         }
 
     }
+
+    function makeId(length) {
+        let result = "";
+        let chars = "123456789";
+        for (var i = 0; i < length; i++) {
+        result += chars[Math.floor(Math.random() * 9)];
+        }
+        return result;
+      }
 
 
     return (
@@ -129,6 +146,9 @@ function RegisterPage({handleUser,userList,handleUserList})
                         <input className="register-form-submit" type="submit" disabled={inputEmpty()}/>
                         
                     </form>
+                </div>
+                <div className="home-button-container">
+                    <Link to={"/"} className="home-button">Back to Home</Link>
                 </div>
             </div>
         </div>

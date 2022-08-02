@@ -48,16 +48,6 @@ function SideBar()
         console.log(sideBar.current.style.width);
     }
 
-    function calculateTotal()
-    {
-        let total = 0;
-        for(let i = 0; i < cartList.length; i++)
-        {
-            total += cartList[i].price;
-        }
-        return total;
-    }
-
 
     return (
         <div className="side-bar" ref = {sideBar}>
@@ -66,7 +56,7 @@ function SideBar()
         </div>
         <div className="side-bar-content">
             {
-                cartList.length != 0 ? <div className="shopping-cart-list">
+                cartList.length !== 0 ? <div className="shopping-cart-list">
                                             {
                                                 cartList.map((item,index)=>
                                                 <CartItem ItemId={item.id} name={item.name} price={item.price} editList={setCartList} key={"Item"+index}/>
@@ -80,7 +70,7 @@ function SideBar()
             <div className="total-cost-label">
                 <h2>Total:</h2><h2>{calculateTotal()}</h2>
             </div>
-            <button className="checkout-button" disabled={cartList.length==0}>Checkout</button>
+            <button className="checkout-button" disabled={cartList.length===0}>Checkout</button>
         </div>
         <label htmlFor="cart-toggle" className="cart-button-container">
             <img className="cart-icon" src={require("./img/cart-icon.png")}/>
