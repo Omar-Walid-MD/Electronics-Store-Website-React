@@ -55,6 +55,33 @@ function ShoppingPage({currentUser, handleUser})
         ))
     }
 
+    function OptionsScroll()
+    {
+
+
+
+        const OptionsContainer = document.querySelector(".shopping-options-container");
+
+        const PageContainer = document.querySelector(".shopping-page-container");
+
+        let bottom = PageContainer.getBoundingClientRect().bottom + window.pageYOffset;
+
+
+
+        if(window.pageYOffset < bottom - 750)
+        {
+            const OptionsContainer = document.querySelector(".shopping-options-container");
+    
+            OptionsContainer.style.transform = "translateY(" + window.pageYOffset + "px)";
+
+        }
+        else
+        {
+            OptionsContainer.style.transform = "translateY(" + (bottom - 750) + "px)";
+        }
+        
+    }
+
 
     
     useEffect(()=>{
@@ -66,11 +93,19 @@ function ShoppingPage({currentUser, handleUser})
           console.log(data);
           setFilteredProductList(filterList(data));
         })
+
+        window.addEventListener('scroll',OptionsScroll);
+
+        return function()
+        {
+            window.removeEventListener('scroll',OptionsScroll);
+            console.log("Unmounted");
+        } 
     
     },[priceFilter,categoryFilter,brandFilter]);
 
     return (
-        <div className="shopping-page">
+        <div className="shopping-page" onClick={OptionsScroll}>
             <header>
                 <NavBar currentUser={currentUser} handleUser={handleUser} />
             </header>
@@ -101,7 +136,7 @@ function ShoppingPage({currentUser, handleUser})
 
                         </div>
                     </div>
-                    
+
                     <div className="shopping-option-section">
                         <h2>Categories:</h2>
                         <div className="shopping-option-input-group">
