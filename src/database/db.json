@@ -2,7 +2,7 @@
   "currentUser": [
     {
       "id": 0,
-      "userId": 0
+      "userId": 1
     }
   ],
   "users": [
@@ -11,21 +11,24 @@
       "firstName": "Omar",
       "lastName": "Diab",
       "email": "omar.madinah49@yahoo.com",
-      "password": "omar123"
+      "password": "omar123",
+      "cart": []
     },
     {
       "id": 20,
       "firstName": "Mido",
       "lastName": "Diab",
       "email": "mido12@gemail.com",
-      "password": "mido12"
+      "password": "mido12",
+      "cart": []
     },
     {
       "id": "3483489429",
       "firstName": "Test",
       "lastName": "User",
       "email": "user@test.com",
-      "password": "2020"
+      "password": "2020",
+      "cart": []
     }
   ],
   "products": [

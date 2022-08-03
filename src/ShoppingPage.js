@@ -2,20 +2,23 @@ import NavBar from "./NavBar";
 import SideBar from "./SideBar";
 import Footer from "./Footer"
 import { useState, useEffect } from "react";
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import "./ShoppingPage.css";
 
 function ShoppingPage({currentUser, handleUser})
 {
     var loggedIn = currentUser && currentUser.userId !== 0;
 
+    const location = useLocation();
+    const { category, brand } = location.state;
+
+    const [produtList,setProductList] = useState([]);
+
     const [priceFilter,setPriceFilter] = useState({min:0,max:1000});
 
     const [brandFilter,setBrandFilter] = useState([])
 
     const [categoryFilter,setCategoryFilter] = useState([]);
-
-
-    const [filteredProductList,setFilteredProductList] = useState([]);
 
     function setPriceRange()
     {
@@ -45,9 +48,30 @@ function ShoppingPage({currentUser, handleUser})
         console.log(brandFilter);
     }
 
+    function setPageOnMount()
+    {
+        //Set Categories and Brands from links
+        if(category !== undefined) setCategoryFilter([category]);
+        if(brand !== undefined) setBrandFilter([brand]);
+
+        //Set Checkboxes to match filters
+        const categoryChecboxes = document.querySelectorAll("input[name=shopping-category]");
+
+        for(let i = 0; i < categoryChecboxes.length; i++)
+        {
+            if(category === (categoryChecboxes[i].value)) categoryChecboxes[i].checked = true;
+        }
+
+        const brandCheckboxes = document.querySelectorAll("input[name=shopping-brand]");
+        for(let i = 0; i < brandCheckboxes.length; i++)
+        {
+            if(brand === (brandCheckboxes[i].value)) brandCheckboxes[i].checked = true;
+        }
+    }
 
     function filterList(inputList)
     {
+        console.log(brandFilter)
         return inputList.filter((product)=>(
                 (product.price >= priceFilter.min && product.price <= priceFilter.max)
             &&  (categoryFilter.length > 0 ? categoryFilter.includes(product.category) : true)
@@ -55,33 +79,51 @@ function ShoppingPage({currentUser, handleUser})
         ))
     }
 
+    function AddToCart(product)
+    {
+        if(loggedIn)
+        {
+            let profileWithNewProduct = {
+                ...currentUser,
+                cart: [...currentUser.cart,product],
+            };
+            
+            const axios = require('axios');
+
+            axios.put('http://localhost:8000/users/'+currentUser.id,
+                profileWithNewProduct
+            )
+            .then(resp =>{
+                console.log("Added product to your cart");
+            }).catch(error => {
+                console.log(error);
+            });
+
+            //To update state and trigger re-render
+            handleUser(profileWithNewProduct);
+        }
+        else
+        {
+            console.log("You need to log in!")
+        }
+    }
+
     function OptionsScroll()
     {
-
-
-
         const OptionsContainer = document.querySelector(".shopping-options-container");
-
         const PageContainer = document.querySelector(".shopping-page-container");
-
         let bottom = PageContainer.getBoundingClientRect().bottom + window.pageYOffset;
-
-
 
         if(window.pageYOffset < bottom - 750)
         {
             const OptionsContainer = document.querySelector(".shopping-options-container");
-    
             OptionsContainer.style.transform = "translateY(" + window.pageYOffset + "px)";
-
         }
         else
         {
             OptionsContainer.style.transform = "translateY(" + (bottom - 750) + "px)";
         }
-        
     }
-
 
     
     useEffect(()=>{
@@ -91,10 +133,14 @@ function ShoppingPage({currentUser, handleUser})
         })
         .then((data)=>{
           console.log(data);
-          setFilteredProductList(filterList(data));
+          setProductList(data);
         })
 
         window.addEventListener('scroll',OptionsScroll);
+
+        setPageOnMount();
+
+        console.log("re rendered");
 
         return function()
         {
@@ -102,15 +148,15 @@ function ShoppingPage({currentUser, handleUser})
             console.log("Unmounted");
         } 
     
-    },[priceFilter,categoryFilter,brandFilter]);
+    },[]);
 
     return (
-        <div className="shopping-page" onClick={OptionsScroll}>
+        <div className="shopping-page">
             <header>
                 <NavBar currentUser={currentUser} handleUser={handleUser} />
             </header>
             {
-                loggedIn && <SideBar />
+                loggedIn && <SideBar currentUser={currentUser} handleUser={handleUser}/>
             }
 
             <div className="shopping-page-container">
@@ -186,6 +232,46 @@ function ShoppingPage({currentUser, handleUser})
                                 <input type="checkbox" value="maple" name="shopping-brand" id="shopping-brand-maple" onChange={setBrands} />
                                 <label htmlFor="shopping-brand-maple" >Maple</label>
                             </div>
+
+                            <div className="shopping-option-checkbox-container">
+                                <input type="checkbox" value="chromax" name="shopping-brand" id="shopping-brand-chromax" onChange={setBrands} />
+                                <label htmlFor="shopping-brand-chromax" >Chromax</label>
+                            </div>
+
+                            <div className="shopping-option-checkbox-container">
+                                <input type="checkbox" value="hyper" name="shopping-brand" id="shopping-brand-hyper" onChange={setBrands} />
+                                <label htmlFor="shopping-brand-hyper" >Hyper</label>
+                            </div>
+
+                            <div className="shopping-option-checkbox-container">
+                                <input type="checkbox" value="nuclai" name="shopping-brand" id="shopping-brand-nuclai" onChange={setBrands} />
+                                <label htmlFor="shopping-brand-nuclai" >NuclAI</label>
+                            </div>
+
+                            <div className="shopping-option-checkbox-container">
+                                <input type="checkbox" value="mory" name="shopping-brand" id="shopping-brand-mory" onChange={setBrands} />
+                                <label htmlFor="shopping-brand-mory" >Mory</label>
+                            </div>
+
+                            <div className="shopping-option-checkbox-container">
+                                <input type="checkbox" value="opal" name="shopping-brand" id="shopping-brand-opal" onChange={setBrands} />
+                                <label htmlFor="shopping-brand-opal" >Opal</label>
+                            </div>
+
+                            <div className="shopping-option-checkbox-container">
+                                <input type="checkbox" value="auro" name="shopping-brand" id="shopping-brand-auro" onChange={setBrands} />
+                                <label htmlFor="shopping-brand-auro" >Auro</label>
+                            </div>
+
+                            <div className="shopping-option-checkbox-container">
+                                <input type="checkbox" value="hotkey" name="shopping-brand" id="shopping-brand-hotkey" onChange={setBrands} />
+                                <label htmlFor="shopping-brand-hotkey" >Hot-key</label>
+                            </div>
+
+                            <div className="shopping-option-checkbox-container">
+                                <input type="checkbox" value="pixcel" name="shopping-brand" id="shopping-brand-pixcel" onChange={setBrands} />
+                                <label htmlFor="shopping-brand-pixcel" >Pixcel</label>
+                            </div>
                             
                         </div>
                     </div>
@@ -196,7 +282,7 @@ function ShoppingPage({currentUser, handleUser})
                     <div className="shopping-results-container">
 
                     {
-                        filteredProductList.map((product)=>
+                        filterList(produtList).map((product)=>
                         
                         <div className="product-result-container" key={product.id}>
                             <div className="product-result-image">
@@ -205,7 +291,7 @@ function ShoppingPage({currentUser, handleUser})
                             <h3 className="product-result-name">{product.name}</h3>
                             <h1 className="product-result-price">{product.price}</h1>
 
-                            <div className="product-result-option-button"><img className="product-result-cart-icon" src={require("./img/cart-icon.png")} /></div>
+                            <div className="product-result-option-button" onClick={function(){AddToCart(product);}}><img className="product-result-cart-icon" src={require("./img/cart-icon.png")} /></div>
 
                         </div>
                         

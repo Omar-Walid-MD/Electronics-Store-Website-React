@@ -22,7 +22,7 @@ function HomePage({currentUser, handleUser})
         </header>
         
         {
-            loggedIn && <SideBar />
+            loggedIn && <SideBar currentUser={currentUser} handleUser={handleUser} />
         }
         <div className="home-page-container">
             <OverviewDisplay />

@@ -1,32 +1,15 @@
 import {useEffect, useRef, useState} from "react";
 import CartItem from "./CartItem";
 
-function SideBar()
+function SideBar({currentUser, handleUser})
 {
-    const [cartList,setCartList] = useState([
-        {
-            name: "Mobile Phone",
-            price: 49.99,
-            id: 0,
-        },
-        {
-            name: "Mobile Phone",
-            price: 29.99,
-            id: 1,
-        },
-        {
-            name: "Mobile Phone",
-            price: 59.99,
-            id: 2,
-        },
-    ]);
     
     function calculateTotal()
     {
         let total = 0;
-        for(let i = 0; i < cartList.length; i++)
+        for(let i = 0; i < currentUser.cart.length; i++)
         {
-            total += cartList[i].price;
+            total += parseInt(currentUser.cart[i].price);
         }
         return total;
     }
@@ -56,10 +39,10 @@ function SideBar()
         </div>
         <div className="side-bar-content">
             {
-                cartList.length !== 0 ? <div className="shopping-cart-list">
+                currentUser.cart && currentUser.cart.length !== 0 ? <div className="shopping-cart-list">
                                             {
-                                                cartList.map((item,index)=>
-                                                <CartItem ItemId={item.id} name={item.name} price={item.price} editList={setCartList} key={"Item"+index}/>
+                                                currentUser.cart.map((item,index)=>
+                                                <CartItem ItemId={item.id} name={item.name} currentUser={currentUser} handleUser={handleUser} price={item.price} key={"Item"+index}/>
                                                 )
                                             }
                                         </div>
@@ -70,7 +53,7 @@ function SideBar()
             <div className="total-cost-label">
                 <h2>Total:</h2><h2>{calculateTotal()}</h2>
             </div>
-            <button className="checkout-button" disabled={cartList.length===0}>Checkout</button>
+            <button className="checkout-button" disabled={currentUser.cart.length===0}>Checkout</button>
         </div>
         <label htmlFor="cart-toggle" className="cart-button-container">
             <img className="cart-icon" src={require("./img/cart-icon.png")}/>
