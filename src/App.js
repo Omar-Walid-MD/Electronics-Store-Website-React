@@ -7,6 +7,7 @@ import RegisterPage from './RegisterPage';
 import AddProductPage from './AddProductPage';
 import ProductListPage from './ProductListPage';
 import EditProductPage from './EditProductPage';
+import ShoppingPage from './ShoppingPage';
 
 function App() {
 
@@ -67,6 +68,7 @@ function App() {
         <Route path="/" element={<HomePage currentUser={currentUser} handleUser={setCurrentUser} />} />
         <Route path="/login" element={<LoginPage handleUser={setCurrentUser} userList={userList} />} />
         <Route path="/register" element={<RegisterPage handleUser={setCurrentUser} userList={userList} handleUserList={setUserList} />} />
+        <Route path="/shop" element={<ShoppingPage currentUser={currentUser} handleUser={setCurrentUser} />}/>
         <Route path="/products" element={<ProductListPage />} />
         <Route path="/add-product" element={<AddProductPage />} />
         <Route path="/edit-product" element={<EditProductPage />} />

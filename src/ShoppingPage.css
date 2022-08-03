@@ -1,0 +1,141 @@
+.shopping-page
+{
+    height: auto;
+    background-color: dimgray;
+}
+.shopping-page > *
+{
+    color: white;
+}
+
+.shopping-page-container
+{
+    height: 100%; width: 100%;
+
+
+    margin: 100px 0;
+    padding-top: 100px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around; align-items: flex-start;
+}
+
+
+.shopping-results-container
+{
+    height: auto; width: 1000px;
+
+    display: grid;
+    grid-template-columns: repeat(3,30%);
+
+}
+
+
+.product-result-container
+{
+    height: 350px; width: 250px;
+    
+    color: black;
+    background-color: white;
+
+    border: 3px solid black;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px -10px black;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; align-items: center;
+    
+    box-sizing: border-box;
+    padding: 10px;
+    margin-bottom: 50px;
+}
+.product-result-image
+{
+    height: 160px; width: 160px;
+    
+    background-color: pink;
+    
+    position: relative;
+}
+.product-result-brand
+{
+    height: 50px; width: 50px;
+    
+    background-color: gray;
+    
+    position: absolute;
+    
+    bottom: -25px;
+    right: -25px;
+}
+.product-result-name
+{
+    font-size: 100;
+    margin: 5px;
+}
+.product-result-price
+{
+    color: red;
+    
+    margin: 5px;
+}
+
+.product-result-option-button
+{
+    
+    height: 25px; width: 25px;
+    background-color: black;
+    
+    padding: 5px;
+    border-radius: 50%;
+    border: 2px solid black;
+    
+    display: flex;
+    justify-content: center; align-items: center;
+    
+    cursor: pointer;
+}
+.product-result-cart-icon
+{
+    height: 25px;
+}
+
+
+.shopping-options-container
+{
+    height: 500px; width: 400px;
+    background-color: rgb(59, 59, 59);
+
+    border: 3px solid black;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px black;
+    
+    box-sizing: border-box;
+
+    padding: 30px;
+    
+    /* transform: translateX(); */
+
+}
+
+.shopping-option-input-group
+{
+    display: grid;
+    grid-template-columns: repeat(2,50%);
+}
+.shopping-option-input-container
+{
+    width: 150px;
+
+    margin-bottom: 10px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; align-items: center;
+}
+.shopping-option-input
+{
+    width: 50px;
+}
