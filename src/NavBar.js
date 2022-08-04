@@ -16,7 +16,7 @@ function NavBar({currentUser, handleUser})
             nullUser
         )
         .then(resp =>{
-            console.log(resp.data);
+            //console.log(resp.data);
         }).catch(error => {
             console.log(error);
         });

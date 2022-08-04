@@ -28,7 +28,7 @@ function SideBar({currentUser, handleUser})
         sideBar.current.style.right = "-" + getComputedStyle(sideBar.current).width;
         }
 
-        console.log(sideBar.current.style.width);
+        //console.log(sideBar.current.style.width);
     }
 
 

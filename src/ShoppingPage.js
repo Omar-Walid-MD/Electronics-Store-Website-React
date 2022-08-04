@@ -20,6 +20,11 @@ function ShoppingPage({currentUser, handleUser})
 
     const [categoryFilter,setCategoryFilter] = useState([]);
 
+    const [sortSettings,setSortSettings] = useState({sortBy: "price", ascending: true});
+
+
+
+
     function setPriceRange()
     {
         const minPrice = parseInt(document.querySelector("input[name=min-price-range]").value);
@@ -30,23 +35,49 @@ function ShoppingPage({currentUser, handleUser})
             max: maxPrice
         });
 
-        console.log(minPrice + " : " + maxPrice);
-        console.log(typeof(minPrice))
     }
 
     function setCategories()
     {
         const selectedCheckboxes = document.querySelectorAll("input[name=shopping-category]:checked");
         setCategoryFilter([...selectedCheckboxes].map((checkbox)=>(checkbox.value)));
-        console.log(categoryFilter);
     }
 
     function setBrands()
     {
         const selectedCheckboxes = document.querySelectorAll("input[name=shopping-brand]:checked");
         setBrandFilter([...selectedCheckboxes].map((checkbox)=>(checkbox.value)));
-        console.log(brandFilter);
     }
+
+    function setSortBy(event)
+    {
+        console.log("Done");
+        setSortSettings(
+            {
+                sortBy: event.target.value,
+                ascending: true
+            }
+        )
+    }
+
+    function setSortOrder(event)
+    {
+        let ascendingValue = true;
+        if(event.target.value!=="true")
+        {
+            ascendingValue = false;
+        }
+
+        setSortSettings(
+            {
+                ...sortSettings,
+                ascending: ascendingValue
+            }
+        )
+    }
+
+
+    
 
     function setPageOnMount()
     {
@@ -71,13 +102,39 @@ function ShoppingPage({currentUser, handleUser})
 
     function filterList(inputList)
     {
-        console.log(brandFilter)
+        sortList(inputList);
+
         return inputList.filter((product)=>(
                 (product.price >= priceFilter.min && product.price <= priceFilter.max)
             &&  (categoryFilter.length > 0 ? categoryFilter.includes(product.category) : true)
             &&  (brandFilter.length > 0 ? brandFilter.includes(product.brand) : true)
         ))
     }
+
+    function sortList(inputList)
+    {
+        if(sortSettings.sortBy==="price")
+        {
+            inputList.sort(function(a, b) {
+                return parseFloat(a.price) - parseFloat(b.price);
+            });
+        }
+
+        else if(sortSettings.sortBy==="alphabet")
+        {
+            inputList.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+        }
+
+        if(!sortSettings.ascending)
+            {
+                inputList.reverse();
+                console.log("Descending");
+            }
+
+        return inputList;
+        
+    }
+
 
     function AddToCart(product)
     {
@@ -132,7 +189,7 @@ function ShoppingPage({currentUser, handleUser})
           return res.json()
         })
         .then((data)=>{
-          console.log(data);
+        //   console.log(data);
           setProductList(data);
         })
 
@@ -151,7 +208,7 @@ function ShoppingPage({currentUser, handleUser})
     },[]);
 
     return (
-        <div className="shopping-page">
+        <div className="shopping-page" id="top">
             <header>
                 <NavBar currentUser={currentUser} handleUser={handleUser} />
             </header>
@@ -279,25 +336,48 @@ function ShoppingPage({currentUser, handleUser})
                 </div>
 
 
-                    <div className="shopping-results-container">
+                    <div className="shopping-results-section">
+                        <div className="shopping-results-sort-container">
 
-                    {
-                        filterList(produtList).map((product)=>
-                        
-                        <div className="product-result-container" key={product.id}>
-                            <div className="product-result-image">
-                                <div className="product-result-brandx"></div>
+                            <div className="shopping-results-sort-section">
+                                <h2 className="shopping-results-sort-label">Sort by:</h2>
+                                <select id="sort-type" className="shopping-results-sort-input" onChange={setSortBy}>
+                                    <option value="price">Price</option>
+                                    <option value="alphabet">Alphabetical Order</option>
+                                </select>
                             </div>
-                            <h3 className="product-result-name">{product.name}</h3>
-                            <h1 className="product-result-price">{product.price}</h1>
 
-                            <div className="product-result-option-button" onClick={function(){AddToCart(product);}}><img className="product-result-cart-icon" src={require("./img/cart-icon.png")} /></div>
+                            <div className="shopping-results-sort-section">
+                                <h2 className="shopping-results-sort-label">Order:</h2>
+                                <select id="sort-type" className="shopping-results-sort-input" onChange={setSortOrder}>
+                                    <option value={true}>Ascending</option>
+                                    <option value={false}>Descending</option>
+                                </select>
+                            </div>
 
+                            <h4>Sort By: {sortSettings && sortSettings.sortBy}</h4>
+                            <h4>Order: {sortSettings && sortSettings.ascending}</h4>
                         </div>
-                        
-                        )
-                    }
-                    
+
+                        <div className="shopping-results-container">
+
+                        {
+                            sortList(filterList(produtList)).map((product)=>
+                            
+                            <div className="product-result-container" key={product.id}>
+                                <div className="product-result-image">
+                                    <div className="product-result-brandx"></div>
+                                </div>
+                                <h3 className="product-result-name">{product.name}</h3>
+                                <h1 className="product-result-price">{product.price}</h1>
+
+                                <div className="product-result-option-button" onClick={function(){AddToCart(product);}}><img className="product-result-cart-icon" src={require("./img/cart-icon.png")} /></div>
+
+                            </div>
+                            
+                            )
+                        }
+                        </div>
                     </div>
 
             </div>

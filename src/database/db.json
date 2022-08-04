@@ -206,6 +206,13 @@
       "category": "smartphone",
       "brand": "maple",
       "price": "350"
+    },
+    {
+      "id": "7827517223",
+      "name": "Buzz Phone 00",
+      "category": "smartphone",
+      "brand": "buzz",
+      "price": "500"
     }
   ]
 }

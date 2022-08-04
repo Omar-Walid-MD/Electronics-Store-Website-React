@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import { useState, useEffect } from 'react';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route,  useLocation, useNavigate, useParams } from "react-router-dom";
 import HomePage from './HomePage';
 import LoginPage from './LoginPage';
 import RegisterPage from './RegisterPage';
@@ -8,6 +8,12 @@ import AddProductPage from './AddProductPage';
 import ProductListPage from './ProductListPage';
 import EditProductPage from './EditProductPage';
 import ShoppingPage from './ShoppingPage';
+import ScrollToTop from './ScrollToTop';
+
+
+
+
+
 
 function App() {
 
@@ -22,7 +28,7 @@ function App() {
       return res.json()
     })
     .then((data)=>{
-      console.log(data);
+      //console.log(data);
       const userId = data.userId;
 
       if(userId===0)
@@ -36,8 +42,8 @@ function App() {
           return res.json()
         })
         .then((data)=>{
-          console.log("Current user: ");
-          console.log(data);
+          //console.log("Current user: ");
+          //console.log(data);
           setCurrentUser(data);
           
         })
@@ -64,15 +70,15 @@ function App() {
   },[]);
 
   return (
+    
     <Routes>
-        <Route path="/" element={<HomePage currentUser={currentUser} handleUser={setCurrentUser} />} />
-        <Route path="/login" element={<LoginPage handleUser={setCurrentUser} userList={userList} />} />
-        <Route path="/register" element={<RegisterPage handleUser={setCurrentUser} userList={userList} handleUserList={setUserList} />} />
-        <Route path="/shop" element={<ShoppingPage currentUser={currentUser} handleUser={setCurrentUser} />}/>
-        <Route path="/products" element={<ProductListPage />} />
-        <Route path="/add-product" element={<AddProductPage />} />
-        <Route path="/edit-product" element={<EditProductPage />} />
-
+      <Route path="/" element={<HomePage currentUser={currentUser} handleUser={setCurrentUser} />} />
+      <Route path="/login" element={<LoginPage handleUser={setCurrentUser} userList={userList} />} />
+      <Route path="/register" element={<RegisterPage handleUser={setCurrentUser} userList={userList} handleUserList={setUserList} />} />
+      <Route path="/shop" element={<ShoppingPage currentUser={currentUser} handleUser={setCurrentUser} />}/>
+      <Route path="/products" element={<ProductListPage />} />
+      <Route path="/add-product" element={<AddProductPage />} />
+      <Route path="/edit-product" element={<EditProductPage />} />
     </Routes>
   )
 }
