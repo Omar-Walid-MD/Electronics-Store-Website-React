@@ -27,7 +27,7 @@ function NavBar({currentUser, handleUser})
 
     return (
         <div className="nav-bar">
-            <h1 className="logo">Store Title</h1>
+            <Link to={"/"} className="logo"><h1>Store Title</h1></Link>
             <div className="search-bar-container">
             <img className="search-icon" src={searchIcon} alt="search-icon" />
             <input className="search-bar" type="search" />

@@ -431,7 +431,9 @@ function ShoppingPage({currentUser, handleUser})
                             
                             <div className="product-result-container" key={product.id}>
                                 <div className="product-result-image">
-                                    <div className="product-result-brandx"></div>
+                                    <div className="product-result-brand">
+                                        <img className="product-result-brand-icon" src={require('./img/brands/'+product.brand + "-logo-small.png")} />
+                                    </div>
                                 </div>
                                 <h3 className="product-result-name">{product.name}</h3>
                                 <h1 className="product-result-price">{product.price}</h1>

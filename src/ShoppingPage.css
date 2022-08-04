@@ -97,12 +97,22 @@
 {
     height: 50px; width: 50px;
     
-    background-color: gray;
+    background-color: white;
+
+    border-radius: 50%;
+    box-shadow: 0 0 10px grey;
     
     position: absolute;
     
     bottom: -25px;
     right: -25px;
+
+    display: flex;
+    justify-content: center; align-items: center;
+}
+.product-result-brand-icon
+{
+    height: 70%;
 }
 .product-result-name
 {
