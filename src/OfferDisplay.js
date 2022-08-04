@@ -57,7 +57,7 @@ function OfferDisplay()
 
     let transitioning = false;
 
-    if(maxCount%2==0)
+    if(maxCount%2===0)
     {
         offset = 0.5
     }
@@ -163,7 +163,7 @@ function OfferDisplay()
                     {
                         offerList.map((offer)=>
                         <div className="offer-panel-container" key={makeId(5)}>
-                            <img className="offer-image" src={offer.img}/>
+                            <img className="offer-image" src={offer.img} alt="offer"/>
                             <div className="offer-desc">{offer.desc}</div>
                         </div>
                         )
@@ -173,13 +173,13 @@ function OfferDisplay()
                 <div className="offer-buttons-container">
                     <div className="offer-button" onClick={function(){slide(-1)}}>
                         <div className="offer-button-circle">
-                            <img className="offer-button-icon" src={leftArrow} />
+                            <img className="offer-button-icon" src={leftArrow} alt="left arrow" />
                         </div>
                         <div className="offer-button-shadow" end="left"></div>
                     </div>
                     <div className="offer-button" onClick={function(){slide(1)}}>
                         <div className="offer-button-circle">
-                            <img className="offer-button-icon" src={rightArrow} />
+                            <img className="offer-button-icon" src={rightArrow} alt="right arrow" />
                         </div>
                         <div className="offer-button-shadow" end="right"></div>
                     </div>

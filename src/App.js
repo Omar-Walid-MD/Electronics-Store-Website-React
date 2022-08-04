@@ -1,6 +1,5 @@
-import logo from './logo.svg';
 import { useState, useEffect } from 'react';
-import { Routes, Route,  useLocation, useNavigate, useParams } from "react-router-dom";
+import { Routes, Route} from "react-router-dom";
 import HomePage from './HomePage';
 import LoginPage from './LoginPage';
 import RegisterPage from './RegisterPage';
@@ -8,7 +7,6 @@ import AddProductPage from './AddProductPage';
 import ProductListPage from './ProductListPage';
 import EditProductPage from './EditProductPage';
 import ShoppingPage from './ShoppingPage';
-import ScrollToTop from './ScrollToTop';
 
 
 

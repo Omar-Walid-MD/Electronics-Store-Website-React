@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from "react";
+import {useRef} from "react";
 import CartItem from "./CartItem";
 
 function SideBar({currentUser, handleUser})
@@ -62,7 +62,7 @@ function SideBar({currentUser, handleUser})
             
         </div>
         <label htmlFor="cart-toggle" className="cart-button-container">
-            <img className="cart-icon" src={require("./img/cart-icon.png")}/>
+            <img className="cart-icon" src={require("./img/cart-icon.png")} alt="cart icon"/>
             <input className="cart-checkbox" type="checkbox" id="cart-toggle" onChange={toggleSideBar} />
         </label>
         

@@ -117,7 +117,7 @@ function LoginPage({handleUser,userList})
                                 <label htmlFor="remember-me-checkbox">Remember Me</label>
                             </div>
 
-                            <a className="forgot-password-link">Forgot Password?</a>
+                            <div className="forgot-password-link">Forgot Password?</div>
                         </div>
                         <input className="login-form-submit" type="submit" disabled={inputEmpty()}/>
                         

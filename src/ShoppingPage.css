@@ -238,3 +238,16 @@
 {
     color: black;
 }
+
+
+
+
+.price-range-container
+{
+    width: 100%;
+
+    position: relative;
+
+    display: flex;
+    justify-content: center; align-items: center;
+}
