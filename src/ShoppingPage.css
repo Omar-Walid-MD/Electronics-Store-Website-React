@@ -1,6 +1,7 @@
 .shopping-page
 {
     background-color: dimgray;
+    
 }
 .shopping-page > *
 {
@@ -9,14 +10,21 @@
 
 .shopping-page-container
 {
-    height: 100%; width: 100%;
+    height: 100vw; width: 100%;
 
-    margin: 100px 0;
+    margin: 100px 0 200px 0;
     padding-top: 100px;
 
     display: flex;
+    justify-content: center; align-items: flex-start;
+}
+.shopping-section-container
+{
+    width: 1450px;
+
+    display: flex;
     flex-direction: row;
-    justify-content: space-around; align-items: flex-start;
+    justify-content: space-between;
 }
 
 
@@ -84,6 +92,12 @@
     box-sizing: border-box;
     padding: 10px;
     margin-bottom: 50px;
+
+    transition: transform 0.2s ease-in-out;
+}
+.product-result-container:hover
+{
+    transform: scale(110%);
 }
 .product-result-image
 {

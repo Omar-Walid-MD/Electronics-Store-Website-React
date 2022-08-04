@@ -216,14 +216,14 @@ function ShoppingPage({currentUser, handleUser})
         const PageContainer = document.querySelector(".shopping-page-container");
         let bottom = PageContainer.getBoundingClientRect().bottom + window.pageYOffset;
 
-        if(window.pageYOffset < bottom - 750)
+        if(window.pageYOffset < bottom - 595)
         {
             const OptionsContainer = document.querySelector(".shopping-options-container");
             OptionsContainer.style.transform = "translateY(" + window.pageYOffset + "px)";
         }
         else
         {
-            OptionsContainer.style.transform = "translateY(" + (bottom - 750) + "px)";
+            OptionsContainer.style.transform = "translateY(" + (bottom - 595) + "px)";
         }
     }
 
@@ -281,125 +281,124 @@ function ShoppingPage({currentUser, handleUser})
 
             <div className="shopping-page-container">
 
+                <div className="shopping-section-container">
 
-                <div className="shopping-options-container">
+                    <div className="shopping-options-container">
 
-                <div className="shopping-option-section">
+                        <div className="shopping-option-section">
+
+                            <h2>Price Range:</h2>
+                            
+                            <div className="shopping-option-input-group">
+
+                                <div className="shopping-option-input-container">
+                                    Minimum:
+                                    <input className="shopping-option-input" type="number" name="min-price-range" value={priceFilter.min} step="10" onChange={setPriceRange}/>
+                                </div>
+                            
+
+                                <div className="shopping-option-input-container">
+                                    Maximum:
+                                    <input className="shopping-option-input" type="number" name="max-price-range" value={priceFilter.max} step="10" onChange={setPriceRange}/>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div className="shopping-option-section">
+                            <h2>Categories:</h2>
+                            <div className="shopping-option-input-group">
+                                <div className="shopping-option-checkbox-container">
+                                    <input type="checkbox" value="smartphone" name="shopping-category" id="shopping-category-smartphone" onChange={setCategories} />
+                                    <label htmlFor="shopping-category-smartphone" >Smartphones</label>
+                                </div>
+                                
+                                <div className="shopping-option-checkbox-container">
+                                    <input type="checkbox" value="tablet" name="shopping-category" id="shopping-category-tablet" onChange={setCategories} />
+                                    <label htmlFor="shopping-category-tablet" >Tablets</label>
+                                </div>
+
+                                <div className="shopping-option-checkbox-container">
+                                    <input type="checkbox" value="mouse" name="shopping-category" id="shopping-category-mouse" onChange={setCategories} />
+                                    <label htmlFor="shopping-category-mouse" >Mice</label>
+                                </div>
+
+                                <div className="shopping-option-checkbox-container">
+                                    <input type="checkbox" value="keyboard" name="shopping-category" id="shopping-category-keyboard" onChange={setCategories} />
+                                    <label htmlFor="shopping-category-keyboard" >Keyboards</label>
+                                </div>
+
+                                <div className="shopping-option-checkbox-container">
+                                    <input type="checkbox" value="headphone" name="shopping-category" id="shopping-category-headphone" onChange={setCategories} />
+                                    <label htmlFor="shopping-category-headphone" >Headphones</label>
+                                </div>
+
+                                <div className="shopping-option-checkbox-container">
+                                    <input type="checkbox" value="earphone" name="shopping-category" id="shopping-category-earphone" onChange={setCategories} />
+                                    <label htmlFor="shopping-category-earphone" >Earphones</label>
+                                </div>
+                            </div>
+                        </div>
 
                     
-                        <h2>Price Range:</h2>
-                        
-                        <div className="shopping-option-input-group">
 
-                            <div className="shopping-option-input-container">
-                                Minimum:
-                                <input className="shopping-option-input" type="number" name="min-price-range" value={priceFilter.min} step="10" onChange={setPriceRange}/>
+                        <div className="shopping-option-section">
+                            <h2>Brands:</h2>
+                            <div className="shopping-option-input-group">
+                                <div className="shopping-option-checkbox-container">
+                                    <input type="checkbox" value="buzz" name="shopping-brand" id="shopping-brand-buzz" onChange={setBrands} />
+                                    <label htmlFor="shopping-brand-buzz" >Buzz</label>
+                                </div>
+
+                                <div className="shopping-option-checkbox-container">
+                                    <input type="checkbox" value="maple" name="shopping-brand" id="shopping-brand-maple" onChange={setBrands} />
+                                    <label htmlFor="shopping-brand-maple" >Maple</label>
+                                </div>
+
+                                <div className="shopping-option-checkbox-container">
+                                    <input type="checkbox" value="chromax" name="shopping-brand" id="shopping-brand-chromax" onChange={setBrands} />
+                                    <label htmlFor="shopping-brand-chromax" >Chromax</label>
+                                </div>
+
+                                <div className="shopping-option-checkbox-container">
+                                    <input type="checkbox" value="hyper" name="shopping-brand" id="shopping-brand-hyper" onChange={setBrands} />
+                                    <label htmlFor="shopping-brand-hyper" >Hyper</label>
+                                </div>
+
+                                <div className="shopping-option-checkbox-container">
+                                    <input type="checkbox" value="nuclai" name="shopping-brand" id="shopping-brand-nuclai" onChange={setBrands} />
+                                    <label htmlFor="shopping-brand-nuclai" >NuclAI</label>
+                                </div>
+
+                                <div className="shopping-option-checkbox-container">
+                                    <input type="checkbox" value="mory" name="shopping-brand" id="shopping-brand-mory" onChange={setBrands} />
+                                    <label htmlFor="shopping-brand-mory" >Mory</label>
+                                </div>
+
+                                <div className="shopping-option-checkbox-container">
+                                    <input type="checkbox" value="opal" name="shopping-brand" id="shopping-brand-opal" onChange={setBrands} />
+                                    <label htmlFor="shopping-brand-opal" >Opal</label>
+                                </div>
+
+                                <div className="shopping-option-checkbox-container">
+                                    <input type="checkbox" value="auro" name="shopping-brand" id="shopping-brand-auro" onChange={setBrands} />
+                                    <label htmlFor="shopping-brand-auro" >Auro</label>
+                                </div>
+
+                                <div className="shopping-option-checkbox-container">
+                                    <input type="checkbox" value="hotkey" name="shopping-brand" id="shopping-brand-hotkey" onChange={setBrands} />
+                                    <label htmlFor="shopping-brand-hotkey" >Hot-key</label>
+                                </div>
+
+                                <div className="shopping-option-checkbox-container">
+                                    <input type="checkbox" value="pixcel" name="shopping-brand" id="shopping-brand-pixcel" onChange={setBrands} />
+                                    <label htmlFor="shopping-brand-pixcel" >Pixcel</label>
+                                </div>
+                                
                             </div>
-                           
-
-                            <div className="shopping-option-input-container">
-                                Maximum:
-                                <input className="shopping-option-input" type="number" name="max-price-range" value={priceFilter.max} step="10" onChange={setPriceRange}/>
-                            </div>
-
                         </div>
+
                     </div>
-
-                    <div className="shopping-option-section">
-                        <h2>Categories:</h2>
-                        <div className="shopping-option-input-group">
-                            <div className="shopping-option-checkbox-container">
-                                <input type="checkbox" value="smartphone" name="shopping-category" id="shopping-category-smartphone" onChange={setCategories} />
-                                <label htmlFor="shopping-category-smartphone" >Smartphones</label>
-                            </div>
-                            
-                            <div className="shopping-option-checkbox-container">
-                                <input type="checkbox" value="tablet" name="shopping-category" id="shopping-category-tablet" onChange={setCategories} />
-                                <label htmlFor="shopping-category-tablet" >Tablets</label>
-                            </div>
-
-                            <div className="shopping-option-checkbox-container">
-                                <input type="checkbox" value="mouse" name="shopping-category" id="shopping-category-mouse" onChange={setCategories} />
-                                <label htmlFor="shopping-category-mouse" >Mice</label>
-                            </div>
-
-                            <div className="shopping-option-checkbox-container">
-                                <input type="checkbox" value="keyboard" name="shopping-category" id="shopping-category-keyboard" onChange={setCategories} />
-                                <label htmlFor="shopping-category-keyboard" >Keyboards</label>
-                            </div>
-
-                            <div className="shopping-option-checkbox-container">
-                                <input type="checkbox" value="headphone" name="shopping-category" id="shopping-category-headphone" onChange={setCategories} />
-                                <label htmlFor="shopping-category-headphone" >Headphones</label>
-                            </div>
-
-                            <div className="shopping-option-checkbox-container">
-                                <input type="checkbox" value="earphone" name="shopping-category" id="shopping-category-earphone" onChange={setCategories} />
-                                <label htmlFor="shopping-category-earphone" >Earphones</label>
-                            </div>
-                        </div>
-                    </div>
-
-                   
-
-                    <div className="shopping-option-section">
-                        <h2>Brands:</h2>
-                        <div className="shopping-option-input-group">
-                            <div className="shopping-option-checkbox-container">
-                                <input type="checkbox" value="buzz" name="shopping-brand" id="shopping-brand-buzz" onChange={setBrands} />
-                                <label htmlFor="shopping-brand-buzz" >Buzz</label>
-                            </div>
-
-                            <div className="shopping-option-checkbox-container">
-                                <input type="checkbox" value="maple" name="shopping-brand" id="shopping-brand-maple" onChange={setBrands} />
-                                <label htmlFor="shopping-brand-maple" >Maple</label>
-                            </div>
-
-                            <div className="shopping-option-checkbox-container">
-                                <input type="checkbox" value="chromax" name="shopping-brand" id="shopping-brand-chromax" onChange={setBrands} />
-                                <label htmlFor="shopping-brand-chromax" >Chromax</label>
-                            </div>
-
-                            <div className="shopping-option-checkbox-container">
-                                <input type="checkbox" value="hyper" name="shopping-brand" id="shopping-brand-hyper" onChange={setBrands} />
-                                <label htmlFor="shopping-brand-hyper" >Hyper</label>
-                            </div>
-
-                            <div className="shopping-option-checkbox-container">
-                                <input type="checkbox" value="nuclai" name="shopping-brand" id="shopping-brand-nuclai" onChange={setBrands} />
-                                <label htmlFor="shopping-brand-nuclai" >NuclAI</label>
-                            </div>
-
-                            <div className="shopping-option-checkbox-container">
-                                <input type="checkbox" value="mory" name="shopping-brand" id="shopping-brand-mory" onChange={setBrands} />
-                                <label htmlFor="shopping-brand-mory" >Mory</label>
-                            </div>
-
-                            <div className="shopping-option-checkbox-container">
-                                <input type="checkbox" value="opal" name="shopping-brand" id="shopping-brand-opal" onChange={setBrands} />
-                                <label htmlFor="shopping-brand-opal" >Opal</label>
-                            </div>
-
-                            <div className="shopping-option-checkbox-container">
-                                <input type="checkbox" value="auro" name="shopping-brand" id="shopping-brand-auro" onChange={setBrands} />
-                                <label htmlFor="shopping-brand-auro" >Auro</label>
-                            </div>
-
-                            <div className="shopping-option-checkbox-container">
-                                <input type="checkbox" value="hotkey" name="shopping-brand" id="shopping-brand-hotkey" onChange={setBrands} />
-                                <label htmlFor="shopping-brand-hotkey" >Hot-key</label>
-                            </div>
-
-                            <div className="shopping-option-checkbox-container">
-                                <input type="checkbox" value="pixcel" name="shopping-brand" id="shopping-brand-pixcel" onChange={setBrands} />
-                                <label htmlFor="shopping-brand-pixcel" >Pixcel</label>
-                            </div>
-                            
-                        </div>
-                    </div>
-
-                </div>
-
 
                     <div className="shopping-results-section">
                         <div className="shopping-results-sort-container">
@@ -449,17 +448,17 @@ function ShoppingPage({currentUser, handleUser})
                             )
                         }
                         </div>
-                    </div>
+                        </div>
+                    
 
-                
-
-                {
-                    popUps.map((popup)=>(
-                        <Popup popup={popup} key={"popup-"+popup.id}/>
-                    ))
-                }
-                
+                    {
+                        popUps.map((popup)=>(
+                            <Popup popup={popup} key={"popup-"+popup.id}/>
+                        ))
+                    }
+                </div>
             </div>
+            
             <Footer />
         </div>
     )
