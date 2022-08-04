@@ -1,12 +1,10 @@
 import './HomePage.css';
-import { useEffect, useRef, useState } from 'react';
 import OverviewDisplay from './OverviewDisplay';
 import OfferDisplay from './OfferDisplay';
 import CategorySection from './CategorySection';
 import BrandSection from './BrandSection';
 import BranchSection from './BranchSection';
 import SideBar from './SideBar';
-import LoginPage from "./LoginPage";
 import Footer from "./Footer";
 import NavBar from "./NavBar";
 

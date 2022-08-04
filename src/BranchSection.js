@@ -88,7 +88,7 @@ function BranchSection()
             <div className="branches-container">
                 <div className="branches-info-container" ref={infoContainer} key={"true"}>
                     <h1 className="branch-name">{currentBranch.name}</h1>
-                    {currentBranch!=null && <img className="branch-image" src={require("./img/branches/"+currentBranch.img)} />}
+                    {currentBranch!=null && <img className="branch-image" src={require("./img/branches/"+currentBranch.img)} alt="branch" />}
                     <p className="branch-desc">{currentBranch.desc}</p>
                 </div>
                 <div className="branches-map-container">
@@ -99,7 +99,7 @@ function BranchSection()
                                 
                                 <label className="branches-map-pointer" key={index} htmlFor={"branch-" + index}>
                                     <input className="branches-radio" type="radio" name="branches" id={"branch-" + index} onClick={function(){selectBranch(index)}} />
-                                    <img className="branches-map-pointer-image" src={require("./img/pointer.png")} />
+                                    <img className="branches-map-pointer-image" src={require("./img/pointer.png")} alt="pointer" />
                                 </label>
                             ))
                         }

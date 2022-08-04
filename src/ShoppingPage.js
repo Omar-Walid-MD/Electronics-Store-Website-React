@@ -3,8 +3,10 @@ import SideBar from "./SideBar";
 import Footer from "./Footer"
 import Popup from "./Popup"
 import { useState, useEffect } from "react";
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import MultiRangeSlider from "multi-range-slider-react";
 import "./ShoppingPage.css";
+import "./MultiRangeSlider.css";
 
 function ShoppingPage({currentUser, handleUser})
 {
@@ -26,10 +28,11 @@ function ShoppingPage({currentUser, handleUser})
     const [popUps,setPopups] = useState([]);
 
 
-    function setPriceRange()
+    function setPriceRange(event)
     {
-        const minPrice = parseInt(document.querySelector("input[name=min-price-range]").value);
-        const maxPrice = parseInt(document.querySelector("input[name=max-price-range]").value);
+        console.log(event)
+        const minPrice = Math.round(parseInt(event.minValue)/50)*50;
+        const maxPrice = Math.round(parseInt(event.maxValue)/50)*50;
 
         setPriceFilter({
             min: minPrice,
@@ -270,6 +273,10 @@ function ShoppingPage({currentUser, handleUser})
     
     },[]);
 
+
+
+
+
     return (
         <div className="shopping-page" id="top">
             <header>
@@ -287,22 +294,23 @@ function ShoppingPage({currentUser, handleUser})
 
                         <div className="shopping-option-section">
 
+
                             <h2>Price Range:</h2>
-                            
-                            <div className="shopping-option-input-group">
+                            <div className="price-range-container">
 
-                                <div className="shopping-option-input-container">
-                                    Minimum:
-                                    <input className="shopping-option-input" type="number" name="min-price-range" value={priceFilter.min} step="10" onChange={setPriceRange}/>
-                                </div>
-                            
-
-                                <div className="shopping-option-input-container">
-                                    Maximum:
-                                    <input className="shopping-option-input" type="number" name="max-price-range" value={priceFilter.max} step="10" onChange={setPriceRange}/>
-                                </div>
-
+                                <MultiRangeSlider
+                                    min={0}
+                                    max={1000}
+                                    step={50}
+                                    ruler={false}
+                                    label={true}
+                                    preventWheel={false}
+                                    minValue={priceFilter.min}
+                                    maxValue={priceFilter.max}
+                                    onInput={setPriceRange}
+                                />
                             </div>
+                            
                         </div>
 
                         <div className="shopping-option-section">
@@ -419,8 +427,6 @@ function ShoppingPage({currentUser, handleUser})
                                 </select>
                             </div>
 
-                            <h4>Sort By: {sortSettings && sortSettings.sortBy}</h4>
-                            <h4>Order: {sortSettings && sortSettings.ascending}</h4>
                         </div>
 
                         <div className="shopping-results-container">
@@ -431,7 +437,7 @@ function ShoppingPage({currentUser, handleUser})
                             <div className="product-result-container" key={product.id}>
                                 <div className="product-result-image">
                                     <div className="product-result-brand">
-                                        <img className="product-result-brand-icon" src={require('./img/brands/'+product.brand + "-logo-small.png")} />
+                                        <img className="product-result-brand-icon" src={require('./img/brands/'+product.brand + "-logo-small.png")} alt="brand icon" />
                                     </div>
                                 </div>
                                 <h3 className="product-result-name">{product.name}</h3>
@@ -439,8 +445,8 @@ function ShoppingPage({currentUser, handleUser})
 
                                 {
                                     InCart(product)
-                                    ? <div className="product-result-option-button" state="remove" onClick={function(){RemoveFromCart(product);}}><img className="product-result-cart-icon" src={require("./img/remove-from-cart-icon.png")} /></div>
-                                    : <div className="product-result-option-button" onClick={function(){AddToCart(product);}}><img className="product-result-cart-icon" src={require("./img/add-to-cart-icon.png")} /></div>
+                                    ? <div className="product-result-option-button" state="remove" onClick={function(){RemoveFromCart(product);}}><img className="product-result-cart-icon" src={require("./img/remove-from-cart-icon.png")} alt="add to cart icon" /></div>
+                                    : <div className="product-result-option-button" onClick={function(){AddToCart(product);}}><img className="product-result-cart-icon" src={require("./img/add-to-cart-icon.png")} alt="remove from cart icon" /></div>
                                 }
 
                             </div>

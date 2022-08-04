@@ -49,8 +49,8 @@ function NavBar({currentUser, handleUser})
                                     <div className="border-line"></div>
 
                                     <div className="profile-overview-options-container">
-                                        <a>Edit Profile</a>
-                                        <a>My Cart</a>
+                                        <div>Edit Profile</div>
+                                        <div>My Cart</div>
                                     </div>
                                     <div className="border-line"></div>
 
