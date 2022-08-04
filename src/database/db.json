@@ -12,7 +12,22 @@
       "lastName": "Diab",
       "email": "omar.madinah49@yahoo.com",
       "password": "omar123",
-      "cart": []
+      "cart": [
+        {
+          "id": "6124359531",
+          "name": "Buzz Phone B1",
+          "category": "smartphone",
+          "brand": "buzz",
+          "price": "100"
+        },
+        {
+          "id": "3458684934",
+          "name": "Buzz Phone B2",
+          "category": "smartphone",
+          "brand": "buzz",
+          "price": "120"
+        }
+      ]
     },
     {
       "id": 20,

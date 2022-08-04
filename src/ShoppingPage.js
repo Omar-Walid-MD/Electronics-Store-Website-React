@@ -163,8 +163,51 @@ function ShoppingPage({currentUser, handleUser})
         }
         else
         {
+            popUpMessage("You need to login to add products to your cart!");
+        }
+    }
+
+    function RemoveFromCart(product)
+    {
+        if(loggedIn)
+        {
+            let profileWithNewProduct = {
+                ...currentUser,
+                cart: currentUser.cart.filter((item)=>item.id!==product.id),
+            };
+            
+            const axios = require('axios');
+
+            axios.put('http://localhost:8000/users/'+currentUser.id,
+                profileWithNewProduct
+            )
+            .then(resp =>{
+                console.log("Removed product from your cart");
+                popUpMessage("Product removed from your cart");
+            }).catch(error => {
+                console.log(error);
+            });
+
+            //To update state and trigger re-render
+            handleUser(profileWithNewProduct);
+        }
+        else
+        {
             console.log("You need to log in!")
         }
+    }
+
+    function InCart(product)
+    {
+        if(loggedIn)
+        {    
+            for(let i = 0; i < currentUser.cart.length; i++)
+            {
+                if(product.id===currentUser.cart[i].id) return true;
+            }
+    
+        }
+        return false;
     }
 
     function OptionsScroll()
@@ -393,7 +436,11 @@ function ShoppingPage({currentUser, handleUser})
                                 <h3 className="product-result-name">{product.name}</h3>
                                 <h1 className="product-result-price">{product.price}</h1>
 
-                                <div className="product-result-option-button" onClick={function(){AddToCart(product);}}><img className="product-result-cart-icon" src={require("./img/cart-icon.png")} /></div>
+                                {
+                                    InCart(product)
+                                    ? <div className="product-result-option-button" state="remove" onClick={function(){RemoveFromCart(product);}}><img className="product-result-cart-icon" src={require("./img/remove-from-cart-icon.png")} /></div>
+                                    : <div className="product-result-option-button" onClick={function(){AddToCart(product);}}><img className="product-result-cart-icon" src={require("./img/add-to-cart-icon.png")} /></div>
+                                }
 
                             </div>
                             

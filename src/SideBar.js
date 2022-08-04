@@ -7,9 +7,13 @@ function SideBar({currentUser, handleUser})
     function calculateTotal()
     {
         let total = 0;
-        for(let i = 0; i < currentUser.cart.length; i++)
-        {
-            total += parseInt(currentUser.cart[i].price);
+
+        if(currentUser.cart!=null)
+        {    
+            for(let i = 0; i < currentUser.cart.length; i++)
+            {
+                total += parseInt(currentUser.cart[i].price);
+            }
         }
         return total;
     }
@@ -53,7 +57,9 @@ function SideBar({currentUser, handleUser})
             <div className="total-cost-label">
                 <h2>Total:</h2><h2>{calculateTotal()}</h2>
             </div>
-            <button className="checkout-button" disabled={currentUser.cart.length===0}>Checkout</button>
+    
+            <button className="checkout-button" disabled={currentUser.cart && currentUser.cart.length===0}>Checkout</button>
+            
         </div>
         <label htmlFor="cart-toggle" className="cart-button-container">
             <img className="cart-icon" src={require("./img/cart-icon.png")}/>

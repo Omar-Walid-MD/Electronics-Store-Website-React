@@ -119,17 +119,21 @@
 .product-result-option-button
 {
     
-    height: 25px; width: 25px;
-    background-color: black;
+    height: 30px; width: 30px;
+    background-color: darkblue;
     
     padding: 5px;
     border-radius: 50%;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     
     display: flex;
     justify-content: center; align-items: center;
     
     cursor: pointer;
+}
+.product-result-option-button[state="remove"]
+{
+    background-color: rgb(168, 0, 0);
 }
 .product-result-cart-icon
 {
