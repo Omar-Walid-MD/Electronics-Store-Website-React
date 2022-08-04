@@ -2,7 +2,7 @@
   "currentUser": [
     {
       "id": 0,
-      "userId": 1
+      "userId": 0
     }
   ],
   "users": [
@@ -13,13 +13,6 @@
       "email": "omar.madinah49@yahoo.com",
       "password": "omar123",
       "cart": [
-        {
-          "id": "6124359531",
-          "name": "Buzz Phone B1",
-          "category": "smartphone",
-          "brand": "buzz",
-          "price": "100"
-        },
         {
           "id": "3458684934",
           "name": "Buzz Phone B2",

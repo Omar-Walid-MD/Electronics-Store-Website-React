@@ -11,7 +11,7 @@ function ShoppingPage({currentUser, handleUser})
     var loggedIn = currentUser && currentUser.userId !== 0;
 
     const location = useLocation();
-    const { category, brand } = location.state;
+    const { category, brand } = location.state || {};
 
     const [produtList,setProductList] = useState([]);
 
@@ -83,8 +83,8 @@ function ShoppingPage({currentUser, handleUser})
     function setPageOnMount()
     {
         //Set Categories and Brands from links
-        if(category !== undefined) setCategoryFilter([category]);
-        if(brand !== undefined) setBrandFilter([brand]);
+        if(category !== undefined && category !== null) setCategoryFilter([category]);
+        if(brand !== undefined && brand !== null) setBrandFilter([brand]);
 
         //Set Checkboxes to match filters
         const categoryChecboxes = document.querySelectorAll("input[name=shopping-category]");

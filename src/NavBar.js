@@ -1,8 +1,11 @@
 import searchIcon from "./img/search.png"
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function NavBar({currentUser, handleUser})
 {
+
+    const location = useLocation();
+
     var loggedIn = currentUser && currentUser.userId !== 0;
 
     function logOut()
@@ -61,8 +64,8 @@ function NavBar({currentUser, handleUser})
 
 
                         : <div className="login-register-container">
-                            <Link to={"/register"} className="account-button">Register</Link>
-                            <Link to={"/login"} className="login-button account-button">Log in</Link>
+                            <Link to={"/register"} state={{ prevPath: location.pathname }} className="account-button">Register</Link>
+                            <Link to={"/login"} state={{ prevPath: location.pathname }} className="login-button account-button">Log in</Link>
                             </div>
                         
                 }    

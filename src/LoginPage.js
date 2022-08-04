@@ -1,9 +1,14 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './LoginPage.css';
 
 function LoginPage({handleUser,userList})
 {
+
+    const location = useLocation();
+    const { prevPath } = location.state;
+
+
     //Submitted types: "none","success","passwordFailed","emailFailed"
     const [submitted,setSubmitted] = useState("none");
 
@@ -67,7 +72,7 @@ function LoginPage({handleUser,userList})
                     })
 
                     handleUser(loggedUser);
-                    navigate("/");
+                    navigate(prevPath);
                     return;
                 }
                 else
