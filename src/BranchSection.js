@@ -65,18 +65,18 @@ function BranchSection()
         setCurrentBranch(branchPointers[index]);
         console.log(infoContainer.current.getAttribute("key"));
         infoContainer.current.setAttribute("key",makeId(5));
-
-        
+  
     }
 
-    function makeId(length) {
+    function makeId(length)
+    {
         let result = "";
         let chars = "123456789";
         for (var i = 0; i < length; i++) {
         result += chars[Math.floor(Math.random() * 9)];
         }
         return result;
-      }
+    }
 
     useEffect(()=>{
         setPointerPositions();

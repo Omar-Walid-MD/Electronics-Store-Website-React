@@ -171,3 +171,42 @@
 {
     width: 50px;
 }
+
+
+
+@keyframes popup {
+
+    0% {bottom: -120px;}
+
+    10% {bottom: 50px;}
+
+    90% {bottom: 50px;}
+
+    100% {bottom: -120px;}
+    
+}
+.popup-message-container
+{
+    height: auto; width: auto;
+
+    background-color: white;
+
+    padding: 5px 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px black;
+
+    position: fixed;
+    bottom: -120px;
+
+    z-index: 5;
+
+    animation: popup 3s ease-in-out forwards;
+
+    display: flex;
+    justify-content: center; align-items: center;
+
+}
+.popup-message
+{
+    color: black;
+}

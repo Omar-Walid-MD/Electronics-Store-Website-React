@@ -1,6 +1,7 @@
 import NavBar from "./NavBar";
 import SideBar from "./SideBar";
 import Footer from "./Footer"
+import Popup from "./Popup"
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import "./ShoppingPage.css";
@@ -22,7 +23,7 @@ function ShoppingPage({currentUser, handleUser})
 
     const [sortSettings,setSortSettings] = useState({sortBy: "price", ascending: true});
 
-
+    const [popUps,setPopups] = useState([]);
 
 
     function setPriceRange()
@@ -152,6 +153,7 @@ function ShoppingPage({currentUser, handleUser})
             )
             .then(resp =>{
                 console.log("Added product to your cart");
+                popUpMessage("Product Added to your cart!");
             }).catch(error => {
                 console.log(error);
             });
@@ -180,6 +182,24 @@ function ShoppingPage({currentUser, handleUser})
         {
             OptionsContainer.style.transform = "translateY(" + (bottom - 750) + "px)";
         }
+    }
+
+
+    function popUpMessage(message)
+    {
+        setPopups([]);
+        setPopups([{id: makeId(5), message: message}]);
+        console.log(popUps);
+    }
+
+    function makeId(length)
+    {
+        let result = "";
+        let chars = "123456789";
+        for (var i = 0; i < length; i++) {
+        result += chars[Math.floor(Math.random() * 9)];
+        }
+        return result;
     }
 
     
@@ -222,6 +242,8 @@ function ShoppingPage({currentUser, handleUser})
                 <div className="shopping-options-container">
 
                 <div className="shopping-option-section">
+
+                    
                         <h2>Price Range:</h2>
                         
                         <div className="shopping-option-input-group">
@@ -380,8 +402,15 @@ function ShoppingPage({currentUser, handleUser})
                         </div>
                     </div>
 
-            </div>
+                
 
+                {
+                    popUps.map((popup)=>(
+                        <Popup popup={popup} key={"popup-"+popup.id}/>
+                    ))
+                }
+                
+            </div>
             <Footer />
         </div>
     )
