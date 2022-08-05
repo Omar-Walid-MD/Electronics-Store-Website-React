@@ -1,6 +1,6 @@
-import offerTemp from "./img/offerTemplate.png";
-import rightArrow from "./img/arrow-right.png";
-import leftArrow from "./img/arrow-left.png";
+import offerTemp from "../../img/offerTemplate.png";
+import rightArrow from "../../img/arrow-right.png";
+import leftArrow from "../../img/arrow-left.png";
 import { useEffect, useState, useRef } from 'react';
 
 

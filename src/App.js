@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route} from "react-router-dom";
-import HomePage from './HomePage';
-import LoginPage from './LoginPage';
-import RegisterPage from './RegisterPage';
-import AddProductPage from './AddProductPage';
-import ProductListPage from './ProductListPage';
-import EditProductPage from './EditProductPage';
-import ShoppingPage from './ShoppingPage';
+import HomePage from './components/Home Page/HomePage';
+import LoginPage from './components/Account Pages/LoginPage';
+import RegisterPage from './components/Account Pages/RegisterPage';
+import AddProductPage from './components/Product Management Pages/AddProductPage';
+import ProductListPage from './components/Product Management Pages/ProductListPage';
+import EditProductPage from './components/Product Management Pages/EditProductPage';
+import ShoppingPage from './components/Shopping Page/ShoppingPage';
 
 
 

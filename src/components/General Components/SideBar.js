@@ -62,7 +62,7 @@ function SideBar({currentUser, handleUser})
             
         </div>
         <label htmlFor="cart-toggle" className="cart-button-container">
-            <img className="cart-icon" src={require("./img/cart-icon.png")} alt="cart icon"/>
+            <img className="cart-icon" src={require("../../img/cart-icon.png")} alt="cart icon"/>
             <input className="cart-checkbox" type="checkbox" id="cart-toggle" onChange={toggleSideBar} />
         </label>
         

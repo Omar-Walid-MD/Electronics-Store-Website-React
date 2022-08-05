@@ -1,4 +1,4 @@
-import searchIcon from "./img/search.png"
+import searchIcon from "../../img/search.png"
 import { Link, useLocation } from "react-router-dom";
 
 function NavBar({currentUser, handleUser})
@@ -38,7 +38,7 @@ function NavBar({currentUser, handleUser})
                 loggedIn ?  <div className="profile-menu-container">     
                                 <input className="profile-checkbox" type="checkbox" id="profile-toggle" />
                                 <label htmlFor="profile-toggle">
-                                    <img className="profile-icon" src={require("./img/profile-icon.png")}/>
+                                    <img className="profile-icon" src={require("../../img/profile-icon.png")}/>
                                 </label>
                                 <div className="profile-dropdown-container">
                                     <div className="profile-overview-info-container">
@@ -73,7 +73,7 @@ function NavBar({currentUser, handleUser})
             <div className="menu-container">
                 <input className="menu-checkbox" type="checkbox" id="menu-toggle" />
                 <label htmlFor="menu-toggle">
-                    <img className="menu-icon" src={require("./img/menu-icon.png")}/>
+                    <img className="menu-icon" src={require("../../img/menu-icon.png")}/>
                 </label>
                     <div className="dropdown-menu-container">
                     <div className="dropdown-menu-option" onClick={function(){console.log("hi")}}>Option</div>

@@ -49,15 +49,15 @@ function ProductListPage()
                                 </div>
                                 <div className="product-options">
 
-                                    <Link to={"/edit-product"} state={{ productToEdit: product }} className="product-option-button"><img className="edit-product-button-icon" src={require("./img/edit.png")} alt="edit icon" /></Link>
-                                    <div className="product-option-button" onClick={function(){removeProduct(product.id)}}><img className="remove-product-button-icon" src={require("./img/x.png")} alt="remove icon" /></div>
+                                    <Link to={"/edit-product"} state={{ productToEdit: product }} className="product-option-button"><img className="edit-product-button-icon" src={require("../../img/edit.png")} alt="edit icon" /></Link>
+                                    <div className="product-option-button" onClick={function(){removeProduct(product.id)}}><img className="remove-product-button-icon" src={require("../../img/x.png")} alt="remove icon" /></div>
                                 </div>
                             </div>
                         )
                     }
                 </div>
                 <Link to={"/add-product"} className="add-product-link-button">
-                    <img className="add-product-link-icon" src={require("./img/add.png")} />
+                    <img className="add-product-link-icon" src={require("../../img/add.png")} />
                 </Link>
             </div>  
         </div>

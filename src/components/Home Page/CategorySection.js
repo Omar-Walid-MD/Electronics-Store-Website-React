@@ -91,7 +91,7 @@ function CategorySection()
                 {
                     categoryList.map((category,index)=>
                         <Link to={"/shop"} state={{ category: category.categCode }} className="category-container" key={index}>
-                            <img className="category-image" src={require('./img/categories/'+category.img)} alt="icon" />
+                            <img className="category-image" src={require('../../img/categories/'+category.img)} alt="icon" />
                             <h1 className="category-name">{category.name}</h1>
                         </Link>
                     )

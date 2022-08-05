@@ -55,7 +55,7 @@ function BrandSection()
                 {
                     brandList.map((brand,index)=>
                     <Link to={"/shop"} state={{ brand: brand.brandCode }} className="brand-container" key={index}>
-                        <img className="brand-image" src={require('./img/brands/'+brand.brandCode + "-logo-full.png")} alt="icon" />
+                        <img className="brand-image" src={require('../../img/brands/'+brand.brandCode + "-logo-full.png")} alt="icon" />
                     </Link>
                     )
                 }

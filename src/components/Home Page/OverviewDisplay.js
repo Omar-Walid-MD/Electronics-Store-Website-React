@@ -1,4 +1,4 @@
-import featureImgList from "./img/export.js"
+import featureImgList from "../../img/export.js"
 import { useEffect, useState } from 'react';
 
 function OverviewDisplay()

@@ -1,4 +1,4 @@
-import "./ShoppingPage.css";
+import "../Shopping Page/ShoppingPage.css";
 
 
 function Popup({popup})

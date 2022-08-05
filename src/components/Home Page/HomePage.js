@@ -4,9 +4,9 @@ import OfferDisplay from './OfferDisplay';
 import CategorySection from './CategorySection';
 import BrandSection from './BrandSection';
 import BranchSection from './BranchSection';
-import SideBar from './SideBar';
-import Footer from "./Footer";
-import NavBar from "./NavBar";
+import SideBar from '../General Components/SideBar';
+import Footer from "../General Components/Footer";
+import NavBar from "../General Components/NavBar";
 
 function HomePage({currentUser, handleUser})
 {

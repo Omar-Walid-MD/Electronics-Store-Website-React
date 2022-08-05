@@ -88,18 +88,18 @@ function BranchSection()
             <div className="branches-container">
                 <div className="branches-info-container" ref={infoContainer} key={"true"}>
                     <h1 className="branch-name">{currentBranch.name}</h1>
-                    {currentBranch!=null && <img className="branch-image" src={require("./img/branches/"+currentBranch.img)} alt="branch" />}
+                    {currentBranch!=null && <img className="branch-image" src={require("../../img/branches/"+currentBranch.img)} alt="branch" />}
                     <p className="branch-desc">{currentBranch.desc}</p>
                 </div>
                 <div className="branches-map-container">
-                    <img className="branches-map-image" src={require("./img/branches/city-map.png")} alt="map"/>
+                    <img className="branches-map-image" src={require("../../img/branches/city-map.png")} alt="map"/>
                     <div className="branches-map-pointer-group" ref={pointerGroup}>
                         {
                             branchPointers.map((pointer,index)=>(
                                 
                                 <label className="branches-map-pointer" key={index} htmlFor={"branch-" + index}>
                                     <input className="branches-radio" type="radio" name="branches" id={"branch-" + index} onClick={function(){selectBranch(index)}} />
-                                    <img className="branches-map-pointer-image" src={require("./img/pointer.png")} alt="pointer" />
+                                    <img className="branches-map-pointer-image" src={require("../../img/pointer.png")} alt="pointer" />
                                 </label>
                             ))
                         }

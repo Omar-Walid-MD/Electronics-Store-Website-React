@@ -53,7 +53,7 @@ function CartItem({ItemId,name,price,currentUser,handleUser})
             <div className="cart-item-name">{name}</div>
             <div className="cart-item-price">{price}</div>
 
-            <div className="remove-item-button" onClick={function(){setWarning(true)}}><img className="remove-icon" src={require("./img/x.png")} /></div>
+            <div className="remove-item-button" onClick={function(){setWarning(true)}}><img className="remove-icon" src={require("../../img/x.png")} /></div>
             {/* <input className="remove-item-checkbox" type="checkbox" id={"remove-"+ItemId} /> */}
             <div className="remove-item-warning" ref={removeItemWarning}>
                 <h3 className="remove-item-warning-label">Are you sure you want to remove this item?</h3>

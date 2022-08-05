@@ -1,12 +1,12 @@
-import NavBar from "./NavBar";
-import SideBar from "./SideBar";
-import Footer from "./Footer"
-import Popup from "./Popup"
+import NavBar from "../General Components/NavBar";
+import SideBar from "../General Components/SideBar";
+import Footer from "../General Components/Footer"
+import Popup from "../General Components/Popup"
 import { useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
 import MultiRangeSlider from "multi-range-slider-react";
 import "./ShoppingPage.css";
-import "./MultiRangeSlider.css";
+import "../General Components/MultiRangeSlider.css";
 
 function ShoppingPage({currentUser, handleUser})
 {
@@ -437,7 +437,7 @@ function ShoppingPage({currentUser, handleUser})
                             <div className="product-result-container" key={product.id}>
                                 <div className="product-result-image">
                                     <div className="product-result-brand">
-                                        <img className="product-result-brand-icon" src={require('./img/brands/'+product.brand + "-logo-small.png")} alt="brand icon" />
+                                        <img className="product-result-brand-icon" src={require('../../img/brands/'+product.brand + "-logo-small.png")} alt="brand icon" />
                                     </div>
                                 </div>
                                 <h3 className="product-result-name">{product.name}</h3>
@@ -445,8 +445,8 @@ function ShoppingPage({currentUser, handleUser})
 
                                 {
                                     InCart(product)
-                                    ? <div className="product-result-option-button" state="remove" onClick={function(){RemoveFromCart(product);}}><img className="product-result-cart-icon" src={require("./img/remove-from-cart-icon.png")} alt="add to cart icon" /></div>
-                                    : <div className="product-result-option-button" onClick={function(){AddToCart(product);}}><img className="product-result-cart-icon" src={require("./img/add-to-cart-icon.png")} alt="remove from cart icon" /></div>
+                                    ? <div className="product-result-option-button" state="remove" onClick={function(){RemoveFromCart(product);}}><img className="product-result-cart-icon" src={require("../../img/remove-from-cart-icon.png")} alt="add to cart icon" /></div>
+                                    : <div className="product-result-option-button" onClick={function(){AddToCart(product);}}><img className="product-result-cart-icon" src={require("../../img/add-to-cart-icon.png")} alt="remove from cart icon" /></div>
                                 }
 
                             </div>
