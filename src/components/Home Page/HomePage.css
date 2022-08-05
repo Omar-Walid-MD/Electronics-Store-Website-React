@@ -29,12 +29,13 @@
 
   box-sizing: border-box;
 
+  box-shadow: 0 0 30px 2px white;
+
   z-index: 2;
 }
-.logo
+.store-logo
 {
-  color: white;
-  text-decoration: none;
+  height: 70px;
 }
 /* ---------------------------------------------------------- */
 .search-bar-container
@@ -567,20 +568,19 @@
 {
   width: 100%; height: 500px;
 
-  background-color: lightgray;
+  background-color: black;
 
-  box-shadow: inset 0 0 50px gray;
+  /* box-shadow: inset 0 0 50px gray; */
 
   display: flex;
   justify-content: center; align-items: center;
 }
-.overview-section-title
+.overview-section-logo
 {
-  color: black;
-  font-size: 40pt;
+  height: 150px;
 
   position: absolute;
-  top: 100px;
+  top: 150px;
 
   z-index: 1;
 }
@@ -639,13 +639,16 @@
 .feature-image
 {
   width: 100%; height: 100%;
-  opacity: 0.3;
+  opacity: 0.8;
+
+  border-radius: 10px;
+
+  box-shadow: 0 0 40px 10px gray;
 
 }
 
 .feature-desc
 {
-  color: black;
   font-size: 2em; font-weight: 500;
   text-align: center;
 
@@ -686,6 +689,11 @@
   z-index: 1;
 }
 /* ---------------------------------------------------------- */
+@keyframes appear {
+  0% {opacity: 0;}
+  50% {opacity: 0;}
+  100% {opacity: 1;}
+}
 .offers-group-container
 {
   
@@ -698,6 +706,8 @@
   overflow: hidden;
 
   position: relative;
+
+  animation: appear 1s ease-in-out forwards;
 
 }
 .offers-group

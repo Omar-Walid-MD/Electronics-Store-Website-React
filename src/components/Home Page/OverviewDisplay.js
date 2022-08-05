@@ -92,7 +92,7 @@ function OverviewDisplay()
 
     return (
         <section className="overview-section-container">
-          <h1 className="overview-section-title">Store Title</h1>
+          <img className="overview-section-logo" src={require("../../img/store-logo-text.png")} />
           <div className="feature-panels">
             {
               getFeaturePanels().map((feature,index)=>

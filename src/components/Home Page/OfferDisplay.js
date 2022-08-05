@@ -41,27 +41,30 @@ function OfferDisplay()
         },
     ];
 
-    const [offerList,setOfferList] = useState([offerArray[offerArray.length-1],...offerArray,offerArray[0]]);
+    const offerList = [offerArray[offerArray.length-1],...offerArray,offerArray[0]];
 
     //Variables
-
+    
     let maxCount = offerList.length;
-    let first =  1 - Math.ceil(maxCount/2) + 1
-    let counter = first;
-    let offset = 0;
-
+    const first = useRef(1 - Math.ceil(maxCount/2) + 1);
+    
+    const [counter,setCounter] = useState(first.current);
+    const [transition,setTransition] = useState("none");
+    
     let offers = null;
-    let size = 0;
-    let margin = "";
+    const size = useRef(0);
+    const margin = useRef("");
     let index  = counter + Math.ceil(maxCount/2) - 1;
-
-    let transitioning = false;
-
-    if(maxCount%2===0)
+    
+    
+    let offset = 0;
+    if(maxCount%2==0)
     {
         offset = 0.5
     }
 
+    const transitioning = useRef(false);
+    
     const offerGroup = useRef(null);
     const gotoGroup = useRef(null);
     
@@ -70,73 +73,105 @@ function OfferDisplay()
         if(offerGroup.current!=null)
         {
             offers = offerGroup.current.children;
-            size = offers[0].clientWidth;
-            margin = parseInt(getComputedStyle(offers[0]).margin.slice(0,-2));
-        }
-        offerGroup.current.style.transform = "translateX(" + (-(size+margin*2)*first + offset*(size+margin*2)) + "px)";
-        gotoGroup.current.querySelectorAll(".goto-offer-radio")[index-1].checked = true;
-    }
-    
-    function slide(change)
-    {
-        if(!transitioning)
-        {
-            transitioning = true;
-            counter+=change;
-            offerGroup.current.style.transition = "transform 0.4s ease-in-out";
-            offerGroup.current.style.transform = "translateX(" + (-(size+margin*2)*counter + offset*(size+margin*2)) + "px)";
-
-            index  = counter + Math.ceil(maxCount/2) - 1;
-            console.log(index);
-
-            if(index>0&&index<maxCount-1)
-            {
-                gotoGroup.current.querySelectorAll(".goto-offer-radio")[index-1].checked = true;
-            }
-            else if(index===maxCount-1)
-            {
-                gotoGroup.current.querySelectorAll(".goto-offer-radio")[0].checked = true;
-            }
-            else if(index===0)
-            {
-                gotoGroup.current.querySelectorAll(".goto-offer-radio")[maxCount+2-Math.ceil(maxCount/2)].checked = true;
-            }
+            size.current = offers[0].clientWidth;
+            margin.current = parseInt(getComputedStyle(offers[0]).margin.slice(0,-2));
 
         }
+
+        offerGroup.current.style.transform = "translateX(" + (-(size.current+margin.current*2)*first + offset*(size.current+margin.current*2)) + "px)";
+        
+
+
         
     }
+
+    function updateCounter(change)
+    {
+        console.log(transitioning.current);
+        if(!transitioning.current)
+        {
+            setTransition("transform 0.4s ease-in-out");
+            setCounter(x => x + change);
+            transitioning.current = true;
+        }
+        
+
+    }
+
+    function setChecked(index,counter)
+    {
+        if(counter===first.current-1)
+        {
+            console.log("case 1");
+            return index === maxCount - Math.ceil(maxCount/2) + 2;
+        }
+        else if(counter===maxCount - Math.ceil(maxCount/2))
+        {
+            console.log("case 2")
+            return index===0;
+        }
+        else
+        {
+            console.log("case 3");
+            return index === counter + Math.ceil(maxCount/2) - 2;
+        }
+
+    }
+
+
+    
+    // function slide(counter)
+    // {
+    //     console.log("Updated to: " + counter);
+    //     if(!transitioning)
+    //     {
+    //         // if(index!==maxCount-1 && index!==0)
+    //         transitioning = true;
+    //         offerGroup.current.style.transition = "transform 0.4s ease-in-out";
+    //         offerGroup.current.style.transform = "translateX(" + (-(size.current+margin.current*2)*counter + offset*(size.current+margin.current*2)) + "px)";
+
+    //         index  = counter + Math.ceil(maxCount/2) - 1;
+    //         // console.log(index);
+
+            
+
+    //     }
+    //     // console.log(offerGroup.current.style.transform);
+        
+    // }
 
     function slideLoop()
     {
         if(index===maxCount-1)
         {
-
-            counter=first;
+            console.log("Transition loop");
+            setCounter(first.current);
             index  = counter + Math.ceil(maxCount/2) - 1;
 
-            offerGroup.current.style.transition = "none";
-            offerGroup.current.style.transform = "translateX(" + (-(size+margin*2)*counter + offset*(size+margin*2)) + "px)";
+            setTransition("none");
+            offerGroup.current.style.transform = "translateX(" + (-(size.current+margin.current*2)*counter + offset*(size.current+margin.current*2)) + "px)";
         }
         else if(index===0)
         {
-            counter = maxCount - Math.ceil(maxCount/2) - 1;
+            console.log("Transition loop");
+            setCounter(maxCount - Math.ceil(maxCount/2) - 1);
             index  = counter + Math.ceil(maxCount/2) - 1;
 
-            offerGroup.current.style.transition = "none";
-            offerGroup.current.style.transform = "translateX(" + (-(size+margin*2)*counter + offset*(size+margin*2)) + "px)";
+            setTransition("none");
+            offerGroup.current.style.transform = "translateX(" + (-(size.current+margin.current*2)*counter + offset*(size.current+margin.current*2)) + "px)";
 
         }
-        transitioning = false;
-        offerGroup.current.style.transition = "none";
+        transitioning.current = false;
+        //offerGroup.current.style.transition = "none";
         
     }
 
     function slideTo(i)
     {
-        counter = i - Math.ceil(maxCount/2) + 1;
+        setCounter(i - Math.ceil(maxCount/2) + 2);
         offerGroup.current.style.transition = "transform 0.4s ease-in-out";
-        offerGroup.current.style.transform = "translateX(" + (-(size+margin*2)*counter + offset*(size+margin*2)) + "px)";
-        index  = counter + Math.ceil(maxCount/2) - 1;
+        offerGroup.current.style.transform = "translateX(" + (-(size.current+margin.current*2)*counter + offset*(size.current+margin.current*2)) + "px)";
+        index  = counter + Math.ceil(maxCount/2);
     }
 
 
@@ -151,7 +186,8 @@ function OfferDisplay()
 
     useEffect(()=>{
         slideOnMount();
-    },[])
+
+    },[counter])
 
     return (
         <section className="offer-section-container">
@@ -159,11 +195,13 @@ function OfferDisplay()
             
             <div className="offers-group-container">
                 
-                <div className="offers-group" ref={offerGroup} onTransitionEnd={slideLoop}>
+                <div className="offers-group" ref={offerGroup} onTransitionEnd={slideLoop}
+                    style={{transform : "translateX(" + (-(size.current+margin.current*2)*counter + offset*(size.current+margin.current*2)) + "px)",
+                            transition: transition}}>
                     {
                         offerList.map((offer)=>
                         <div className="offer-panel-container" key={makeId(5)}>
-                            <img className="offer-image" src={offer.img} alt="offer"/>
+                            <img className="offer-image" src={offer.img}/>
                             <div className="offer-desc">{offer.desc}</div>
                         </div>
                         )
@@ -171,15 +209,15 @@ function OfferDisplay()
                 </div>
 
                 <div className="offer-buttons-container">
-                    <div className="offer-button" onClick={function(){slide(-1)}}>
+                    <div className="offer-button" onClick={function(){updateCounter(-1)}}>
                         <div className="offer-button-circle">
-                            <img className="offer-button-icon" src={leftArrow} alt="left arrow" />
+                            <img className="offer-button-icon" src={leftArrow} />
                         </div>
                         <div className="offer-button-shadow" end="left"></div>
                     </div>
-                    <div className="offer-button" onClick={function(){slide(1)}}>
+                    <div className="offer-button" onClick={function(){updateCounter(1)}}>
                         <div className="offer-button-circle">
-                            <img className="offer-button-icon" src={rightArrow} alt="right arrow" />
+                            <img className="offer-button-icon" src={rightArrow} />
                         </div>
                         <div className="offer-button-shadow" end="right"></div>
                     </div>
@@ -190,7 +228,7 @@ function OfferDisplay()
                         offerArray.map((offer,index)=>
                             <label htmlFor={"offer-"+index} key={index}>
                                 <div className="goto-offer-container" key={makeId(5)}>
-                                    <input className="goto-offer-radio" type="radio" name="offer-goto" id={"offer-"+index} onClick={function(){slideTo(index)}}/>
+                                    <input className="goto-offer-radio" type="radio" name="offer-goto" id={"offer-"+index} checked={setChecked(index,counter)} onChange={function(){slideTo(index)}}/>
                                     <div className="goto-offer-box"></div>
                                 </div>
                             </label>
@@ -202,5 +240,4 @@ function OfferDisplay()
         </section>
     )
 }
-
 export default OfferDisplay;
