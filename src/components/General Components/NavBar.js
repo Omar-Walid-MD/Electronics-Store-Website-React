@@ -138,33 +138,43 @@ function NavBar({currentUser, handleUser, productList})
                     searchValue !== "" &&
 
                     <div className="search-results-container">
-                    <div className="search-results-grid">
-                    {
-                        SearchProduct().length !== 0
-                        ? SearchProduct().map((product)=>
-                        
-                        <div className="search-result-container" key={product.id}>
-                        <div className="search-result-image">
-                            <div className="search-result-brand">
-                                <img className="search-result-brand-icon" src={require('../../img/brands/'+product.brand + "-logo-small.png")} alt="brand icon" />
-                            </div>
-                        </div>
-                        <h3 className="search-result-name">{product.name}</h3>
-                        <h1 className="search-result-price">{product.price}</h1>
 
                         {
-                            InCart(product)
-                            ? <div className="product-result-option-button" state="remove" onClick={function(){RemoveFromCart(product);}}><img className="product-result-cart-icon" src={require("../../img/remove-from-cart-icon.png")} alt="add to cart icon" /></div>
-                            : <div className="product-result-option-button" onClick={function(){AddToCart(product);}}><img className="product-result-cart-icon" src={require("../../img/add-to-cart-icon.png")} alt="remove from cart icon" /></div>
+                            SearchProduct().length !== 0
+                            ?
+                            <div className="search-results-grid">
+
+                                {
+                                    SearchProduct().map((product)=>
+
+                                    <div className="search-result-container" key={product.id}>
+                                        <div className="search-result-image">
+                                            <div className="search-result-brand">
+                                                <img className="search-result-brand-icon" src={require('../../img/brands/'+product.brand + "-logo-small.png")} alt="brand icon" />
+                                            </div>
+                                        </div>
+                                        <h3 className="search-result-name">{product.name}</h3>
+                                        <h1 className="search-result-price">{product.price}</h1>
+
+                                        {
+                                            InCart(product)
+                                            ? <div className="product-result-option-button" state="remove" onClick={function(){RemoveFromCart(product);}}><img className="product-result-cart-icon" src={require("../../img/remove-from-cart-icon.png")} alt="add to cart icon" /></div>
+                                            : <div className="product-result-option-button" onClick={function(){AddToCart(product);}}><img className="product-result-cart-icon" src={require("../../img/add-to-cart-icon.png")} alt="remove from cart icon" /></div>
+                                        }
+                                
+                                    </div>
+                                    )
+
+                                }    
+                
+                            </div>
+                            
+                            : <h2 className="search-results-empty-message">No Results for "{searchValue}"</h2>
                         }
-                    
-                    </div>
-                        )
-                        : <h1>No results for "{searchValue}"</h1>
-                    }
-                    </div>
+
                     </div>
                 }
+
             </div>
             <div className="nav-bar-options-container">
             
