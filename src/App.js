@@ -7,8 +7,7 @@ import AddProductPage from './components/Product Management Pages/AddProductPage
 import ProductListPage from './components/Product Management Pages/ProductListPage';
 import EditProductPage from './components/Product Management Pages/EditProductPage';
 import ShoppingPage from './components/Shopping Page/ShoppingPage';
-
-
+import EditProfilePage from './components/Account Pages/EditProfilePage';
 
 
 
@@ -77,6 +76,7 @@ function App() {
       <Route path="/products" element={<ProductListPage />} />
       <Route path="/add-product" element={<AddProductPage />} />
       <Route path="/edit-product" element={<EditProductPage />} />
+      <Route path="/edit-profile" element={<EditProfilePage handleUser={setCurrentUser} />} />
     </Routes>
   )
 }

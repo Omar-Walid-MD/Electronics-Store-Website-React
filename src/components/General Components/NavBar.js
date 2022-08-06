@@ -8,8 +8,10 @@ function NavBar({currentUser, handleUser})
 
     var loggedIn = currentUser && currentUser.userId !== 0;
 
-    function logOut()
+    function logOut(e)
     {
+       
+
         let nullUser = {id: 0, userId: 0};
         handleUser(nullUser);
 
@@ -20,6 +22,7 @@ function NavBar({currentUser, handleUser})
         )
         .then(resp =>{
             //console.log(resp.data);
+            window.location.reload();
         }).catch(error => {
             console.log(error);
         });
@@ -60,7 +63,7 @@ function NavBar({currentUser, handleUser})
                                     <div className="border-line"></div>
 
                                     <div className="profile-overview-options-container">
-                                        <div>Edit Profile</div>
+                                        <Link to={"/edit-profile"} state={{currentUser: currentUser, prevPath: location.pathname}} className="nav-bar-link">Edit Profile</Link>
                                         <div>My Cart</div>
                                     </div>
                                     <div className="border-line"></div>
