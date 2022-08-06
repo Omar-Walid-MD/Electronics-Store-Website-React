@@ -8,14 +8,12 @@ import MultiRangeSlider from "multi-range-slider-react";
 import "./ShoppingPage.css";
 import "../General Components/MultiRangeSlider.css";
 
-function ShoppingPage({currentUser, handleUser})
+function ShoppingPage({productList, currentUser, handleUser})
 {
     var loggedIn = currentUser && currentUser.userId !== 0;
 
     const location = useLocation();
     const { category, brand } = location.state || {};
-
-    const [produtList,setProductList] = useState([]);
 
     const [priceFilter,setPriceFilter] = useState({min:0,max:1000});
 
@@ -250,14 +248,6 @@ function ShoppingPage({currentUser, handleUser})
 
     
     useEffect(()=>{
-        fetch('http://localhost:8000/products')
-        .then(res => {
-          return res.json()
-        })
-        .then((data)=>{
-        //   console.log(data);
-          setProductList(data);
-        })
 
         window.addEventListener('scroll',OptionsScroll);
 
@@ -280,7 +270,7 @@ function ShoppingPage({currentUser, handleUser})
     return (
         <div className="shopping-page" id="top">
             <header>
-                <NavBar currentUser={currentUser} handleUser={handleUser} />
+                <NavBar currentUser={currentUser} handleUser={handleUser} productList={productList} />
             </header>
             {
                 loggedIn && <SideBar currentUser={currentUser} handleUser={handleUser}/>
@@ -432,7 +422,7 @@ function ShoppingPage({currentUser, handleUser})
                         <div className="shopping-results-container">
 
                         {
-                            sortList(filterList(produtList)).map((product)=>
+                            sortList(filterList(productList)).map((product)=>
                             
                             <div className="product-result-container" key={product.id}>
                                 <div className="product-result-image">

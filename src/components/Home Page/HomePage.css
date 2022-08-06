@@ -51,6 +51,7 @@
   flex-direction: row;
   align-items: center;
 
+  position: relative;
 }
 .search-icon
 {
@@ -67,6 +68,130 @@
   padding: 0 10px;
   outline: none;
 }
+.search-results-container
+{
+  position: absolute;
+  top: 70px; left: -20%;
+
+  height: 500px; width: 150%;
+
+  color: black;
+
+  background-color: lightgray;
+
+  border-radius: 20px;
+  box-shadow: 0 0 30px grey;
+  box-sizing: border-box;
+  padding: 20px;
+
+  opacity: 1;
+
+  display: flex;
+  justify-content: center; align-items: center;
+
+  transition: all 0.2s ease-in-out;
+
+  overflow-y: scroll;
+  
+}
+.search-results-grid
+{
+    height: 100%; width: 100%;
+
+    display: grid;
+    justify-items: center; align-items: center;
+    grid-template-columns: repeat(4,25%);
+}
+.search-result-container
+{
+    height: 300px; width: 200px;
+    
+    color: black;
+    background-color: white;
+
+    border: 3px solid black;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px -10px black;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; align-items: center;
+    
+    box-sizing: border-box;
+    padding: 20px;
+    margin-bottom: 50px;
+
+    transition: transform 0.2s ease-in-out;
+}
+.search-result-container:hover
+{
+    transform: scale(110%);
+}
+.search-result-image
+{
+    height: 100px; width: 100px;
+    
+    background-color: pink;
+    
+    position: relative;
+}
+.search-result-brand
+{
+    height: 40px; width: 40px;
+    
+    background-color: white;
+
+    border-radius: 50%;
+    box-shadow: 0 0 10px grey;
+    
+    position: absolute;
+    
+    bottom: -20px;
+    right: -20px;
+
+    display: flex;
+    justify-content: center; align-items: center;
+}
+.search-result-brand-icon
+{
+    height: 70%;
+}
+.search-result-name
+{
+    font-size: 12pt;
+    margin: 10px;
+}
+.search-result-price
+{
+    color: red;
+    font-size: 20pt;
+    margin: 5px;
+}
+
+.search-result-option-button
+{
+    
+    height: 30px; width: 30px;
+    background-color: darkblue;
+    
+    padding: 5px;
+    border-radius: 50%;
+    /* border: 2px solid black; */
+    
+    display: flex;
+    justify-content: center; align-items: center;
+    
+    cursor: pointer;
+}
+.search-result-option-button[state="remove"]
+{
+    background-color: rgb(168, 0, 0);
+}
+.search-result-cart-icon
+{
+    height: 25px;
+}
+
 /* ---------------------------------------------------------- */
 .nav-bar-options-container
 {

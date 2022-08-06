@@ -18,6 +18,8 @@ function App() {
 
   const [currentUser,setCurrentUser] = useState(null);
 
+  const [productList,setProductList] = useState(null);
+
   function handleCurrentUser()
   {
     fetch('http://localhost:8000/currentUser/0')
@@ -63,16 +65,32 @@ function App() {
 
     handleCurrentUser();
 
+    fetch('http://localhost:8000/products')
+    .then(res => {
+      return res.json()
+    })
+    .then((data)=>{
+    //   console.log(data);
+      setProductList(data);
+    })
+
     
   },[]);
+
+  useEffect(()=>{
+    
+
+
+
+},[]);
 
   return (
     
     <Routes>
-      <Route path="/" element={<HomePage currentUser={currentUser} handleUser={setCurrentUser} />} />
+      <Route path="/" element={<HomePage currentUser={currentUser} handleUser={setCurrentUser} productList={productList} />} />
       <Route path="/login" element={<LoginPage handleUser={setCurrentUser} userList={userList} />} />
       <Route path="/register" element={<RegisterPage handleUser={setCurrentUser} userList={userList} handleUserList={setUserList} />} />
-      <Route path="/shop" element={<ShoppingPage currentUser={currentUser} handleUser={setCurrentUser} />}/>
+      <Route path="/shop" element={<ShoppingPage currentUser={currentUser} handleUser={setCurrentUser} productList={productList} />}/>
       <Route path="/products" element={<ProductListPage />} />
       <Route path="/add-product" element={<AddProductPage />} />
       <Route path="/edit-product" element={<EditProductPage />} />

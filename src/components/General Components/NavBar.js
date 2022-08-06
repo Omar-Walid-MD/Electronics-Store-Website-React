@@ -1,12 +1,26 @@
 import searchIcon from "../../img/search.png"
 import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
 
-function NavBar({currentUser, handleUser})
+function NavBar({currentUser, handleUser, productList})
 {
 
     const location = useLocation();
 
     var loggedIn = currentUser && currentUser.userId !== 0;
+
+    const [searchValue,setSearchValue] = useState("");
+
+    function handleSearch(e)
+    {
+        setSearchValue(e.target.value);
+        console.log(e.target.value);
+    }
+
+    function SearchProduct()
+    {
+        return productList!==null ? productList.filter((product)=>product.name.toLowerCase().includes(searchValue.toLowerCase())) : [];
+    }
 
     function logOut(e)
     {
@@ -37,14 +51,120 @@ function NavBar({currentUser, handleUser})
         }
         
     }
+
+
+    function AddToCart(product)
+    {
+        if(loggedIn)
+        {
+            let profileWithNewProduct = {
+                ...currentUser,
+                cart: [...currentUser.cart,product],
+            };
+            
+            const axios = require('axios');
+
+            axios.put('http://localhost:8000/users/'+currentUser.id,
+                profileWithNewProduct
+            )
+            .then(resp =>{
+                console.log("Added product to your cart");
+                //popUpMessage("Product Added to your cart!");
+            }).catch(error => {
+                console.log(error);
+            });
+
+            //To update state and trigger re-render
+            handleUser(profileWithNewProduct);
+        }
+        else
+        {
+            //popUpMessage("You need to login to add products to your cart!");
+        }
+    }
+
+    function RemoveFromCart(product)
+    {
+        if(loggedIn)
+        {
+            let profileWithNewProduct = {
+                ...currentUser,
+                cart: currentUser.cart.filter((item)=>item.id!==product.id),
+            };
+            
+            const axios = require('axios');
+
+            axios.put('http://localhost:8000/users/'+currentUser.id,
+                profileWithNewProduct
+            )
+            .then(resp =>{
+                console.log("Removed product from your cart");
+                //popUpMessage("Product removed from your cart");
+            }).catch(error => {
+                console.log(error);
+            });
+
+            //To update state and trigger re-render
+            handleUser(profileWithNewProduct);
+        }
+        else
+        {
+            console.log("You need to log in!")
+        }
+    }
+
+    function InCart(product)
+    {
+        if(loggedIn)
+        {    
+            for(let i = 0; i < currentUser.cart.length; i++)
+            {
+                if(product.id===currentUser.cart[i].id) return true;
+            }
+    
+        }
+        return false;
+    }
     
 
     return (
         <div className="nav-bar">
             <Link to={"/"}><img  className="store-logo" src={require("../../img/store-logo-full.png")}/></Link>
             <div className="search-bar-container">
-            <img className="search-icon" src={searchIcon} alt="search-icon" />
-            <input className="search-bar" type="search" />
+                <img className="search-icon" src={searchIcon} alt="search-icon" />
+                <input className="search-bar" type="search" value={searchValue} onChange={handleSearch} />
+
+                {
+                    searchValue !== "" &&
+
+                    <div className="search-results-container">
+                    <div className="search-results-grid">
+                    {
+                        SearchProduct().length !== 0
+                        ? SearchProduct().map((product)=>
+                        
+                        <div className="search-result-container" key={product.id}>
+                        <div className="search-result-image">
+                            <div className="search-result-brand">
+                                <img className="search-result-brand-icon" src={require('../../img/brands/'+product.brand + "-logo-small.png")} alt="brand icon" />
+                            </div>
+                        </div>
+                        <h3 className="search-result-name">{product.name}</h3>
+                        <h1 className="search-result-price">{product.price}</h1>
+
+                        {
+                            InCart(product)
+                            ? <div className="product-result-option-button" state="remove" onClick={function(){RemoveFromCart(product);}}><img className="product-result-cart-icon" src={require("../../img/remove-from-cart-icon.png")} alt="add to cart icon" /></div>
+                            : <div className="product-result-option-button" onClick={function(){AddToCart(product);}}><img className="product-result-cart-icon" src={require("../../img/add-to-cart-icon.png")} alt="remove from cart icon" /></div>
+                        }
+                    
+                    </div>
+                        )
+                        : <h1>No results for "{searchValue}"</h1>
+                    }
+                    </div>
+                    </div>
+                }
             </div>
             <div className="nav-bar-options-container">
             
