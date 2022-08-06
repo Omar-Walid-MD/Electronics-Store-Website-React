@@ -25,6 +25,17 @@ function NavBar({currentUser, handleUser})
         });
     }
 
+    function manageMenus(event)
+    {
+        const menus = document.querySelectorAll("[name='dropdown-checkbox']");
+        for(let i = 0; i < menus.length; i++)
+        {
+            if(menus[i]!==event.target) menus[i].checked = false;
+        }
+        
+    }
+    
+
     return (
         <div className="nav-bar">
             <Link to={"/"}><img  className="store-logo" src={require("../../img/store-logo-full.png")}/></Link>
@@ -36,7 +47,7 @@ function NavBar({currentUser, handleUser})
             
                 {
                 loggedIn ?  <div className="profile-menu-container">     
-                                <input className="profile-checkbox" type="checkbox" id="profile-toggle" />
+                                <input className="profile-checkbox" type="checkbox" name="dropdown-checkbox" id="profile-toggle" onChange={manageMenus} />
                                 <label htmlFor="profile-toggle">
                                     <img className="profile-icon" src={require("../../img/profile-icon.png")}/>
                                 </label>
@@ -71,7 +82,7 @@ function NavBar({currentUser, handleUser})
                 }    
 
             <div className="menu-container">
-                <input className="menu-checkbox" type="checkbox" id="menu-toggle" />
+                <input className="menu-checkbox" name="dropdown-checkbox" type="checkbox" id="menu-toggle" onChange={manageMenus} />
                 <label htmlFor="menu-toggle">
                     <img className="menu-icon" src={require("../../img/menu-icon.png")}/>
                 </label>

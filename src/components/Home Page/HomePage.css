@@ -271,11 +271,23 @@
   -Bar content
   -Bar footer*/
 
+.side-bar-container
+{
+  height: 90%; width: 0;
 
+  position: fixed;
+  right: 0;
+
+  z-index: 5;
+
+  box-sizing: border-box;
+
+  background-color: red;
+
+}
 .side-bar
 {
-  height: 90%; width: 500px;
-
+  height: 100%; width: 500px;
 
   position: fixed;
   right: -500px;
@@ -286,9 +298,13 @@
   flex-direction: column;
   justify-content: space-between; align-items: center;
 
-  box-shadow: 0 0 10px black;
+  box-shadow: none;
 
   box-sizing: border-box;
+
+  padding-bottom: 100px;
+
+  transition: all 0.5s ease-in-out;
   
 }
 /* ---------------------------------------------------------- */
@@ -511,7 +527,7 @@
   background-color: black;
   
   position: absolute;
-  bottom: 50px; left: -130px;
+  bottom: 130px; left: -130px;
 
   border-width: 5px 0 5px 5px;
   border-color: white;
@@ -543,6 +559,11 @@
   opacity: 0;
   position: absolute;
 }
+.cart-checkbox:checked +.side-bar
+{
+  right: 0;
+  box-shadow: 0 0 10px black;
+}
 
 
 
@@ -568,7 +589,7 @@
 {
   width: 100%; height: 500px;
 
-  background-color: black;
+  background-color: rgb(30, 30, 30);
 
   /* box-shadow: inset 0 0 50px gray; */
 
@@ -674,7 +695,7 @@
 
   padding: 40px;
 
-  background-color: rgb(53, 53, 53);
+  background-color: rgb(30, 30, 30);
 
 }
 .offer-section-title
@@ -855,7 +876,7 @@
 {
   height: auto; width: 100%;
 
-  background-color: dimgray;
+  background-color: rgb(30, 30, 30);
 
   display: flex;
   flex-direction: column;
@@ -937,7 +958,7 @@
 {
   height: auto; width: 100%;
 
-  background-color: dimgray;
+  background-color: rgb(30, 30, 30);
 
   display: flex;
   flex-direction: column;
@@ -1011,7 +1032,7 @@
 {
   height: auto; width: 100%;
 
-  background-color: dimgray;
+  background-color: rgb(30, 30, 30);
 
   display: flex;
   flex-direction: column;
@@ -1151,6 +1172,8 @@
 
   box-sizing: border-box;
   padding: 30px 50px 80px 50px;
+
+  box-shadow: 0 0 30px 2px white;
 
   display: flex;
   flex-direction: row;

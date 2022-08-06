@@ -87,7 +87,6 @@ function OfferDisplay()
 
     function updateCounter(change)
     {
-        console.log(transitioning.current);
         if(!transitioning.current)
         {
             setTransition("transform 0.4s ease-in-out");
@@ -102,43 +101,18 @@ function OfferDisplay()
     {
         if(counter===first.current-1)
         {
-            console.log("case 1");
             return index === maxCount - Math.ceil(maxCount/2) + 2;
         }
         else if(counter===maxCount - Math.ceil(maxCount/2))
         {
-            console.log("case 2")
             return index===0;
         }
         else
         {
-            console.log("case 3");
             return index === counter + Math.ceil(maxCount/2) - 2;
         }
 
     }
-
-
-    
-    // function slide(counter)
-    // {
-    //     console.log("Updated to: " + counter);
-    //     if(!transitioning)
-    //     {
-    //         // if(index!==maxCount-1 && index!==0)
-    //         transitioning = true;
-    //         offerGroup.current.style.transition = "transform 0.4s ease-in-out";
-    //         offerGroup.current.style.transform = "translateX(" + (-(size.current+margin.current*2)*counter + offset*(size.current+margin.current*2)) + "px)";
-
-    //         index  = counter + Math.ceil(maxCount/2) - 1;
-    //         // console.log(index);
-
-            
-
-    //     }
-    //     // console.log(offerGroup.current.style.transform);
-        
-    // }
 
     function slideLoop()
     {
@@ -153,7 +127,6 @@ function OfferDisplay()
         }
         else if(index===0)
         {
-            console.log("Transition loop");
             setCounter(maxCount - Math.ceil(maxCount/2) - 1);
             index  = counter + Math.ceil(maxCount/2) - 1;
 
