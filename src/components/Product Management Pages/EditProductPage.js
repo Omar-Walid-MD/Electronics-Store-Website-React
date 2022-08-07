@@ -96,6 +96,11 @@ function EditProductPage()
         console.log(product);
     }
 
+    function trimInput(event)
+    {
+        event.target.value = event.target.value.trim();
+    }
+
 
     function InputEmpty(allInputs)
     {
@@ -148,7 +153,7 @@ function EditProductPage()
         <div className="add-product-page">
             <div className="add-product-page-container">
                 <div className="add-product-form-container">
-                    <h1 className="add-product-form-title">Add product</h1>
+                    <h1 className="add-product-form-title">Edit product</h1>
                     <form className="add-product-form" onSubmit={EditProduct}>
 
                     <div className="add-product-form-input-group">
@@ -158,11 +163,11 @@ function EditProductPage()
                             <h2 className="add-product-form-section-group-label">General:</h2>
                             <div className="add-product-form-section">
                                 <h2 className="add-product-form-section-label">Product Name:</h2>
-                                <input className="add-product-form-input" type="text" name="name" value={product.name} onChange={handleProduct} />
+                                <input className="add-product-form-input" type="text" name="name" value={product.name} onChange={handleProduct} onBlur={trimInput}  />
                             </div>
                             <div className="add-product-form-section">
                                 <h2 className="add-product-form-section-label">Product Category:</h2>
-                                <select id="category-select" className="add-product-form-input" name="category" value={product.category} onChange={handleProduct}>
+                                <select id="category-select" className="add-product-form-input" name="category" value={product.category} onChange={handleProduct} onBlur={trimInput} >
                                     <option value="">Choose Category</option>
                                     <option value="desktop">Desktop</option>
                                     <option value="laptop">Laptop</option>
@@ -180,7 +185,7 @@ function EditProductPage()
 
                             <div className="add-product-form-section">
                                 <h2 className="add-product-form-section-label">Product Brand:</h2>
-                                <select id="brand-select" className="add-product-form-input" name="brand" value={product.brand} onChange={handleProduct}>
+                                <select id="brand-select" className="add-product-form-input" name="brand" value={product.brand} onChange={handleProduct} onBlur={trimInput} >
                                     <option value="">Choose Brand</option>
                                     <option value="buzz">Buzz</option>
                                     <option value="maple">Maple</option>
@@ -198,7 +203,7 @@ function EditProductPage()
                             
                             <div className="add-product-form-section">
                                 <h2 className="add-product-form-section-label">Product Price:</h2>
-                                <input className="add-product-form-input" name="price" value={product.price} onChange={handleProduct} />
+                                <input className="add-product-form-input" name="price" value={product.price} onChange={handleProduct} onBlur={trimInput} />
                             </div>
 
                         </div>
@@ -212,7 +217,7 @@ function EditProductPage()
                                             specList[product.category].map((spec)=>
                                             <div key={"spec-"+spec.code}>
                                                 <h2 className="add-product-form-section-label">{spec.name}</h2>
-                                                <input className="add-product-form-input" type="text" name={spec.code} value={product.specs[spec.code]} onChange={handleSpecs} />
+                                                <input className="add-product-form-input" type="text" name={spec.code} value={product.specs[spec.code]} onChange={handleSpecs} onBlur={trimInput} />
                                             </div>
                                             
                                             )
