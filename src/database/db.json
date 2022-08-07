@@ -45,7 +45,16 @@
       "name": "Buzz Phone B1",
       "category": "smartphone",
       "brand": "buzz",
-      "price": "100"
+      "price": "100",
+      "specs": {
+        "os": "Android 11",
+        "processor": "1.5 GHz",
+        "ram": "1 GB",
+        "storage": "64 GB",
+        "screen": "6",
+        "camResolution": "8 MP",
+        "battery": "3000 mAh"
+      }
     },
     {
       "id": "3458684934",
@@ -221,6 +230,22 @@
       "category": "smartphone",
       "brand": "buzz",
       "price": "500"
+    },
+    {
+      "name": "Buzz Phone X12",
+      "category": "smartphone",
+      "brand": "buzz",
+      "price": "269",
+      "specs": {
+        "os": "Android 12",
+        "processor": "2.3 GHz",
+        "ram": "2 GB",
+        "storage": "128 GB",
+        "screen": "7",
+        "camResolution": "10 MP",
+        "battery": "3000 mAh"
+      },
+      "id": "NaqrQ7J"
     }
   ]
 }

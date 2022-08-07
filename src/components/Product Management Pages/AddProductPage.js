@@ -3,7 +3,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import './AddProductPage.css';
 function AddProductPage()
 {
-    //Submitted types: "none","success","passwordFailed","emailFailed"
 
     const specList = {
         desktop: [{name:"Operating System",code:"os"},{name:"Processor",code:"processor"},{name:"RAM",code:"ram"},{name:"Storage",code:"storage"},{name:"Graphics Card",code:"graphics"}],
@@ -52,20 +51,14 @@ function AddProductPage()
                     specs: specsTable,
                     
                 });
-
                 console.log("Done");
-
             }
             else
             {
                 setProduct({
                     ...product,
                     category: value,
-                    specs:
-                    {
-
-                    }
-                    
+                    specs:{},
                 });
             }
         }
@@ -76,10 +69,6 @@ function AddProductPage()
                 [property]: value
             });
         }
-        
-        
-
-        
         
         console.log(product);
     }
@@ -220,7 +209,6 @@ function AddProductPage()
                                 </div>     
                             }
                                 
-                            
                         
                         </div>
                         <input className="add-product-form-submit" type="submit" disabled={InputEmpty(requiredFields)}/>

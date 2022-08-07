@@ -422,7 +422,7 @@ function ShoppingPage({productList, currentUser, handleUser})
                         <div className="shopping-results-container">
 
                         {
-                            sortList(filterList(productList)).map((product)=>
+                            productList && sortList(filterList(productList)).map((product)=>
                             
                             <div className="product-result-container" key={product.id}>
                                 <div className="product-result-image">
