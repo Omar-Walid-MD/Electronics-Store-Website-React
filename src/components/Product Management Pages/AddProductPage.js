@@ -5,63 +5,123 @@ function AddProductPage()
 {
     //Submitted types: "none","success","passwordFailed","emailFailed"
 
-    const [NameValue,setNameValue] = useState("");
-
-    const [categoryValue,setCategoryValue] = useState("");
-
-    const [brandValue,setBrandValue] = useState("");
-
-    const [priceValue,setPriceValue] = useState(0);
-
-    const requiredValues = [NameValue, categoryValue, brandValue, priceValue];
-
-    const navigate = useNavigate();
-
-    function handleNameValue(event)
-    {
-        setNameValue(event.target.value);
-    }
-    function handleCategoryValue(event)
-    {
-        setCategoryValue(event.target.value);
-        console.log(event.target.value);
-    }
-    function handleBrandValue(event)
-    {
-        setBrandValue(event.target.value);
-    }
-
-    function handlePriceValue(event)
-    {
-        setPriceValue(event.target.value);
+    const specList = {
+        desktop: [{name:"Operating System",code:"os"},{name:"Processor",code:"processor"},{name:"RAM",code:"ram"},{name:"Storage",code:"storage"},{name:"Graphics Card",code:"graphics"}],
+        laptop: [{name:"Operating System",code:"os"},{name:"Processor",code:"processor"},{name:"RAM",code:"ram"},{name:"Storage",code:"storage"},{name:"Graphics Card",code:"graphics"},{name:"Battery life",code:"battery"}],
+        smartphone: [{name:"Operating System",code:"os"},{name:"Processor",code:"processor"},{name:"RAM",code:"ram"},{name:"Storage",code:"storage"},{name:"Screen size",code:"screen"},{name:"Camera Resolution",code:"camResolution"},{name:"Battery life",code:"battery"}],
+        tablet: [{name:"Operating System",code:"os"},{name:"Processor",code:"processor"},{name:"RAM",code:"ram"},{name:"Storage",code:"storage"},{name:"Screen size",code:"screen"},{name:"Camera Resolution",code:"camResolution"},{name:"Battery life",code:"battery"}],
+        mouse: [{name:"Connection",code:"connection"}],
+        keyboard: [{name:"Connection",code:"connection"},{name:"Key Type",code:"keyType"}],
+        monitor: [{name:"Screen size",code:"screen"},{name:"Resolution",code:"resolution"}],
+        speaker: [{name:"Connection",code:"connection"},{name:"Height",code:"height"}],
+        headphone: [{name:"Design",code:"design"},{name:"Connection",code:"connection"},{name:"Microphone",code:"microphone"},{name:"Noise Cancelling",code:"noiseCancelling"}],
+        earphone: [{name:"Design",code:"design"},{name:"Connection",code:"connection"},{name:"Microphone",code:"microphone"},{name:"Noise Cancelling",code:"noiseCancelling"}],
+        camera: [{name:"Flash",code:"flash"},{name:"Video resolution",code:"videoResolution"},{name:"Touch display",code:"touchDisplay"},{name:"Shutter speed",code:"shutterSpeed"}],
     }
 
 
-    function inputEmpty()
+    const [product,setProduct] = useState({
+        name: "",
+        category: "",
+        brand: "",
+        price: "",
+        specs: {},
+
+    });
+
+    const [requiredFields,setRequiredFields] = useState(document.querySelectorAll(".add-product-form-input"));
+
+    function handleProduct(event)
     {
-        for(let i = 0; i < requiredValues.length; i++)
+        let property = event.target.name;
+        let value = event.target.value;
+
+        if(property==="category")
         {
-            if(requiredValues[i]==="") return true;
+            if(value!=="")
+            {
+                let specsTable = {};
+                for(let i = 0; i < specList[value].length; i++)
+                {
+                    specsTable[specList[value][i].code] = "";
+                }
+        
+                setProduct({
+                    ...product,
+                    category: value,
+                    specs: specsTable,
+                    
+                });
+
+                console.log("Done");
+
+            }
+            else
+            {
+                setProduct({
+                    ...product,
+                    category: value,
+                    specs:
+                    {
+
+                    }
+                    
+                });
+            }
         }
-        return false; 
+        else
+        {
+            setProduct({
+                ...product,
+                [property]: value
+            });
+        }
+        
+        
+
+        
+        
+        console.log(product);
     }
+
+    function handleSpecs(event)
+    {
+        let property = event.target.name;
+        let value = event.target.value;
+
+        setProduct({
+            ...product,
+            specs:
+            {
+                ...product.specs,
+                [property]: value
+            }
+            
+        });
+
+        console.log(product);
+    }
+
+
+    function InputEmpty(allInputs)
+    {
+        for(let i = 0; i < allInputs.length; i++)
+        {
+            if(allInputs[i].value==="") return true;
+        }
+        return false;
+    }
+
 
     function AddProduct(e)
     {
         e.preventDefault();
            
-            let newProduct = {
-                id: makeId(10),
-                name: NameValue,
-                category: categoryValue,
-                brand: brandValue,
-                price: priceValue,
-            };
             
             fetch('http://localhost:8000/products',{
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(newProduct)
+                body: JSON.stringify(product)
             }).then(()=>{console.log("New Product Added.")})
             
             return
@@ -77,6 +137,11 @@ function AddProductPage()
         return result;
       }
 
+    
+    useEffect(()=>{
+        setRequiredFields(document.querySelectorAll(".add-product-form-input"));
+    },[product.category])
+
 
     return (
         <div className="add-product-page">
@@ -84,14 +149,19 @@ function AddProductPage()
                 <div className="add-product-form-container">
                     <h1 className="add-product-form-title">Add product</h1>
                     <form className="add-product-form" onSubmit={AddProduct}>
+
+                    <div className="add-product-form-input-group">
+
+                   
                         <div className="add-product-form-section-group">
+                            <h2 className="add-product-form-section-group-label">General:</h2>
                             <div className="add-product-form-section">
                                 <h2 className="add-product-form-section-label">Product Name:</h2>
-                                <input className="add-product-form-input" type="text" value={NameValue} onChange={handleNameValue} />
+                                <input className="add-product-form-input" type="text" name="name" value={product.name} onChange={handleProduct} />
                             </div>
                             <div className="add-product-form-section">
                                 <h2 className="add-product-form-section-label">Product Category:</h2>
-                                <select id="category-select" className="add-product-form-input" value={categoryValue} onChange={handleCategoryValue}>
+                                <select id="category-select" className="add-product-form-input" name="category" value={product.category} onChange={handleProduct}>
                                     <option value="">Choose Category</option>
                                     <option value="desktop">Desktop</option>
                                     <option value="laptop">Laptop</option>
@@ -109,7 +179,7 @@ function AddProductPage()
 
                             <div className="add-product-form-section">
                                 <h2 className="add-product-form-section-label">Product Brand:</h2>
-                                <select id="brand-select" className="add-product-form-input"  value={brandValue} onChange={handleBrandValue}>
+                                <select id="brand-select" className="add-product-form-input" name="brand" value={product.brand} onChange={handleProduct}>
                                     <option value="">Choose Brand</option>
                                     <option value="buzz">Buzz</option>
                                     <option value="maple">Maple</option>
@@ -123,16 +193,37 @@ function AddProductPage()
                                     <option value="pixcel">Pixcel</option>
                                 </select>
                             </div>
+
                             
                             <div className="add-product-form-section">
                                 <h2 className="add-product-form-section-label">Product Price:</h2>
-                                <input className="add-product-form-input" type="number" value={priceValue} onChange={handlePriceValue} />
+                                <input className="add-product-form-input" name="price" value={product.price} onChange={handleProduct} />
                             </div>
 
                         </div>
+                            {
+                                specList[product.category] &&
+
+                                <div className="add-product-form-section-group">
+                                    <h2 className="add-product-form-section-group-label">Specs:</h2>
+                                    <div className="add-product-form-section">
+                                        {
+                                            specList[product.category].map((spec)=>
+                                            <div key={"spec-"+spec.code}>
+                                                <h2 className="add-product-form-section-label">{spec.name}</h2>
+                                                <input className="add-product-form-input" type="text" name={spec.code} value={product.specs[spec.code]} onChange={handleSpecs} />
+                                            </div>
+                                            
+                                            )
+                                        }
+                                    </div>
+                                </div>     
+                            }
+                                
+                            
                         
-                        <input className="add-product-form-submit" type="submit" disabled={inputEmpty()}/>
-                        
+                        </div>
+                        <input className="add-product-form-submit" type="submit" disabled={InputEmpty(requiredFields)}/>
                     </form>
                 </div>
                 <div className="home-button-container">

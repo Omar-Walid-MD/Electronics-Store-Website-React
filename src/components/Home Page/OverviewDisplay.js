@@ -6,19 +6,19 @@ function OverviewDisplay()
     const featureList = [
         {
           img: featureImgList[0],
-          desc: "First First First First",
+          desc: "#1 Electronics chain in your town",
         },
         {
           img: featureImgList[1],
-          desc: "Second Second Second Second",
+          desc: "Broad variety of quality products",
         },
         {
           img: featureImgList[2],
-          desc: "Third Third Third Third",
+          desc: "High speed delivery to your desired location",
         },
         {
           img: featureImgList[3],
-          desc: "Fourth Fourth Fourth Fourth",
+          desc: "Certified warranty and quick repair for all your purchases",
         },
       ];
     
