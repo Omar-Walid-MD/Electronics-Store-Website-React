@@ -14,11 +14,21 @@
       "password": "omar1234",
       "cart": [
         {
-          "id": "3458684934",
-          "name": "Buzz Phone B2",
+          "id": "6124359531",
+          "name": "Buzz Phone B1",
           "category": "smartphone",
           "brand": "buzz",
-          "price": "120"
+          "price": "100",
+          "specs": {
+            "os": "Android 11",
+            "processor": "1.8 GHz",
+            "ram": "1 GB",
+            "storage": "64 GB",
+            "screen": "6",
+            "camResolution": "8 MP",
+            "battery": "3800 mAh"
+          },
+          "img": "phone"
         }
       ]
     },
@@ -48,204 +58,365 @@
       "price": "100",
       "specs": {
         "os": "Android 11",
-        "processor": "1.5 GHz",
+        "processor": "1.8 GHz",
         "ram": "1 GB",
         "storage": "64 GB",
         "screen": "6",
         "camResolution": "8 MP",
-        "battery": "3000 mAh"
-      }
+        "battery": "3800 mAh"
+      },
+      "img": "phone"
     },
     {
       "id": "3458684934",
       "name": "Buzz Phone B2",
       "category": "smartphone",
       "brand": "buzz",
-      "price": "120"
+      "price": "120",
+      "specs": {
+        "os": "Android 11",
+        "processor": "1.8 GHz",
+        "ram": "1.5 GB",
+        "storage": "64 GB",
+        "screen": "7",
+        "camResolution": "10 MP",
+        "battery": "4000 mAH"
+      },
+      "img": "phone"
     },
     {
       "id": "5921471598",
       "name": "Buzz Phone B3",
       "category": "smartphone",
       "brand": "buzz",
-      "price": "140"
+      "price": "140",
+      "specs": {
+        "os": "Android 11",
+        "processor": "2 GHz",
+        "ram": "1.5 GB",
+        "storage": "128 GB",
+        "screen": "7",
+        "camResolution": "12 MP",
+        "battery": "4200 mAH"
+      },
+      "img": "phone"
     },
     {
       "id": "2989843834",
       "name": "Buzz Phone B4",
       "category": "smartphone",
       "brand": "buzz",
-      "price": "160"
+      "price": "160",
+      "specs": {
+        "os": "Android 12",
+        "processor": "2 GHz",
+        "ram": "2 GB",
+        "storage": "128 GB",
+        "screen": "7",
+        "camResolution": "15 MP",
+        "battery": "4800 mAH"
+      },
+      "img": "phone"
     },
     {
       "id": "9287661888",
       "name": "Buzz Tab B1",
       "category": "tablet",
       "brand": "buzz",
-      "price": "200"
+      "price": "200",
+      "specs": {
+        "os": "Android 12",
+        "processor": "2.5 GHz",
+        "ram": "2 GB",
+        "storage": "128 GB",
+        "screen": "7",
+        "camResolution": "5 MP",
+        "battery": "5000 mAH"
+      },
+      "img": "tablet"
     },
     {
       "id": "6119347394",
       "name": "Buzz Phone B5",
       "category": "smartphone",
       "brand": "buzz",
-      "price": "180"
+      "price": "180",
+      "specs": {
+        "os": "Android 12",
+        "processor": "2.3 GHz",
+        "ram": "3 GB",
+        "storage": "128 GB",
+        "screen": "7",
+        "camResolution": "15 MP",
+        "battery": "4200 mAH"
+      },
+      "img": "phone"
     },
     {
       "id": "2976317714",
       "name": "Buzz Tab B2",
       "category": "tablet",
       "brand": "buzz",
-      "price": "250"
+      "price": "250",
+      "specs": {
+        "os": "Android 12",
+        "processor": "2.3 GHz",
+        "ram": "2 GB",
+        "storage": "128 GB",
+        "screen": "8",
+        "camResolution": "8 MP",
+        "battery": "5000 mAH"
+      },
+      "img": "tablet"
     },
     {
       "id": "4637131441",
       "name": "Buzz Tab B3",
       "category": "tablet",
       "brand": "buzz",
-      "price": "300"
+      "price": "300",
+      "specs": {
+        "os": "Android 12",
+        "processor": "2.5 GHz",
+        "ram": "3 GB",
+        "storage": "128 GB",
+        "screen": "10",
+        "camResolution": "10 MP",
+        "battery": "6000 mAH"
+      },
+      "img": "tablet"
     },
     {
       "id": "3526683322",
       "name": "Buzz Keyboard KB1",
       "category": "keyboard",
       "brand": "buzz",
-      "price": "10"
+      "price": "10",
+      "specs": {
+        "connection": "Wired - USB C",
+        "keyType": "Standard"
+      }
     },
     {
       "id": "8823614376",
       "name": "Buzz Keyboard KB2",
       "category": "keyboard",
       "brand": "buzz",
-      "price": "15"
+      "price": "15",
+      "specs": {
+        "connection": "Wired - USB C",
+        "keyType": "Standard"
+      }
     },
     {
       "id": "3767498163",
       "name": "Buzz Keyboard KB3",
       "category": "keyboard",
       "brand": "buzz",
-      "price": "20"
+      "price": "20",
+      "specs": {
+        "connection": "Wireless - Bluetooth",
+        "keyType": "Standard"
+      }
     },
     {
       "id": "8696269769",
       "name": "Buzz Mouse MB1",
       "category": "mouse",
       "brand": "buzz",
-      "price": "10"
+      "price": "10",
+      "specs": {
+        "connection": "Wired - USB C"
+      },
+      "img": "mouse"
     },
     {
       "id": "6271221645",
       "name": "Buzz Mouse MB2",
       "category": "mouse",
       "brand": "buzz",
-      "price": "15"
+      "price": "15",
+      "specs": {
+        "connection": "Wired - USB C"
+      },
+      "img": "mouse"
     },
     {
       "id": "5563558618",
       "name": "Buzz Mouse MB3",
       "category": "mouse",
       "brand": "buzz",
-      "price": "20"
+      "price": "20",
+      "specs": {
+        "connection": "Wireless - Bluetooth"
+      },
+      "img": "mouse"
     },
     {
       "id": "9491146934",
       "name": "Buzz Heaphones HB1",
       "category": "headphone",
       "brand": "buzz",
-      "price": "20"
+      "price": "20",
+      "specs": {
+        "noiseCancelling": "Yes",
+        "microphone": "Internal",
+        "connection": "Wired - Jack",
+        "design": "Soft Pads"
+      },
+      "img": "headphone"
     },
     {
       "id": "2359569296",
       "name": "Buzz Heaphones HB2",
       "category": "headphone",
       "brand": "buzz",
-      "price": "30"
+      "price": "30",
+      "specs": {
+        "design": "On-ear Over-the-Head Flexibility",
+        "connection": "Wired - Jack",
+        "microphone": "External",
+        "noiseCancelling": "No"
+      },
+      "img": "headphone"
     },
     {
       "id": "5567626888",
       "name": "Buzz Heaphones HB3",
       "category": "headphone",
       "brand": "buzz",
-      "price": "40"
+      "price": "40",
+      "specs": {
+        "design": "Soft Pads",
+        "connection": "Wireless - Bluetooth",
+        "microphone": "External",
+        "noiseCancelling": "Yes"
+      },
+      "img": "headphone"
     },
     {
       "id": "8819869213",
       "name": "Buzz Earphones EB1",
       "category": "earphone",
       "brand": "buzz",
-      "price": "15"
+      "price": "15",
+      "specs": {
+        "design": "Silicone Eartips",
+        "connection": "Wired - Jack",
+        "microphone": "Internal",
+        "noiseCancelling": "No"
+      }
     },
     {
       "id": "3959314339",
       "name": "Buzz Earphones EB2",
       "category": "earphone",
       "brand": "buzz",
-      "price": "20"
+      "price": "20",
+      "specs": {
+        "design": "Silicone Eartips",
+        "connection": "Wired - Jack",
+        "microphone": "Internal",
+        "noiseCancelling": "Yes"
+      }
     },
     {
       "id": "7319174168",
       "name": "Buzz Earphones EB3",
       "category": "earphone",
       "brand": "buzz",
-      "price": "25"
+      "price": "25",
+      "specs": {
+        "design": "Circular Earbuds",
+        "connection": "Wireless - Bluetooth",
+        "microphone": "Internal",
+        "noiseCancelling": "Yes"
+      }
     },
     {
       "id": "9697147832",
       "name": "Maple Dew X1",
       "category": "smartphone",
       "brand": "maple",
-      "price": "180"
+      "price": "180",
+      "specs": {
+        "os": "Android 11",
+        "processor": "1.6 GHz",
+        "ram": "1.5 GB",
+        "storage": "64 GB",
+        "screen": "6.5",
+        "camResolution": "8 MP",
+        "battery": "3800 mAh"
+      },
+      "img": "phone"
     },
     {
       "id": "2839156689",
       "name": "Maple Dew X2",
       "category": "smartphone",
       "brand": "maple",
-      "price": "220"
+      "price": "220",
+      "specs": {
+        "os": "Android 11",
+        "processor": "1.8 GHz",
+        "ram": "1.5 GB",
+        "storage": "64 GB",
+        "screen": "7",
+        "camResolution": "8 MP",
+        "battery": "4000 mAH"
+      },
+      "img": "phone"
     },
     {
       "id": "4994147751",
       "name": "Maple Dew X3",
       "category": "smartphone",
       "brand": "maple",
-      "price": "250"
+      "price": "250",
+      "specs": {
+        "os": "Android 11",
+        "processor": "2 GHz",
+        "ram": "2 GB",
+        "storage": "64 GB",
+        "screen": "7",
+        "camResolution": "12 MP",
+        "battery": "4200 mAH"
+      },
+      "img": "phone"
     },
     {
       "id": "9638777783",
       "name": "Maple Dew X4",
       "category": "smartphone",
       "brand": "maple",
-      "price": "300"
+      "price": "300",
+      "specs": {
+        "os": "Android 12",
+        "processor": "2.3 GHz",
+        "ram": "3 GB",
+        "storage": "128 GB",
+        "screen": "7",
+        "camResolution": "15 MP",
+        "battery": "4500 mAH"
+      },
+      "img": "phone"
     },
     {
       "id": "8925253883",
       "name": "Maple Dew X5",
       "category": "smartphone",
       "brand": "maple",
-      "price": "350"
-    },
-    {
-      "id": "7827517223",
-      "name": "Buzz Phone 00",
-      "category": "smartphone",
-      "brand": "buzz",
-      "price": "500"
-    },
-    {
-      "name": "Buzz Phone X12",
-      "category": "smartphone",
-      "brand": "buzz",
-      "price": "269",
+      "price": "350",
       "specs": {
         "os": "Android 12",
-        "processor": "2.3 GHz",
-        "ram": "2 GB",
+        "processor": "2.5 GHz",
+        "ram": "3 GB",
         "storage": "128 GB",
-        "screen": "7",
-        "camResolution": "10 MP",
-        "battery": "3000 mAh"
+        "screen": "7.5",
+        "camResolution": "15 MP",
+        "battery": "4800 mAH"
       },
-      "id": "NaqrQ7J"
+      "img": "phone"
     }
   ]
 }

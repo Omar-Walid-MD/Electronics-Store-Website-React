@@ -43,12 +43,12 @@ function SideBar({currentUser, handleUser})
             <div className="side-bar-content">
                 {
                     currentUser.cart && currentUser.cart.length !== 0 ? <div className="shopping-cart-list">
-                                                {
-                                                    currentUser.cart.map((item,index)=>
-                                                    <CartItem ItemId={item.id} name={item.name} currentUser={currentUser} handleUser={handleUser} price={item.price} key={"Item"+index}/>
-                                                    )
-                                                }
-                                            </div>
+                    {
+                        currentUser.cart.map((item,index)=>
+                        <CartItem product={item} currentUser={currentUser} handleUser={handleUser} key={"Item"+index}/>
+                        )
+                    }
+                    </div>
                     : <h1 className="shopping-cart-empty">Shopping cart empty</h1> 
                 }
             </div>

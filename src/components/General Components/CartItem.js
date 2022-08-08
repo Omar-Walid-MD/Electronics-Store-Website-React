@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-function CartItem({ItemId,name,price,currentUser,handleUser})
+function CartItem({product,currentUser,handleUser})
 {
 
     const removeItemWarning = useRef(null);
@@ -11,7 +11,7 @@ function CartItem({ItemId,name,price,currentUser,handleUser})
 
         let profileWithNewProduct = {
             ...currentUser,
-            cart: currentUser.cart.filter((item)=>item.id!==ItemId),
+            cart: currentUser.cart.filter((item)=>item.id!==product.id),
         };
         
         const axios = require('axios');
@@ -50,10 +50,16 @@ function CartItem({ItemId,name,price,currentUser,handleUser})
 
     return (
         <div className="cart-item-container">
-            <div className="cart-item-name">{name}</div>
-            <div className="cart-item-price">{price}</div>
+            <div className="cart-item-image-container">
+                <img className="cart-item-image" src={product.img && require("../../img/products/"+product.img+".png")} />
+                <div className="cart-item-brand">
+                    <img className="cart-item-brand-icon" src={require('../../img/brands/'+product.brand + "-logo-small.png")} alt="brand icon" />
+                </div>
+            </div>
+            <div className="cart-item-name">{product.name}</div>
+            <div className="cart-item-price">{product.price}</div>
 
-            <div className="remove-item-button" onClick={function(){setWarning(true)}}><img className="remove-icon" src={require("../../img/x.png")} /></div>
+            <div className="remove-item-button" onClick={function(){setWarning(true)}}><img className="remove-icon" src={require("../../img/remove-from-cart-icon.png")} /></div>
             {/* <input className="remove-item-checkbox" type="checkbox" id={"remove-"+ItemId} /> */}
             <div className="remove-item-warning" ref={removeItemWarning}>
                 <h3 className="remove-item-warning-label">Are you sure you want to remove this item?</h3>

@@ -425,7 +425,8 @@ function ShoppingPage({productList, currentUser, handleUser})
                             productList && sortList(filterList(productList)).map((product)=>
                             
                             <div className="product-result-container" key={product.id}>
-                                <div className="product-result-image">
+                                <div className="product-result-image-container">
+                                    <img className="product-result-image" src={product.img && require("../../img/products/"+product.img+".png")} />
                                     <div className="product-result-brand">
                                         <img className="product-result-brand-icon" src={require('../../img/brands/'+product.brand + "-logo-small.png")} alt="brand icon" />
                                     </div>

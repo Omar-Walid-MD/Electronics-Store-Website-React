@@ -55,10 +55,22 @@
 }
 .product-info
 {
+    width: 720px;
+
+    padding: 0 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; align-items: center;
+}
+.product-info-image
+{
+    height: 100px;
+}
+.product-info-details
+{
     width: 600px;
     display: grid;
-    grid-template-columns: repeat(2,50%);
-
+    grid-template-columns: repeat(3,50%);
 }
 .product-options
 {

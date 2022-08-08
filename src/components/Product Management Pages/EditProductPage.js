@@ -126,6 +126,7 @@ function EditProductPage()
         )
         .then(resp =>{
             console.log("Saved changes");
+            navigate("/products");
         }).catch(error => {
             console.log(error);
         });
@@ -162,11 +163,11 @@ function EditProductPage()
                         <div className="add-product-form-section-group">
                             <h2 className="add-product-form-section-group-label">General:</h2>
                             <div className="add-product-form-section">
-                                <h2 className="add-product-form-section-label">Product Name:</h2>
+                                <h2 className="add-product-form-section-label">Name:</h2>
                                 <input className="add-product-form-input" type="text" name="name" value={product.name} onChange={handleProduct} onBlur={trimInput}  />
                             </div>
                             <div className="add-product-form-section">
-                                <h2 className="add-product-form-section-label">Product Category:</h2>
+                                <h2 className="add-product-form-section-label">Category:</h2>
                                 <select id="category-select" className="add-product-form-input" name="category" value={product.category} onChange={handleProduct} onBlur={trimInput} >
                                     <option value="">Choose Category</option>
                                     <option value="desktop">Desktop</option>
@@ -184,7 +185,7 @@ function EditProductPage()
                             </div>
 
                             <div className="add-product-form-section">
-                                <h2 className="add-product-form-section-label">Product Brand:</h2>
+                                <h2 className="add-product-form-section-label">Brand:</h2>
                                 <select id="brand-select" className="add-product-form-input" name="brand" value={product.brand} onChange={handleProduct} onBlur={trimInput} >
                                     <option value="">Choose Brand</option>
                                     <option value="buzz">Buzz</option>
@@ -202,8 +203,13 @@ function EditProductPage()
 
                             
                             <div className="add-product-form-section">
-                                <h2 className="add-product-form-section-label">Product Price:</h2>
+                                <h2 className="add-product-form-section-label">Price:</h2>
                                 <input className="add-product-form-input" name="price" value={product.price} onChange={handleProduct} onBlur={trimInput} />
+                            </div>
+
+                            <div className="add-product-form-section">
+                                <h2 className="add-product-form-section-label">Image:</h2>
+                                <input className="add-product-form-input" type="text" name="img" value={product.img} onChange={handleProduct} onBlur={trimInput} />
                             </div>
 
                         </div>
@@ -228,7 +234,7 @@ function EditProductPage()
                                 
                         
                         </div>
-                        <input className="add-product-form-submit" type="submit" disabled={InputEmpty(requiredFields)}/>
+                        <input className="add-product-form-submit" type="submit" value="Save Changes" disabled={InputEmpty(requiredFields)}/>
                     </form>
                 </div>
                 <div className="home-button-container">

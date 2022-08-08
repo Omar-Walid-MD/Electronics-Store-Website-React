@@ -42,10 +42,13 @@ function ProductListPage()
                         productList.map((product)=>
                             <div className="product-container" key={"product-"+product.id}>
                                 <div className="product-info">
-                                    <h2 className="product-detail">Name: {product.name}</h2>
-                                    <h2 className="product-detail">Category: {product.category}</h2>
-                                    <h2 className="product-detail">Brand: {product.brand}</h2>
-                                    <h2 className="product-detail">Price: {product.price}</h2>
+                                    <img className="product-info-image" src={product.img && require("../../img/products/"+product.img+".png")} />
+                                    <div className="product-info-details">
+                                        <h2 className="product-detail">Name: {product.name}</h2>
+                                        <h2 className="product-detail">Category: {product.category}</h2>
+                                        <h2 className="product-detail">Brand: {product.brand}</h2>
+                                        <h2 className="product-detail">Price: {product.price}</h2>
+                                    </div>
                                 </div>
                                 <div className="product-options">
 

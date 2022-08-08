@@ -100,13 +100,18 @@
 {
     transform: scale(110%);
 }
-.product-result-image
+.product-result-image-container
 {
     height: 160px; width: 160px;
     
-    background-color: pink;
+    display: flex;
+    justify-content: center; align-items: center;
     
     position: relative;
+}
+.product-result-image
+{
+    height: 180px;
 }
 .product-result-brand
 {
@@ -132,7 +137,7 @@
 .product-result-name
 {
     font-size: 100;
-    margin: 5px;
+    margin: 20px 5px;
 }
 .product-result-price
 {

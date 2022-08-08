@@ -474,10 +474,10 @@
 .side-bar-content
 {
   width: 100%; height: 65%;
-  background-color: white;
+  background-color: lightgray;
 
   display: flex;
-  justify-content: center; align-items: center;
+  justify-content: center; align-items: flex-start;
 
   overflow-y: scroll;
 }
@@ -516,27 +516,77 @@
 /* ---------------------------------------------------------- */
 .shopping-cart-list
 {
-  width: 100%; height: 100%;
+  width: 100%; height: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   box-sizing: border-box;
   padding: 20px;
+
+
 }
 /* ---------------------------------------------------------- */
 .cart-item-container
 {
   width: 100%; height: 150px;
-  background-color: lightgray;
+  background-color: white;
   
-  margin-bottom: 20px;
+  margin: 10px 0;
 
   display: flex;
   flex-direction: row;
   justify-content: space-between; align-items: center;
 
+  border: 3px solid black;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px -10px black;
+
   box-sizing: border-box;
   padding: 20px;
 
   position: relative;
+
+  transition: transform 0.2s ease-in-out;
+}
+.cart-item-container:hover
+{
+  transform: scale(105%);
+}
+.cart-item-image-container
+{
+    height: 80px; width: 80px;
+    
+    display: flex;
+    justify-content: center; align-items: center;
+    
+    position: relative;
+}
+.cart-item-image
+{
+    height: 120px;
+}
+.cart-item-brand
+{
+    height: 40px; width: 40px;
+    
+    background-color: white;
+
+    border-radius: 50%;
+    box-shadow: 0 0 10px grey;
+    
+    position: absolute;
+    
+    bottom: -20px;
+    right: -20px;
+
+    display: flex;
+    justify-content: center; align-items: center;
+}
+.cart-item-brand-icon
+{
+    height: 70%;
 }
 .cart-item-name
 {
@@ -546,33 +596,37 @@
 }
 .cart-item-price
 {
-  color: black;
+  color: red;
   font-size: 20pt;
   font-weight: 700;
 }
 /* ---------------------------------------------------------- */
 .remove-item-button
 {
-  height: 15px; width: 15px;
-  background-color: white;
+  height: 25px; width: 25px;
+  background-color: rgb(168, 0, 0);
   position: absolute;
 
   bottom: 10px; right: 10px;
 
   padding: 5px;
   border-radius: 50%;
-  border: 2px solid black;
 
   display: flex;
   justify-content: center; align-items: center;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease-in-out;
 }
 .remove-item-button:hover
 {
-  background-color: dimgrey;
+  background-color: rgb(223, 0, 0);
+  box-shadow: 0 0 10px gray;
 }
 .remove-icon
 {
-  height: 10px;
+  height: 22px;
 }
 /* ---------------------------------------------------------- */
 .remove-item-warning
@@ -580,6 +634,8 @@
   height: 100%; width: 100%;
 
   background-color: lightgray;
+
+  border-radius: 20px;
 
   position: absolute;
   left: 0;
