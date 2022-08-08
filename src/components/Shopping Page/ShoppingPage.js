@@ -216,15 +216,16 @@ function ShoppingPage({productList, currentUser, handleUser})
         const OptionsContainer = document.querySelector(".shopping-options-container");
         const PageContainer = document.querySelector(".shopping-page-container");
         let bottom = PageContainer.getBoundingClientRect().bottom + window.pageYOffset;
+        let offset = 750;
 
-        if(window.pageYOffset < bottom - 595)
+        if(window.pageYOffset < bottom - offset)
         {
             const OptionsContainer = document.querySelector(".shopping-options-container");
             OptionsContainer.style.transform = "translateY(" + window.pageYOffset + "px)";
         }
         else
         {
-            OptionsContainer.style.transform = "translateY(" + (bottom - 595) + "px)";
+            OptionsContainer.style.transform = "translateY(" + (bottom - offset) + "px)";
         }
     }
 

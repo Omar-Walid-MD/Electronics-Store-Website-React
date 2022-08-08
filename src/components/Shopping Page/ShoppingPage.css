@@ -1,6 +1,8 @@
 .shopping-page
 {
     background-color: dimgray;
+    width: max-content;
+    min-width: 100%;
     
 }
 .shopping-page > *
@@ -10,10 +12,9 @@
 
 .shopping-page-container
 {
-    height: auto; width: 100%;
-    min-height: 80vh;
+    width: 100%; min-height: 45vw;
 
-    margin: 100px 0 200px 0;
+    margin: 100px 0 50px 0;
     padding-top: 100px;
 
     display: flex;
@@ -63,7 +64,20 @@
 {
     margin-right: 20px;
 }
+.shopping-results-sort-input
+{
+    height: 30px;
 
+    font-size: 12pt;
+
+    background-color: lightgray;
+
+    padding: 5px;
+
+    box-sizing: border-box;
+
+    outline: none;
+}
 .shopping-results-container
 {
     height: auto; width: 1000px;

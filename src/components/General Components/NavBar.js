@@ -148,7 +148,8 @@ function NavBar({currentUser, handleUser, productList})
                                     SearchProduct().map((product)=>
 
                                     <div className="search-result-container" key={product.id}>
-                                        <div className="search-result-image">
+                                         <div className="search-result-image-container">
+                                            <img className="search-result-image" src={product.img && require("../../img/products/"+product.img+".png")} />
                                             <div className="search-result-brand">
                                                 <img className="search-result-brand-icon" src={require('../../img/brands/'+product.brand + "-logo-small.png")} alt="brand icon" />
                                             </div>

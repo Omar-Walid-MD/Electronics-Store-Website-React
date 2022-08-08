@@ -151,17 +151,23 @@
 {
     transform: scale(110%);
 }
-.search-result-image
-{
+.search-result-image-container
+{ 
     height: 100px; width: 100px;
     
-    background-color: pink;
+    display: flex;
+    justify-content: center; align-items: center;
     
     position: relative;
 }
+.search-result-image
+{
+    height: 120px;
+}
+
 .search-result-brand
 {
-    height: 40px; width: 40px;
+    height: 30px; width: 30px;
     
     background-color: white;
 
@@ -170,16 +176,17 @@
     
     position: absolute;
     
-    bottom: -20px;
-    right: -20px;
+    bottom: -15px;
+    right: -15px;
 
     display: flex;
     justify-content: center; align-items: center;
 }
 .search-result-brand-icon
 {
-    height: 70%;
+    height: 80%;
 }
+
 .search-result-name
 {
     font-size: 12pt;
@@ -191,7 +198,6 @@
     font-size: 20pt;
     margin: 5px;
 }
-
 .search-result-option-button
 {
     
@@ -783,6 +789,8 @@
 
 .home-page-container
 {
+  min-width: 100%;
+  width: max-content;
   margin-top: 100px;
 }
 
