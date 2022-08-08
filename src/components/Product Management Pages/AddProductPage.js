@@ -18,7 +18,6 @@ function AddProductPage()
         camera: [{name:"Flash",code:"flash"},{name:"Video resolution",code:"videoResolution"},{name:"Touch display",code:"touchDisplay"},{name:"Shutter speed",code:"shutterSpeed"}],
     }
 
-
     const [product,setProduct] = useState({
         name: "",
         category: "",
@@ -30,6 +29,8 @@ function AddProductPage()
     });
 
     const [requiredFields,setRequiredFields] = useState(document.querySelectorAll(".add-product-form-input"));
+
+    const navigate = useNavigate();
 
     function handleProduct(event)
     {
@@ -112,7 +113,10 @@ function AddProductPage()
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(product)
-            }).then(()=>{console.log("New Product Added.")})
+            }).then(()=>{
+                console.log("New Product Added.");
+                navigate("/products");
+            })
             
             return
 

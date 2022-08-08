@@ -423,6 +423,54 @@
         "battery": "4800 mAH"
       },
       "img": "phone"
+    },
+    {
+      "name": "Buzz Laptop BL1",
+      "category": "laptop",
+      "brand": "buzz",
+      "price": "500",
+      "img": "laptop",
+      "specs": {
+        "os": "Windows 10",
+        "processor": "i7 8th Gen - 2 GHz",
+        "ram": "8 GB",
+        "storage": "256 GB",
+        "graphics": "GTX 350",
+        "battery": "4000 mAH"
+      },
+      "id": "ulvMNC3"
+    },
+    {
+      "name": "Buzz Laptop BL2",
+      "category": "laptop",
+      "brand": "buzz",
+      "price": "550",
+      "img": "laptop",
+      "specs": {
+        "os": "Windows 10",
+        "processor": "i7 9th Gen - 2.3 GHz",
+        "ram": "8 GB",
+        "storage": "256 GB",
+        "graphics": "GTX 550",
+        "battery": "4800 mAH"
+      },
+      "id": "cS29f1M"
+    },
+    {
+      "name": "Buzz Laptop BL3",
+      "category": "laptop",
+      "brand": "buzz",
+      "price": "700",
+      "img": "laptop",
+      "specs": {
+        "os": "Windows 11",
+        "processor": "i7 10th Gen - 2.5 GHz",
+        "ram": "16 GB",
+        "storage": "512 GB",
+        "graphics": "GTX 1050",
+        "battery": "5000 mAH"
+      },
+      "id": "Ooa00JU"
     }
   ]
 }
