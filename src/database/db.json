@@ -12,25 +12,7 @@
       "lastName": "Diab",
       "email": "omar.madinah49@yahoo.com",
       "password": "omar1234",
-      "cart": [
-        {
-          "id": "6124359531",
-          "name": "Buzz Phone B1",
-          "category": "smartphone",
-          "brand": "buzz",
-          "price": "100",
-          "specs": {
-            "os": "Android 11",
-            "processor": "1.8 GHz",
-            "ram": "1 GB",
-            "storage": "64 GB",
-            "screen": "6",
-            "camResolution": "8 MP",
-            "battery": "3800 mAh"
-          },
-          "img": "phone"
-        }
-      ]
+      "cart": []
     },
     {
       "id": 20,

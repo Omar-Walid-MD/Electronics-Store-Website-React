@@ -26,7 +26,7 @@
 
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-between; align-items: flex-start;
 }
 
 
@@ -187,7 +187,7 @@
 
 .shopping-options-container
 {
-    height: 500px; width: 400px;
+    height: fit-content; width: 400px;
     background-color: rgb(59, 59, 59);
 
     border: 3px solid black;
@@ -197,6 +197,7 @@
     box-sizing: border-box;
 
     padding: 30px;
+    
     
 }
 
@@ -220,7 +221,63 @@
     width: 50px;
 }
 
+.shopping-spec-container
+{
+    height: auto;
 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; align-items: flex-start;
+}
+.shopping-spec-label
+{
+    width: 200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; align-items: center;
+}
+.shopping-spec-name
+{
+    margin: 5px;
+}
+.shopping-spec-dropdown-arrow
+{
+    height: 10px;
+    transition: transform 0.2s ease-in-out;
+}
+.shopping-spec-dropdown
+{
+    margin-left: 25px;
+    display: none;
+    justify-items: center; align-items: center;
+    grid-template-columns: repeat(2,50%);
+}
+.shopping-spec-dropdown-checkbox
+{
+    opacity: 0;
+    position: absolute;
+}
+.shopping-spec-dropdown-checkbox:checked ~.shopping-spec-dropdown
+{
+    display: grid;
+}
+.shopping-spec-dropdown-checkbox:checked +.shopping-spec-label >.shopping-spec-dropdown-arrow
+{
+    transform: rotate(180deg);
+}
+.shopping-spec-filter
+{
+    min-width: 100px; width: fit-content;
+
+    margin: 5px;
+
+    display: flex;
+    flex-direction: row;
+}
+.shopping-spec-filter-label
+{
+    margin: 0;
+}
 
 @keyframes popup {
 
