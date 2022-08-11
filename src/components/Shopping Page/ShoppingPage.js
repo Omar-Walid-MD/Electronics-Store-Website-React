@@ -300,7 +300,7 @@ function ShoppingPage({productList, currentUser, handleUser})
 
     const infoBox = useRef(null);
 
-    function moveInfoBox(event)
+    function moveInfoBox(event,product)
     {
         const PageContainer = document.querySelector(".shopping-page-container");
         let maxbottom = PageContainer.getBoundingClientRect().bottom + window.pageYOffset;
@@ -308,8 +308,6 @@ function ShoppingPage({productList, currentUser, handleUser})
 
         let leftOffset = 0;
         let topOffset = 0;
-
-        console.log(maxRight - event.clientX);
 
         if(maxRight - event.clientX < 400) leftOffset = infoBox.current.getBoundingClientRect().width;
         if(maxbottom - event.clientY < 500) topOffset = infoBox.current.getBoundingClientRect().height;
@@ -319,17 +317,24 @@ function ShoppingPage({productList, currentUser, handleUser})
 
     }
 
-    function handleProductForInfo(product)
+    function handleProductForInfo(event,product)
     {
         if(product)
         {
-            setProductForInfo(product);
-            console.log("Added product info box");
+            if(product !== productForInfo)
+            {
+                setProductForInfo(product);
+            }
+
+            if(infoBox.current.style.top == 0)
+            {
+                infoBox.current.style.top = event.clientY + 10 + "px";
+                infoBox.current.style.left = event.clientX + 10 + "px";
+            }
         }
         else
         {
             setProductForInfo(null);
-            console.log("Removed product info box");
         }
     }
 
@@ -567,7 +572,7 @@ function ShoppingPage({productList, currentUser, handleUser})
                         {
                             productList && specFilterList(filterList(productList)).map((product)=>
                             
-                            <div className="product-result-container" key={product.id} onMouseEnter={function(){handleProductForInfo(product)}} onMouseMove={productForInfo && moveInfoBox} onMouseLeave={function(){handleProductForInfo(null)}}>
+                            <div className="product-result-container" key={product.id} onMouseOver={function(event){handleProductForInfo(event,product)}} onMouseMove={productForInfo && function(event){moveInfoBox(event,product)}} onMouseLeave={function(){handleProductForInfo(null)}}>
                                 <div className="product-result-image-container">
                                     <img className="product-result-image" src={product.img && require("../../img/products/"+product.img+".png")} />
                                     <div className="product-result-brand">
@@ -598,14 +603,14 @@ function ShoppingPage({productList, currentUser, handleUser})
                             ))
                         }
                         </div>
-
-                        <input className="info-box-checkbox" type="checkbox" checked={productForInfo}/>
+                        
+                        <input className="info-box-checkbox" type="checkbox" checked={productForInfo || false} readOnly={true}/>
                         <div className="info-box-container" ref={infoBox}>
                             <h2>Specifiations:</h2>
                             <ul className="info-box-spec-list">
                             {
                                 productForInfo && specList[productForInfo.category].map((spec)=>
-                                <li className="info-box-spec-text"><b>{spec.name}</b>: {productForInfo.specs[spec.code]}</li>
+                                <li className="info-box-spec-text" key={"info-box-spec-"+spec.code}><b>{spec.name}</b>: {productForInfo.specs[spec.code]}</li>
                                 )
                             }
                             </ul>
