@@ -75,13 +75,11 @@ function OfferDisplay()
             offers = offerGroup.current.children;
             size.current = offers[0].clientWidth;
             margin.current = parseInt(getComputedStyle(offers[0]).margin.slice(0,-2));
-
         }
 
-        offerGroup.current.style.transform = "translateX(" + (-(size.current+margin.current*2)*first + offset*(size.current+margin.current*2)) + "px)";
+        offerGroup.current.style.transform = "translateX(" + (-(size.current+margin.current*2)*first.current + offset*(size.current+margin.current*2)) + "px)";    
         
-
-
+        console.log("translateX(" + (-(size.current+margin.current*2)*first.current + offset*(size.current+margin.current*2)) + "px)");
         
     }
 
@@ -160,7 +158,7 @@ function OfferDisplay()
     useEffect(()=>{
         slideOnMount();
 
-    },[counter])
+    },[]);
 
     return (
         <section className="offer-section-container">

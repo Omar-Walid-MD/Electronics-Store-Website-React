@@ -1,6 +1,6 @@
 .shopping-page
 {
-    background-color: dimgray;
+    background-color: rgb(21, 24, 56);
     width: max-content;
     min-width: 100%;
 }
@@ -39,7 +39,7 @@
 .shopping-results-sort-container
 {
     height: 60px; width: 92%;
-    background-color: rgb(59, 59, 59);
+    background-color: rgb(40, 40, 100);
 
     border: 3px solid black;
     border-radius: 10px;
@@ -187,7 +187,7 @@
 .shopping-options-container
 {
     height: fit-content; width: 400px;
-    background-color: rgb(59, 59, 59);
+    background-color: rgb(40, 40, 100);
 
     border: 3px solid black;
     border-radius: 10px;

@@ -309,8 +309,8 @@ function ShoppingPage({productList, currentUser, handleUser})
         let leftOffset = 0;
         let topOffset = 0;
 
-        if(maxRight - event.clientX < 400) leftOffset = infoBox.current.getBoundingClientRect().width;
-        if(maxbottom - event.clientY < 500) topOffset = infoBox.current.getBoundingClientRect().height;
+        if(maxRight - event.clientX < infoBox.current.getBoundingClientRect().width + 100) leftOffset = infoBox.current.getBoundingClientRect().width;
+        if(maxbottom - event.clientY < infoBox.current.getBoundingClientRect().height + 100) topOffset = infoBox.current.getBoundingClientRect().height;
 
         infoBox.current.style.top = event.clientY + 10 - topOffset + "px";
         infoBox.current.style.left = event.clientX + 10 - leftOffset + "px";
