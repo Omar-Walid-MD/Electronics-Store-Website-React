@@ -79,8 +79,6 @@ function OfferDisplay()
 
         offerGroup.current.style.transform = "translateX(" + (-(size.current+margin.current*2)*first.current + offset*(size.current+margin.current*2)) + "px)";    
         
-        console.log("translateX(" + (-(size.current+margin.current*2)*first.current + offset*(size.current+margin.current*2)) + "px)");
-        
     }
 
     function updateCounter(change)
@@ -109,7 +107,6 @@ function OfferDisplay()
         {
             return index === counter + Math.ceil(maxCount/2) - 2;
         }
-
     }
 
     function slideLoop()

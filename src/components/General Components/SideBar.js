@@ -1,5 +1,6 @@
 import {useRef} from "react";
 import CartItem from "./CartItem";
+import "./SideBar.css";
 
 function SideBar({currentUser, handleUser})
 {

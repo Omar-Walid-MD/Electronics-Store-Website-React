@@ -69,14 +69,16 @@
 
     font-size: 12pt;
 
-    background-color: lightgray;
+    background-color: rgb(144, 181, 250);
 
     padding: 5px;
 
     box-sizing: border-box;
 
+    border: none;
     outline: none;
 }
+
 .shopping-results-container
 {
     height: auto; width: 1000px;
@@ -91,9 +93,11 @@
 .product-result-container
 {
     height: 350px; width: 250px;
+
+    text-decoration: none;
     
     color: black;
-    background-color: white;
+    background-color: rgb(220, 224, 255);
 
     border: 3px solid black;
     border-radius: 10px;
@@ -163,7 +167,7 @@
 {
     
     height: 30px; width: 30px;
-    background-color: darkblue;
+    background-color: rgb(40, 40, 160);
     
     padding: 5px;
     border-radius: 50%;
@@ -187,7 +191,7 @@
 .shopping-options-container
 {
     height: fit-content; width: 400px;
-    background-color: rgb(40, 40, 100);
+    background-color: rgb(50, 50, 120);
 
     border: 3px solid black;
     border-radius: 10px;
@@ -363,7 +367,7 @@
     height: auto; width: auto;
     color: black;
 
-    background-color: white;
+    background-color: rgb(219, 222, 240);
 
     border: 3px solid black;
     border-radius: 10px;

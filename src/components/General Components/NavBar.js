@@ -1,6 +1,7 @@
 import searchIcon from "../../img/search.png"
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import "./NavBar.css";
 
 function NavBar({currentUser, handleUser, productList})
 {
@@ -11,6 +12,22 @@ function NavBar({currentUser, handleUser, productList})
 
     const [searchValue,setSearchValue] = useState("");
 
+    const [productForInfo,setProductForInfo] = useState(null);
+
+    const specList = {
+        desktop: [{name:"Operating System",code:"os"},{name:"Processor",code:"processor"},{name:"RAM",code:"ram"},{name:"Storage",code:"storage"},{name:"Graphics Card",code:"graphics"}],
+        laptop: [{name:"Operating System",code:"os"},{name:"Processor",code:"processor"},{name:"RAM",code:"ram"},{name:"Storage",code:"storage"},{name:"Graphics Card",code:"graphics"},{name:"Battery life",code:"battery"}],
+        smartphone: [{name:"Operating System",code:"os"},{name:"Processor",code:"processor"},{name:"RAM",code:"ram"},{name:"Storage",code:"storage"},{name:"Screen size",code:"screen"},{name:"Camera Resolution",code:"camResolution"},{name:"Battery life",code:"battery"}],
+        tablet: [{name:"Operating System",code:"os"},{name:"Processor",code:"processor"},{name:"RAM",code:"ram"},{name:"Storage",code:"storage"},{name:"Screen size",code:"screen"},{name:"Camera Resolution",code:"camResolution"},{name:"Battery life",code:"battery"}],
+        mouse: [{name:"Connection",code:"connection"}],
+        keyboard: [{name:"Connection",code:"connection"},{name:"Key Type",code:"keyType"}],
+        monitor: [{name:"Screen size",code:"screen"},{name:"Resolution",code:"resolution"}],
+        speaker: [{name:"Connection",code:"connection"},{name:"Height",code:"height"}],
+        headphone: [{name:"Design",code:"design"},{name:"Connection",code:"connection"},{name:"Microphone",code:"microphone"},{name:"Noise Cancelling",code:"noiseCancelling"}],
+        earphone: [{name:"Design",code:"design"},{name:"Connection",code:"connection"},{name:"Microphone",code:"microphone"},{name:"Noise Cancelling",code:"noiseCancelling"}],
+        camera: [{name:"Flash",code:"flash"},{name:"Video resolution",code:"videoResolution"},{name:"Touch display",code:"touchDisplay"},{name:"Shutter speed",code:"shutterSpeed"}],
+    }
+
     function handleSearch(e)
     {
         setSearchValue(e.target.value);
@@ -20,6 +37,46 @@ function NavBar({currentUser, handleUser, productList})
     function SearchProduct()
     {
         return productList!==null ? productList.filter((product)=>product.name.toLowerCase().includes(searchValue.toLowerCase())) : [];
+    }
+
+    const infoBox = useRef(null);
+
+    function moveInfoBox(event,product)
+    {
+        const PageContainer = document.querySelector(".nav-bar");
+        let maxbottom = PageContainer.getBoundingClientRect().bottom + window.pageYOffset;
+        let maxRight = PageContainer.getBoundingClientRect().right + window.pageXOffset;
+
+        let leftOffset = 0;
+        let topOffset = 0;
+
+        if(maxRight - event.clientX < infoBox.current.getBoundingClientRect().width + 100) leftOffset = infoBox.current.getBoundingClientRect().width;
+        if(maxbottom - event.clientY < infoBox.current.getBoundingClientRect().height + 100) topOffset = infoBox.current.getBoundingClientRect().height;
+
+        infoBox.current.style.top = event.clientY + 10 - topOffset + "px";
+        infoBox.current.style.left = event.clientX + 10 - leftOffset + "px";
+
+    }
+
+    function handleProductForInfo(event,product)
+    {
+        if(product)
+        {
+            if(product !== productForInfo)
+            {
+                setProductForInfo(product);
+            }
+
+            if(infoBox.current.style.top == 0)
+            {
+                infoBox.current.style.top = event.clientY + 10 + "px";
+                infoBox.current.style.left = event.clientX + 10 + "px";
+            }
+        }
+        else
+        {
+            setProductForInfo(null);
+        }
     }
 
     function logOut(e)
@@ -147,7 +204,7 @@ function NavBar({currentUser, handleUser, productList})
                                 {
                                     SearchProduct().map((product)=>
 
-                                    <div className="search-result-container" key={product.id}>
+                                    <div className="search-result-container" key={product.id} onMouseOver={function(event){handleProductForInfo(event,product)}} onMouseMove={productForInfo && function(event){moveInfoBox(event,product)}} onMouseLeave={function(){handleProductForInfo(null)}}>
                                          <div className="search-result-image-container">
                                             <img className="search-result-image" src={product.img && require("../../img/products/"+product.img+".png")} />
                                             <div className="search-result-brand">
@@ -226,6 +283,20 @@ function NavBar({currentUser, handleUser, productList})
                     <div className="dropdown-menu-option">Option</div>
                     </div>
                 </div>
+            </div>
+
+
+            <input className="info-box-checkbox" type="checkbox" checked={productForInfo || false} readOnly={true}/>
+            <div className="info-box-container" ref={infoBox}>
+                <h2>Specifiations:</h2>
+                <ul className="info-box-spec-list">
+                {
+                    productForInfo && specList[productForInfo.category].map((spec)=>
+                    <li className="info-box-spec-text" key={"info-box-spec-"+spec.code}><b>{spec.name}</b>: {productForInfo.specs[spec.code]}</li>
+                    )
+                }
+                </ul>
+                
             </div>
             
         </div>

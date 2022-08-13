@@ -3,7 +3,7 @@ import SideBar from "../General Components/SideBar";
 import Footer from "../General Components/Footer"
 import Popup from "../General Components/Popup"
 import { useState, useEffect, useRef } from "react";
-import { useLocation } from 'react-router-dom';
+import { Link,useLocation } from 'react-router-dom';
 import MultiRangeSlider from "multi-range-slider-react";
 import "./ShoppingPage.css";
 import "../General Components/MultiRangeSlider.css";
@@ -378,7 +378,7 @@ function ShoppingPage({productList, currentUser, handleUser})
 
 
     return (
-        <div className="shopping-page" id="top">
+        <div className="shopping-page">
             <header>
                 <NavBar currentUser={currentUser} handleUser={handleUser} productList={productList} />
             </header>
@@ -510,7 +510,7 @@ function ShoppingPage({productList, currentUser, handleUser})
                             </div>
                         }
                         {
-                            productList && Object.keys(specFilterList(filterList(productList))).length !== 0 && 
+                            productList && Object.keys((filterList(productList))).length !== 0 && 
 
                             <div className="shopping-option-section" ref={specOptionSection}>
                             <h2>Specifications:</h2>
@@ -572,7 +572,7 @@ function ShoppingPage({productList, currentUser, handleUser})
                         {
                             productList && specFilterList(filterList(productList)).map((product)=>
                             
-                            <div className="product-result-container" key={product.id} onMouseOver={function(event){handleProductForInfo(event,product)}} onMouseMove={productForInfo && function(event){moveInfoBox(event,product)}} onMouseLeave={function(){handleProductForInfo(null)}}>
+                            <Link to={"/product"} className="product-result-container" state={{product: product}} key={product.id} onMouseOver={function(event){handleProductForInfo(event,product)}} onMouseMove={productForInfo && function(event){moveInfoBox(event,product)}} onMouseLeave={function(){handleProductForInfo(null)}}>
                                 <div className="product-result-image-container">
                                     <img className="product-result-image" src={product.img && require("../../img/products/"+product.img+".png")} />
                                     <div className="product-result-brand">
@@ -588,7 +588,7 @@ function ShoppingPage({productList, currentUser, handleUser})
                                     : <div className="product-result-option-button" onClick={function(){AddToCart(product);}}><img className="product-result-cart-icon" src={require("../../img/add-to-cart-icon.png")} alt="remove from cart icon" /></div>
                                 }
 
-                            </div>
+                            </Link>
                             
                             )
                         }

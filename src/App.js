@@ -3,11 +3,12 @@ import { Routes, Route} from "react-router-dom";
 import HomePage from './components/Home Page/HomePage';
 import LoginPage from './components/Account Pages/LoginPage';
 import RegisterPage from './components/Account Pages/RegisterPage';
-import AddProductPage from './components/Product Management Pages/AddProductPage';
-import ProductListPage from './components/Product Management Pages/ProductListPage';
-import EditProductPage from './components/Product Management Pages/EditProductPage';
+import AddProductPage from './components/Product Database Management Pages/AddProductPage';
+import ProductListPage from './components/Product Database Management Pages/ProductListPage';
+import EditProductPage from './components/Product Database Management Pages/EditProductPage';
 import ShoppingPage from './components/Shopping Page/ShoppingPage';
 import EditProfilePage from './components/Account Pages/EditProfilePage';
+import ProductPage from './components/Product Page/ProductPage';
 
 
 
@@ -91,6 +92,7 @@ function App() {
       <Route path="/login" element={<LoginPage handleUser={setCurrentUser} userList={userList} />} />
       <Route path="/register" element={<RegisterPage handleUser={setCurrentUser} userList={userList} handleUserList={setUserList} />} />
       <Route path="/shop" element={<ShoppingPage currentUser={currentUser} handleUser={setCurrentUser} productList={productList} />}/>
+      <Route path="/product" element={<ProductPage currentUser={currentUser} handleUser={setCurrentUser} productList={productList} />} />
       <Route path="/products" element={<ProductListPage />} />
       <Route path="/add-product" element={<AddProductPage />} />
       <Route path="/edit-product" element={<EditProductPage />} />
