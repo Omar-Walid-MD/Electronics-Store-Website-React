@@ -3,7 +3,7 @@ import SideBar from "../General Components/SideBar";
 import Footer from "../General Components/Footer"
 import Popup from "../General Components/Popup"
 import { useState, useEffect, useRef } from "react";
-import { Link,useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import MultiRangeSlider from "multi-range-slider-react";
 import "./ShoppingPage.css";
 import "../General Components/MultiRangeSlider.css";
@@ -359,7 +359,7 @@ function ShoppingPage({productList, currentUser, handleUser})
     
     useEffect(()=>{
 
-       window.addEventListener('mousemoved',moveInfoBox);
+        window.addEventListener('mousemoved',moveInfoBox);
 
         setPageOnMount();
 
@@ -572,7 +572,8 @@ function ShoppingPage({productList, currentUser, handleUser})
                         {
                             productList && specFilterList(filterList(productList)).map((product)=>
                             
-                            <Link to={"/product"} className="product-result-container" state={{product: product}} key={product.id} onMouseOver={function(event){handleProductForInfo(event,product)}} onMouseMove={productForInfo && function(event){moveInfoBox(event,product)}} onMouseLeave={function(){handleProductForInfo(null)}}>
+                            <div className="product-result-container"  key={product.id} onMouseOver={function(event){handleProductForInfo(event,product)}} onMouseMove={productForInfo && function(event){moveInfoBox(event,product)}} onMouseLeave={function(){handleProductForInfo(null)}}>
+                                <Link className="product-link" to={"/product"} state={{product: product}}>
                                 <div className="product-result-image-container">
                                     <img className="product-result-image" src={product.img && require("../../img/products/"+product.img+".png")} />
                                     <div className="product-result-brand">
@@ -581,14 +582,14 @@ function ShoppingPage({productList, currentUser, handleUser})
                                 </div>
                                 <h3 className="product-result-name">{product.name}</h3>
                                 <h1 className="product-result-price">{product.price}</h1>
-
+                                </Link>
                                 {
                                     InCart(product)
                                     ? <div className="product-result-option-button" state="remove" onClick={function(){RemoveFromCart(product);}}><img className="product-result-cart-icon" src={require("../../img/remove-from-cart-icon.png")} alt="add to cart icon" /></div>
                                     : <div className="product-result-option-button" onClick={function(){AddToCart(product);}}><img className="product-result-cart-icon" src={require("../../img/add-to-cart-icon.png")} alt="remove from cart icon" /></div>
                                 }
 
-                            </Link>
+                            </div>
                             
                             )
                         }

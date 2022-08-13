@@ -205,15 +205,16 @@ function NavBar({currentUser, handleUser, productList})
                                     SearchProduct().map((product)=>
 
                                     <div className="search-result-container" key={product.id} onMouseOver={function(event){handleProductForInfo(event,product)}} onMouseMove={productForInfo && function(event){moveInfoBox(event,product)}} onMouseLeave={function(){handleProductForInfo(null)}}>
-                                         <div className="search-result-image-container">
-                                            <img className="search-result-image" src={product.img && require("../../img/products/"+product.img+".png")} />
-                                            <div className="search-result-brand">
-                                                <img className="search-result-brand-icon" src={require('../../img/brands/'+product.brand + "-logo-small.png")} alt="brand icon" />
+                                        <Link className="product-link" to={"/product"} state={{product: product}}>
+                                            <div className="search-result-image-container">
+                                                <img className="search-result-image" src={product.img && require("../../img/products/"+product.img+".png")} />
+                                                <div className="search-result-brand">
+                                                    <img className="search-result-brand-icon" src={require('../../img/brands/'+product.brand + "-logo-small.png")} alt="brand icon" />
+                                                </div>
                                             </div>
-                                        </div>
-                                        <h3 className="search-result-name">{product.name}</h3>
-                                        <h1 className="search-result-price">{product.price}</h1>
-
+                                            <h3 className="search-result-name">{product.name}</h3>
+                                            <h1 className="search-result-price">{product.price}</h1>
+                                        </Link>
                                         {
                                             InCart(product)
                                             ? <div className="product-result-option-button" state="remove" onClick={function(){RemoveFromCart(product);}}><img className="product-result-cart-icon" src={require("../../img/remove-from-cart-icon.png")} alt="add to cart icon" /></div>

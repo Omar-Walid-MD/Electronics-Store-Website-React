@@ -32,7 +32,7 @@
 .product-overview-image-container
 {
     height: 500px; width: 500px;
-    background-color: lightgray;
+    background-color: rgb(220, 224, 255);
 
     border-radius: 20px;
 
@@ -137,6 +137,7 @@
 .product-page-reviews-container
 {
     margin-top: 100px;
+
 }
 .product-page-reviews-group
 {
@@ -177,6 +178,109 @@
     background-size: 120px;
     background-repeat: no-repeat;
     height: 25px; width: 80%;
+}
 
 
+.product-page-similar-products-group
+{
+    width: 1300px;
+    display: flex;
+}
+
+
+.product-page-similar-product-container
+{
+    height: 350px; width: 250px;
+
+    text-decoration: none;
+    
+    color: black;
+    background-color: rgb(220, 224, 255);
+
+    border: 3px solid black;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px -10px black;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; align-items: center;
+    
+    box-sizing: border-box;
+    padding: 10px;
+    margin-right: 50px;
+
+    transition: transform 0.2s ease-in-out;
+}
+.product-page-similar-product-container:hover
+{
+    transform: scale(110%);
+}
+.product-page-similar-product-image-container
+{
+    height: 160px; width: 160px;
+    
+    display: flex;
+    justify-content: center; align-items: center;
+    
+    position: relative;
+}
+.product-page-similar-product-image
+{
+    height: 180px;
+}
+.product-page-similar-product-brand
+{
+    height: 50px; width: 50px;
+    
+    background-color: white;
+
+    border-radius: 50%;
+    box-shadow: 0 0 10px grey;
+    
+    position: absolute;
+    
+    bottom: -25px;
+    right: -25px;
+
+    display: flex;
+    justify-content: center; align-items: center;
+}
+.product-page-similar-product-brand-icon
+{
+    height: 70%;
+}
+.product-page-similar-product-name
+{
+    font-size: 100;
+    margin: 20px 5px;
+}
+.product-page-similar-product-price
+{
+    color: red;
+    
+    margin: 5px;
+}
+
+.product-page-similar-product-option-button
+{
+    
+    height: 30px; width: 30px;
+    background-color: rgb(40, 40, 160);
+    
+    padding: 5px;
+    border-radius: 50%;
+    /* border: 2px solid black; */
+    
+    display: flex;
+    justify-content: center; align-items: center;
+    
+    cursor: pointer;
+}
+.product-page-similar-product-option-button[state="remove"]
+{
+    background-color: rgb(168, 0, 0);
+}
+.product-page-similar-product-cart-icon
+{
+    height: 25px;
 }

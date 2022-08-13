@@ -13,6 +13,8 @@ function ProductPage({productList, currentUser, handleUser})
     const location = useLocation();
     const { product } = location.state || {};
 
+    const [productForInfo,setProductForInfo] = useState(null);
+
     const [popUps,setPopups] = useState([]);
 
     const specList = {
@@ -29,37 +31,10 @@ function ProductPage({productList, currentUser, handleUser})
         camera: [{name:"Flash",code:"flash"},{name:"Video resolution",code:"videoResolution"},{name:"Touch display",code:"touchDisplay"},{name:"Shutter speed",code:"shutterSpeed"}],
     }
 
-    function moveInfoBox(event)
+
+    function SimilarProducts(inputList)
     {
-        const ZoomBox = document.querySelector(".product-overview-image-zoom-container");
-        const ImageContainer = document.querySelector(".product-overview-image-container");
-
-        let offsetX = event.offsetX;
-        let offsetY = event.offsetY;
-        let x = offsetX/ImageContainer.offsetWidth*100;
-        let y = offsetY/ImageContainer.offsetHeight*100;
-        ImageContainer.style.backgroundPositon = x + "%" + y +"%";
-
-        let width = 150;
-
-        // if(event.clientY + width <= ImageContainer.getBoundingClientRect().bottom
-        //     && event.clientY - width >= ImageContainer.getBoundingClientRect().top
-        //     && event.clientX + width <= ImageContainer.getBoundingClientRect().right
-        //     && event.clientX - width >= ImageContainer.getBoundingClientRect().left)
-        // {
-        // }
-
-        // let xMid = (ImageContainer.getBoundingClientRect().left+ImageContainer.getBoundingClientRect().right)/2;
-        // let yMid = (ImageContainer.getBoundingClientRect().top+ImageContainer.getBoundingClientRect().bottom)/2;
-        
-        
-        // ZoomBox.style.top = event.clientY - 150 + "px";
-        // ZoomBox.style.left = event.clientX - 150 + "px";
- 
-        // ZoomLayer.style.top =  (event.clientY - 0.9 * ZoomLayer.clientHeight + Math.sign(yMid - event.clientY) * 0.25 * ZoomLayer.clientHeight) + "px";
-        // ZoomLayer.style.left = (event.clientX - 0.9 * ZoomLayer.clientWidth + Math.sign(xMid - event.clientX) * 0.25 * ZoomLayer.clientWidth) + "px";
-        
-
+        return inputList.filter((item)=>item.category === product.category && item.brand === product.brand && item.id !== product.id)
     }
 
 
@@ -136,6 +111,46 @@ function ProductPage({productList, currentUser, handleUser})
         return false;
     }
 
+    const infoBox = useRef(null);
+
+    function moveInfoBox(event,product)
+    {
+        const PageContainer = document.querySelector(".product-page");
+        let maxbottom = PageContainer.getBoundingClientRect().bottom + window.pageYOffset;
+        let maxRight = PageContainer.getBoundingClientRect().right + window.pageXOffset;
+
+        let leftOffset = 0;
+        let topOffset = 0;
+
+        if(maxRight - event.clientX < infoBox.current.getBoundingClientRect().width + 100) leftOffset = infoBox.current.getBoundingClientRect().width;
+        if(maxbottom - event.clientY < infoBox.current.getBoundingClientRect().height + 100) topOffset = infoBox.current.getBoundingClientRect().height;
+
+        infoBox.current.style.top = event.clientY + 10 - topOffset + "px";
+        infoBox.current.style.left = event.clientX + 10 - leftOffset + "px";
+
+    }
+
+    function handleProductForInfo(event,product)
+    {
+        if(product)
+        {
+            if(product !== productForInfo)
+            {
+                setProductForInfo(product);
+            }
+
+            if(infoBox.current.style.top == 0)
+            {
+                infoBox.current.style.top = event.clientY + 10 + "px";
+                infoBox.current.style.left = event.clientX + 10 + "px";
+            }
+        }
+        else
+        {
+            setProductForInfo(null);
+        }
+    }
+
     function popUpMessage(message)
     {
         setPopups([]);
@@ -151,6 +166,12 @@ function ProductPage({productList, currentUser, handleUser})
         }
         return result;
     }
+
+
+    useEffect(()=>{
+        window.scrollTo(0,0);
+        console.log("yes");
+    },[]);
 
     return (
         <div className="product-page">
@@ -228,9 +249,29 @@ function ProductPage({productList, currentUser, handleUser})
                 <div className="product-page-similar-products-container">
                     <h1>Similar products:</h1>
                     <div className="product-page-similar-products-group">
-                        <div className="product-page-similar-product-container">
+                        {
+                           productList && SimilarProducts(productList).map((similarProduct)=>
                             
-                        </div>
+                            <div className="product-page-similar-product-container" key={similarProduct.id} onMouseOver={function(event){handleProductForInfo(event,similarProduct)}} onMouseMove={productForInfo && function(event){moveInfoBox(event,similarProduct)}} onMouseLeave={function(){handleProductForInfo(null)}}>
+                                <Link className="product-link" to={"/product"} state={{product: similarProduct}} onClick={() => window.location.reload()}>
+                                <div className="product-page-similar-product-image-container">
+                                    <img className="product-page-similar-product-image" src={similarProduct.img && require("../../img/products/"+similarProduct.img+".png")} />
+                                    <div className="product-page-similar-product-brand">
+                                        <img className="product-page-similar-product-brand-icon" src={require('../../img/brands/'+similarProduct.brand + "-logo-small.png")} alt="brand icon" />
+                                    </div>
+                                </div>
+                                <h3 className="product-page-similar-product-name">{similarProduct.name}</h3>
+                                <h1 className="product-page-similar-product-price">{similarProduct.price}</h1>
+                                </Link>
+                                {
+                                    InCart(similarProduct)
+                                    ? <div className="product-page-similar-product-option-button" state="remove" onClick={function(){RemoveFromCart(similarProduct);}}><img className="product-page-similar-product-cart-icon" src={require("../../img/remove-from-cart-icon.png")} alt="add to cart icon" /></div>
+                                    : <div className="product-page-similar-product-option-button" onClick={function(){AddToCart(similarProduct);}}><img className="product-page-similar-product-cart-icon" src={require("../../img/add-to-cart-icon.png")} alt="remove from cart icon" /></div>
+                                }
+
+                            </div>
+                            )
+                        }
                     </div>
                 </div>
                 <div className="popups-container">
@@ -240,6 +281,20 @@ function ProductPage({productList, currentUser, handleUser})
                         <Popup popup={popup} key={"popup-"+popup.id}/>
                     ))
                 }
+                </div>
+
+
+                <input className="info-box-checkbox" type="checkbox" checked={productForInfo || false} readOnly={true}/>
+                <div className="info-box-container" ref={infoBox}>
+                    <h2>Specifiations:</h2>
+                    <ul className="info-box-spec-list">
+                    {
+                        productForInfo && specList[productForInfo.category].map((spec)=>
+                        <li className="info-box-spec-text" key={"info-box-spec-"+spec.code}><b>{spec.name}</b>: {productForInfo.specs[spec.code]}</li>
+                        )
+                    }
+                    </ul>
+                    
                 </div>
             </div>
 
