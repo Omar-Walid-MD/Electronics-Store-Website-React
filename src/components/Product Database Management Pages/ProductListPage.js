@@ -31,6 +31,13 @@ function ProductListPage()
         }).catch(error => {
             console.log(error);
         });
+
+        axios.delete('http://localhost:8000/reviews/'+productId)
+        .then(resp => {
+            console.log(resp.data)
+        }).catch(error => {
+            console.log(error);
+        });
     }
 
     return (

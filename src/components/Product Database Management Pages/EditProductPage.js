@@ -130,6 +130,7 @@ function EditProductPage()
         }).catch(error => {
             console.log(error);
         });
+
         
         return
         

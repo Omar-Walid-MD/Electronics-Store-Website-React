@@ -107,16 +107,26 @@ function AddProductPage()
     function AddProduct(e)
     {
         e.preventDefault();
-           
+
+        let newId = makeId(10);
             
-            fetch('http://localhost:8000/products',{
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(product)
-            }).then(()=>{
-                console.log("New Product Added.");
-                navigate("/products");
+        fetch('http://localhost:8000/products',{
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({id:newId,...product})
+        }).then(()=>{
+            console.log("New Product Added.");
+            navigate("/products");
+        })
+
+        fetch('http://localhost:8000/reviews',{
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                id: newId,
+                productReviews: []
             })
+        }).then(()=>{console.log("New Review list Added.")})
             
             return
 

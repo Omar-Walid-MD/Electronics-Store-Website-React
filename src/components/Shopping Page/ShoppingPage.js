@@ -573,7 +573,7 @@ function ShoppingPage({productList, currentUser, handleUser})
                             productList && specFilterList(filterList(productList)).map((product)=>
                             
                             <div className="product-result-container"  key={product.id} onMouseOver={function(event){handleProductForInfo(event,product)}} onMouseMove={productForInfo && function(event){moveInfoBox(event,product)}} onMouseLeave={function(){handleProductForInfo(null)}}>
-                                <Link className="product-link" to={"/product"} state={{product: product}}>
+                                <Link className="product-link" to={"/product/"+product.id} state={{product: product}}>
                                 <div className="product-result-image-container">
                                     <img className="product-result-image" src={product.img && require("../../img/products/"+product.img+".png")} />
                                     <div className="product-result-brand">
