@@ -43,6 +43,33 @@ function ShoppingPage({productList, currentUser, handleUser})
         camera: [{name:"Flash",code:"flash"},{name:"Video resolution",code:"videoResolution"},{name:"Touch display",code:"touchDisplay"},{name:"Shutter speed",code:"shutterSpeed"}],
     }
 
+    const categoryList = {
+        desktop: "Desktop",
+        laptop: "Laptop",
+        smartphone: "Smartphone",
+        tablet: "Tablet",
+        mouse: "Mouse",
+        keyboard: "Keyboard",
+        monitor: "Monitor",
+        speaker: "Speaker",
+        headphone: "Headphone",
+        earphone: "Earphone",
+        camera: "Camera"
+    }
+
+    const brandList = {
+        buzz: "Buzz",
+        maple: "Maple",
+        chromax: "Chromax",
+        hyper: "Hyper",
+        nuclai: "NuclAI",
+        mory: "Mory",
+        opal: "Opal",
+        auro: "Auro",
+        hotkey: "HotKey",
+        pixcel: "Pixcel"
+    }
+
 
     function setPriceRange(event)
     {
@@ -92,6 +119,16 @@ function ShoppingPage({productList, currentUser, handleUser})
                 ascending: ascendingValue
             }
         )
+    }
+
+    function setAvailableCategories(inputList)
+    {
+        return [...new Set(inputList.filter((product)=> product.brand === brand).map((product)=> product.category))];
+    }
+
+    function setAvailableBrands(inputList)
+    {
+        return [...new Set(inputList.filter((product)=> product.category === category).map((product)=> product.brand))];
     }
 
 
@@ -201,9 +238,7 @@ function ShoppingPage({productList, currentUser, handleUser})
     {
         let output = inputList.filter((product)=>Object.keys(specFilter).every(
             (specKey)=>product.specs[specKey] && specFilter[specKey].includes(product.specs[specKey])));                
-        // let output = inputList.filter((product)=>Object.keys(product.specs).filter((specKey)=>{
-        //     specFilter[specKey] && specFilter[specKey].includes(product.specs[specKey])}))
-        // console.log(output);
+   
         return output;
     }
     
@@ -279,24 +314,6 @@ function ShoppingPage({productList, currentUser, handleUser})
         }
         return false;
     }
-
-    // function OptionsScroll()
-    // {
-    //     const OptionsContainer = document.querySelector(".shopping-options-container");
-    //     const PageContainer = document.querySelector(".shopping-page-container");
-    //     let bottom = PageContainer.getBoundingClientRect().bottom + window.pageYOffset;
-    //     let offset = 750;
-
-    //     if(window.pageYOffset < bottom - offset)
-    //     {
-    //         const OptionsContainer = document.querySelector(".shopping-options-container");
-    //         OptionsContainer.style.transform = "translateY(" + window.pageYOffset + "px)";
-    //     }
-    //     else
-    //     {
-    //         OptionsContainer.style.transform = "translateY(" + (bottom - offset) + "px)";
-    //     }
-    // }
 
     const infoBox = useRef(null);
 
@@ -417,7 +434,17 @@ function ShoppingPage({productList, currentUser, handleUser})
                             <div className="shopping-option-section">
                                 <h2>Categories:</h2>
                                 <div className="shopping-option-input-group">
-                                    <div className="shopping-option-checkbox-container">
+
+                                    {
+                                        productList && setAvailableCategories(productList).map((availableCategory,index)=>
+
+                                        <div className="shopping-option-checkbox-container" key={"category-option-"+index}>
+                                            <input type="checkbox" value={availableCategory} name="shopping-category" id={"shopping-category-"+availableCategory} onChange={setCategories} />
+                                            <label htmlFor={"shopping-category-"+availableCategory} >{categoryList[availableCategory]}</label>
+                                        </div>
+                                        )
+                                    }
+                                    {/* <div className="shopping-option-checkbox-container">
                                         <input type="checkbox" value="smartphone" name="shopping-category" id="shopping-category-smartphone" onChange={setCategories} />
                                         <label htmlFor="shopping-category-smartphone" >Smartphones</label>
                                     </div>
@@ -445,7 +472,7 @@ function ShoppingPage({productList, currentUser, handleUser})
                                     <div className="shopping-option-checkbox-container">
                                         <input type="checkbox" value="earphone" name="shopping-category" id="shopping-category-earphone" onChange={setCategories} />
                                         <label htmlFor="shopping-category-earphone" >Earphones</label>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         }
@@ -456,7 +483,15 @@ function ShoppingPage({productList, currentUser, handleUser})
                             <div className="shopping-option-section">
                                 <h2>Brands:</h2>
                                 <div className="shopping-option-input-group">
-                                    <div className="shopping-option-checkbox-container">
+                                    {
+                                        productList && setAvailableBrands(productList).map((availableBrand,index)=>
+                                        <div className="shopping-option-checkbox-container" key={"brand-option-"+index}>
+                                            <input type="checkbox" value={availableBrand} name="shopping-brand" id={"shopping-brand-"+availableBrand} onChange={setBrands} />
+                                            <label htmlFor={"shopping-brand-"+availableBrand} >{brandList[availableBrand]}</label>
+                                        </div>
+                                    )
+                                    }
+                                    {/* <div className="shopping-option-checkbox-container">
                                         <input type="checkbox" value="buzz" name="shopping-brand" id="shopping-brand-buzz" onChange={setBrands} />
                                         <label htmlFor="shopping-brand-buzz" >Buzz</label>
                                     </div>
@@ -504,7 +539,7 @@ function ShoppingPage({productList, currentUser, handleUser})
                                     <div className="shopping-option-checkbox-container">
                                         <input type="checkbox" value="pixcel" name="shopping-brand" id="shopping-brand-pixcel" onChange={setBrands} />
                                         <label htmlFor="shopping-brand-pixcel" >Pixcel</label>
-                                    </div>
+                                    </div> */}
                                     
                                 </div>
                             </div>

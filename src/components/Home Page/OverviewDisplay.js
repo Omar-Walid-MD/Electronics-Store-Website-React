@@ -97,7 +97,7 @@ function OverviewDisplay()
             {
               getFeaturePanels().map((feature,index)=>
               <div className="feature-panel-container" order={index} key={index}>
-                  <div className="feature-panel" key={makeId(3)}>
+                  <div className="feature-panel" key={makeId(5)}>
                     <img className="feature-image" src={feature.img} alt="feature"/>
                     <div className="feature-desc">{feature.desc}</div>
                   </div>

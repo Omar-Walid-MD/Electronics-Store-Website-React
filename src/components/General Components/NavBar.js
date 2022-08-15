@@ -32,10 +32,13 @@ function NavBar({currentUser, handleUser, productList})
     {
         setSearchValue(e.target.value);
         console.log(e.target.value);
+
+        //setProductForInfo(null);
     }
 
     function SearchProduct()
     {
+        if(productList!==null && productList.filter((product)=>product.name.toLowerCase().includes(searchValue.toLowerCase())).length===0 && productForInfo) setProductForInfo(null);
         return productList!==null ? productList.filter((product)=>product.name.toLowerCase().includes(searchValue.toLowerCase())) : [];
     }
 
@@ -43,15 +46,15 @@ function NavBar({currentUser, handleUser, productList})
 
     function moveInfoBox(event,product)
     {
-        const PageContainer = document.querySelector(".nav-bar");
+        const PageContainer = document.querySelector(".search-results-container");
         let maxbottom = PageContainer.getBoundingClientRect().bottom + window.pageYOffset;
         let maxRight = PageContainer.getBoundingClientRect().right + window.pageXOffset;
 
         let leftOffset = 0;
         let topOffset = 0;
 
-        if(maxRight - event.clientX < infoBox.current.getBoundingClientRect().width + 100) leftOffset = infoBox.current.getBoundingClientRect().width;
-        if(maxbottom - event.clientY < infoBox.current.getBoundingClientRect().height + 100) topOffset = infoBox.current.getBoundingClientRect().height;
+        if(maxRight - event.clientX < infoBox.current.getBoundingClientRect().width) leftOffset = infoBox.current.getBoundingClientRect().width;
+        if(maxbottom - event.clientY < infoBox.current.getBoundingClientRect().height) topOffset = infoBox.current.getBoundingClientRect().height;
 
         infoBox.current.style.top = event.clientY + 10 - topOffset + "px";
         infoBox.current.style.left = event.clientX + 10 - leftOffset + "px";

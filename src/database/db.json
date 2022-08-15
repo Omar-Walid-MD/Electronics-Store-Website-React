@@ -12,7 +12,25 @@
       "lastName": "Diab",
       "email": "omar.madinah49@yahoo.com",
       "password": "omar1234",
-      "cart": []
+      "cart": [
+        {
+          "id": "4994147751",
+          "name": "Maple Dew X3",
+          "category": "smartphone",
+          "brand": "maple",
+          "price": "250",
+          "specs": {
+            "os": "Android 11",
+            "processor": "2 GHz",
+            "ram": "2 GB",
+            "storage": "64 GB",
+            "screen": "7",
+            "camResolution": "12 MP",
+            "battery": "4200 mAH"
+          },
+          "img": "phone"
+        }
+      ]
     },
     {
       "id": 20,
@@ -558,9 +576,7 @@
     },
     {
       "id": "ulvMNC3",
-      "productReviews": [
-
-      ]
+      "productReviews": []
     },
     {
       "id": "cS29f1M",
