@@ -272,7 +272,7 @@ function ProductPage({productList, currentUser, handleUser})
             }
 
             {
-                product &&
+                product ?
                 <div className="product-page-container">
                     <div className="product-overview-container">
                         <div className="product-overview-image-container" onMouseOver={moveInfoBox}>
@@ -392,6 +392,12 @@ function ProductPage({productList, currentUser, handleUser})
                         </ul>
                         
                     </div>
+                </div>
+
+                :
+
+                <div className="product-page-container">
+                    <img className="loading" src={require("../../img/loading.png")} />
                 </div>
 
             }

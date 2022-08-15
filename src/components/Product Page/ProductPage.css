@@ -367,3 +367,14 @@
 {
     height: 25px;
 }
+
+@keyframes loading-animation {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
+.loading
+{
+    height: 100px;
+
+    animation: loading-animation 2s infinite;
+}
