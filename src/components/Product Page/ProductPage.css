@@ -170,6 +170,8 @@
 {
     font-size: 15pt;
 
+    background-color: rgb(200, 215, 255);
+
     box-sizing: border-box;
     padding: 5px;
 
@@ -249,6 +251,7 @@
 {
     width: fit-content;
     font-size: 15px;
+    font-weight: 600;
 
     background-color: rgb(144, 181, 250);
 
@@ -257,11 +260,14 @@
     outline: none;
 
     box-sizing: border-box;
-    padding: 5px 10px; 
+    padding: 5px 10px;
+
+    transition: all 0.2s ease-in-out;
 }
 .product-page-review-rating-submit:hover
 {
     background-color: rgb(116, 160, 241);
+    transform: scale(105%);
 }
 
 .product-page-similar-products-group

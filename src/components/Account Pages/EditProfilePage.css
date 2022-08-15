@@ -63,6 +63,10 @@
 
     line-height: 10px;
 }
+.edit-profile-picture-display
+{
+    height: 100px;
+}
 .edit-profile-form-section-label
 {
     font-size: 13pt;

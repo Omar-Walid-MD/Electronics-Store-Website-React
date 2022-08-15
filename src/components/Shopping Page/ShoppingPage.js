@@ -558,15 +558,17 @@ function ShoppingPage({productList, currentUser, handleUser})
                                         <h3 className="shopping-spec-name">{spec.name}</h3>
                                         <img className="shopping-spec-dropdown-arrow" src={require("../../img/white-arrow-down.png")} />
                                     </label>
-                                    <div className="shopping-spec-dropdown">
-                                    {
-                                        spec.availableValues.map((specValue,index)=>
-                                        <div className="shopping-spec-filter" key={"sp-"+spec.code+"-"+index}>
-                                            <input className="shopping-spec-filter-checkbox" type="checkbox" name={spec.code} id={specValue} onChange={setSpecs}/>
-                                            <p className="shopping-spec-filter-label">{specValue}</p>
+                                    <div className="shopping-spec-dropdown-container">
+                                        <div className="shopping-spec-dropdown">
+                                        {
+                                            spec.availableValues.map((specValue,index)=>
+                                            <div className="shopping-spec-filter" key={"sp-"+spec.code+"-"+index}>
+                                                <input className="shopping-spec-filter-checkbox" type="checkbox" name={spec.code} id={specValue} onChange={setSpecs}/>
+                                                <p className="shopping-spec-filter-label">{specValue}</p>
+                                            </div>
+                                            )
+                                        }
                                         </div>
-                                        )
-                                    }
                                     </div>
                                     <div className="border-line"></div>
                                 </div>

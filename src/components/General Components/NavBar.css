@@ -278,7 +278,9 @@
 }
 .profile-icon
 {
-  height: 60px;
+  height: 60px; width: 60px;
+
+  border-radius: 50%;
 }
 .profile-checkbox
 {
@@ -300,9 +302,6 @@
 
   box-shadow: 0 5px 20px 0px black;
 
-  
-
-
   position: absolute;
   top: 100px;
   visibility: hidden;
@@ -323,9 +322,17 @@
 .profile-picture-container
 {
   height: 120px; width: 120px;
-  background-color: lightgray;
 
   border-radius: 50%;
+
+  display: flex;
+  justify-content: center; align-items: center;
+
+  overflow: hidden;
+}
+.profile-picture-container > img
+{
+  height: 120px;
 }
 .profile-overview-options-container
 {
@@ -365,7 +372,6 @@
 
   transition: all 0.2s ease-in-out;
 }
-/* NOTE: now using focus instead of checked but keeping checkbox for now just in case focus is bugged */
 .menu-checkbox
 {
   opacity: 0;

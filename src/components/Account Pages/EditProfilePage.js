@@ -9,14 +9,19 @@ function EditProfilePage({handleUser})
     const { prevPath } = location.state || {};
 
     //Submitted types: "none","success","passwordFailed","emailFailed"
+
+    const [userEdited,setUserEdited] = useState(currentUser);
+
     const [submitted,setSubmitted] = useState("none");
 
-    const [firstNameValue,setFirstNameValue] = useState("");
-    const [lastNameValue,setLastNameValue] = useState("");
+    // const [profilePicture,setProfilePicture] = useState("");
 
-    const [emailValue,setEmailValue] = useState("");
+    // const [firstNameValue,setFirstNameValue] = useState("");
+    // const [lastNameValue,setLastNameValue] = useState("");
 
-    const [passwordValue,setPasswordValue] = useState("");
+    // const [emailValue,setEmailValue] = useState("");
+
+    // const [passwordValue,setPasswordValue] = useState("");
     const [confirmPasswordValue,setConfirmPasswordValue] = useState("");
 
     const [passwordEdit,setPasswordEdit] = useState(false);
@@ -25,21 +30,32 @@ function EditProfilePage({handleUser})
 
     const navigate = useNavigate();
 
-    function handleFirstNameValue(event)
+    function handleUserEdit(event)
     {
-        setFirstNameValue(event.target.value);
+        setUserEdited({
+            ...userEdited,
+            [event.target.name]: event.target.value
+        })
     }
-    function handleLastNameValue(event)
+
+    function handleProfilePicture(event)
     {
-        setLastNameValue(event.target.value);
+        toBase64(event.target.files[0]);
     }
-    function handleEmailValue(event)
+
+    function toBase64(file)
     {
-        setEmailValue(event.target.value);
+        let reader = new FileReader();
+        reader.readAsDataURL(file)
+        reader.onload = () => {
+            console.log(reader.result);
+            setUserEdited({...userEdited,image:reader.result})
+        }
     }
+
     function handlePasswordValue(event)
     {
-        setPasswordValue(event.target.value);
+        setUserEdited({...userEdited,password: event.target.value});
         if(currentUser.password!==event.target.value)
         {
             if(!passwordEdit)
@@ -77,7 +93,7 @@ function EditProfilePage({handleUser})
 
         if(passwordEdit)
         {
-            if(passwordValue!==confirmPasswordValue)
+            if(userEdited.password!==confirmPasswordValue)
             {
                 setSubmitted("passwordFailed");
                 return;
@@ -88,12 +104,8 @@ function EditProfilePage({handleUser})
         setSubmitted("success");
 
         let updateduser = {
-            ...currentUser,
+            ...userEdited,
             id: currentUser.id,
-            firstName: firstNameValue,
-            lastName: lastNameValue,
-            email: emailValue,
-            password: passwordValue,
         };
         
         
@@ -122,10 +134,7 @@ function EditProfilePage({handleUser})
        if(currentUser)
        {
            console.log("yes");
-           setFirstNameValue(currentUser.firstName);
-           setLastNameValue(currentUser.lastName);
-           setEmailValue(currentUser.email);
-           setPasswordValue(currentUser.password);
+           
        }
     }
 
@@ -155,23 +164,29 @@ function EditProfilePage({handleUser})
                     <form className="edit-profile-form" onSubmit={updateProfile}>
                         <div className="edit-profile-form-section-group">
                             <div className="edit-profile-form-section">
+                                {
+                                    userEdited && <img className="edit-profile-picture-display" src={userEdited.image} />
+                                }
+                                <input className="" type="file" name="image" onChange={handleProfilePicture}/>
+                            </div>
+                            <div className="edit-profile-form-section">
                                 <h2 className="edit-profile-form-section-label">First Name:</h2>
-                                <input className="edit-profile-form-input" type="text" value={firstNameValue} onChange={handleFirstNameValue} required />
+                                <input className="edit-profile-form-input" type="text" name="firstName" value={userEdited.firstName} onChange={handleUserEdit} required />
                             </div>
                             <div className="edit-profile-form-section">
                                 <h2 className="edit-profile-form-section-label">Last Name:</h2>
-                                <input className="edit-profile-form-input" type="text" value={lastNameValue} onChange={handleLastNameValue} required />
+                                <input className="edit-profile-form-input" type="text" name="lastName" value={userEdited.lastName} onChange={handleUserEdit} required />
                             </div>
 
                             <div className="edit-profile-form-section">
                                 <h2 className="edit-profile-form-section-label">Email:</h2>
-                                <input className="edit-profile-form-input" type="email" value={emailValue} onChange={handleEmailValue} required />
+                                <input className="edit-profile-form-input" type="email" name="email" value={userEdited.email} onChange={handleUserEdit} required />
                             </div>
 
                             
                             <div className="edit-profile-form-section">
                                 <h2 className="edit-profile-form-section-label">Password:</h2>
-                                <input className="edit-profile-form-input" type="text" value={passwordValue} onChange={handlePasswordValue} required/>
+                                <input className="edit-profile-form-input" type="text" name="password" value={userEdited.password} onChange={handlePasswordValue} required/>
                             </div>
 
                             {

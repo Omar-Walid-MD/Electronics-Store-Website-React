@@ -314,8 +314,8 @@ function ProductPage({productList, currentUser, handleUser})
                                     <textarea className="product-page-review-form-textarea product-page-review-form-input" placeholder="Review Body" name="body" value={productReview.body} onChange={handleReview}></textarea>
                                 </div>
                                 <div className="product-page-review-form-rating">
-                                    <div className="product-page-review-rating-background" onMouseMove={handleReviewRating}>
-                                        <div className="product-page-review-rating-fill" style={{width: productReview.rating * 20 + "%"}}></div>
+                                    <div className="product-page-review-rating-background" draggable="false" onMouseMove={handleReviewRating}>
+                                        <div className="product-page-review-rating-fill" draggable="false" style={{width: productReview.rating * 20 + "%"}}></div>
                                     </div>
                                     <div className="product-page-review-rating-label">{productReview.rating}/5</div>
                                 </div>
