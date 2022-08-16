@@ -22,8 +22,6 @@ function ProductPage({productList, currentUser, handleUser})
         rating: 5
     });
 
-    const [productReviewList,setProductReviewList] = useState([]);
-
 
     const [popUps,setPopups] = useState([]);
 
@@ -148,7 +146,7 @@ function ProductPage({productList, currentUser, handleUser})
     function handleReviewRating(event)
     {
         const reviewBackground = event.target.getBoundingClientRect();
-        const reviewFill = event.target.querySelector(".product-page-review-rating-fill")
+        const reviewFill = event.target.querySelector(".product-page-review-form-rating-fill")
         if(event.buttons == 1)
         {
             let newWidth = Math.min(Math.max(Math.round(((event.pageX-reviewBackground.left)/reviewBackground.width * 100)/20)*20,20),100);
@@ -163,36 +161,38 @@ function ProductPage({productList, currentUser, handleUser})
         //Set username before submit
         let review = {...productReview,user:currentUser.firstName + " " + currentUser.lastName};
 
-        let updatedReviewObject = null;
+        let updatedProductWithReview = {...product,productReviews: [...product.productReviews, review]};
 
-        fetch('http://localhost:8000/reviews/'+product.id)
-        .then(res => {
-        return res.json()
-        })
-        .then((data)=>{
-            console.log(data);
-            updatedReviewObject = {
-                ...data,
-                productReviews: [...data.productReviews,review]
-            }
+        // fetch('http://localhost:8000/reviews/'+product.id)
+        // .then(res => {
+        // return res.json()
+        // })
+        // .then((data)=>{
+        //     console.log(data);
+        //     updatedProductWithReview = {
+        //         ...data,
+        //         productReviews: [...data.productReviews,review]
+        //     }
     
-            const axios = require('axios');
-    
-            axios.put('http://localhost:8000/reviews/'+product.id,
-                updatedReviewObject
-            )
-            .then(resp =>{
-                console.log("Added your review");
-                popUpMessage("Added your review!");
-                setProductReviewList(updatedReviewObject.productReviews);
-            }).catch(error => {
-                console.log(error);
-            });
-        })
+        const axios = require('axios');
+
+        axios.put('http://localhost:8000/products/'+product.id,
+            updatedProductWithReview
+        )
+        .then(resp =>{
+            console.log("Added your review");
+            popUpMessage("Added your review!");
+            setProduct(updatedProductWithReview);
+        }).catch(error => {
+            console.log(error);
+        });
+        // })
 
        
 
     }
+
+
     function handleProductForInfo(event,product)
     {
         if(product)
@@ -212,6 +212,22 @@ function ProductPage({productList, currentUser, handleUser})
         {
             setProductForInfo(null);
         }
+    }
+
+    function calculateRating(product)
+    {
+        let rating = 5;
+        if(product.productReviews.length > 0)
+        {
+            rating = 0;
+            for (let i = 0; i < product.productReviews.length; i++) {
+                const review = product.productReviews[i];
+                rating += review.rating;
+            }
+            rating = rating / product.productReviews.length;
+            console.log(product.productReviews.length)
+        }
+        return rating;
     }
 
     function popUpMessage(message)
@@ -238,27 +254,7 @@ function ProductPage({productList, currentUser, handleUser})
         if(productList) 
         {
             setProduct(productList.filter((product)=>product.id==productIdParam)[0]);
-            console.log(productList.filter((product)=>product.id==productIdParam)[0]);
-
-            fetch('http://localhost:8000/reviews/'+productIdParam)
-            .then(res => {
-            return res.json()
-            })
-            .then((data)=>{
-            //   console.log(data);
-            setProductReviewList(data.productReviews);
-            })
-
-            fetch('http://localhost:8000/reviews/'+productIdParam)
-            .then(res => {
-            return res.json()
-            })
-            .then((data)=>{
-            //   console.log(data);
-            setProductReviewList(data.productReviews);
-            })
-        }
-        
+        }        
 
     },[productList,productIdParam]);
 
@@ -315,7 +311,7 @@ function ProductPage({productList, currentUser, handleUser})
                                 </div>
                                 <div className="product-page-review-form-rating">
                                     <div className="product-page-review-rating-background" draggable="false" onMouseMove={handleReviewRating}>
-                                        <div className="product-page-review-rating-fill" draggable="false" style={{width: productReview.rating * 20 + "%"}}></div>
+                                        <div className="product-page-review-form-rating-fill product-page-review-rating-fill" draggable="false" style={{width: productReview.rating * 20 + "%"}}></div>
                                     </div>
                                     <div className="product-page-review-rating-label">{productReview.rating}/5</div>
                                 </div>
@@ -324,13 +320,13 @@ function ProductPage({productList, currentUser, handleUser})
                         </div>
                         <div className="product-page-reviews-group">
                             {
-                                productReviewList && productReviewList.map((review,index)=>
+                                product && product.productReviews.map((review,index)=>
 
                                 <div className="product-page-review-container" key={"product-review-"+index}>
                                     <h2 className="product-page-review-title">{review.title}</h2>
                                     <div className="product-page-review-rating-container">
                                         <div className="product-page-review-rating-background">
-                                            <div className="product-page-review-rating-fill" style={{width: productReview.rating * 20 + "%"}}></div>
+                                            <div className="product-page-review-rating-fill" style={{width: review.rating * 20 + "%"}}></div>
                                         </div>
                                         <div className="product-page-review-rating-label">{review.rating}/5</div>
                                     </div>
@@ -356,7 +352,12 @@ function ProductPage({productList, currentUser, handleUser})
                                             <img className="product-page-similar-product-brand-icon" src={require('../../img/brands/'+similarProduct.brand + "-logo-small.png")} alt="brand icon" />
                                         </div>
                                     </div>
-                                    <h3 className="product-page-similar-product-name">{similarProduct.name}</h3>
+                                    <div className="product-page-similar-product-info">
+                                        <h3 className="product-page-similar-product-name">{product.name}</h3>
+                                        <div className="product-page-review-rating-background">
+                                            <div className="product-page-review-rating-fill" style={{width: calculateRating(product) * 20 + "%"}}></div>
+                                        </div>
+                                    </div>
                                     <h1 className="product-page-similar-product-price">{similarProduct.price}</h1>
                                     </Link>
                                     {
@@ -399,10 +400,8 @@ function ProductPage({productList, currentUser, handleUser})
                 <div className="product-page-container">
                     <img className="loading" src={require("../../img/loading.png")} />
                 </div>
-
             }
            
-
             <Footer />
         </div>
     )

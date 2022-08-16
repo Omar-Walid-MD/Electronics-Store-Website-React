@@ -72,7 +72,6 @@
 .product-overview-info-container
 {
     height: 100%;
-
 }
 .product-overview-info-name
 {
@@ -275,8 +274,6 @@
     width: 1300px;
     display: flex;
 }
-
-
 .product-page-similar-product-container
 {
     height: 350px; width: 250px;
@@ -338,10 +335,16 @@
 {
     height: 70%;
 }
+.product-page-similar-product-info
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; align-items: center;
+}
 .product-page-similar-product-name
 {
     font-size: 100;
-    margin: 20px 5px;
+    margin: 10px 5px;
 }
 .product-page-similar-product-price
 {

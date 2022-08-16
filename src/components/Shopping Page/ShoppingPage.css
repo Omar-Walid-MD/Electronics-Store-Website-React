@@ -165,10 +165,20 @@
 {
     height: 70%;
 }
+.product-result-info
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; align-items: center;
+}
 .product-result-name
 {
     font-size: 100;
-    margin: 20px 5px;
+    margin: 10px 5px;
+}
+.product-page-review-rating-background
+{
+    
 }
 .product-result-price
 {

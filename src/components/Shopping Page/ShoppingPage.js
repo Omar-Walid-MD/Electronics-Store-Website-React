@@ -315,6 +315,22 @@ function ShoppingPage({productList, currentUser, handleUser})
         return false;
     }
 
+    function calculateRating(product)
+    {
+        let rating = 5;
+        if(product.productReviews.length > 0)
+        {
+            rating = 0;
+            for (let i = 0; i < product.productReviews.length; i++) {
+                const review = product.productReviews[i];
+                rating += review.rating;
+            }
+            rating = rating / product.productReviews.length;
+            console.log(product.productReviews.length)
+        }
+        return rating;
+    }
+
     const infoBox = useRef(null);
 
     function moveInfoBox(event,product)
@@ -617,7 +633,13 @@ function ShoppingPage({productList, currentUser, handleUser})
                                         <img className="product-result-brand-icon" src={require('../../img/brands/'+product.brand + "-logo-small.png")} alt="brand icon" />
                                     </div>
                                 </div>
-                                <h3 className="product-result-name">{product.name}</h3>
+                                
+                                <div className="product-result-info">
+                                    <h3 className="product-result-name">{product.name}</h3>
+                                    <div className="product-page-review-rating-background">
+                                        <div className="product-page-review-rating-fill" style={{width: calculateRating(product) * 20 + "%"}}></div>
+                                    </div>
+                                </div>
                                 <h1 className="product-result-price">{product.price}</h1>
                                 </Link>
                                 {

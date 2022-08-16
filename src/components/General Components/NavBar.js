@@ -112,6 +112,22 @@ function NavBar({currentUser, handleUser, productList})
         
     }
 
+    function calculateRating(product)
+    {
+        let rating = 5;
+        if(product.productReviews.length > 0)
+        {
+            rating = 0;
+            for (let i = 0; i < product.productReviews.length; i++) {
+                const review = product.productReviews[i];
+                rating += review.rating;
+            }
+            rating = rating / product.productReviews.length;
+            console.log(product.productReviews.length)
+        }
+        return rating;
+    }
+
 
     function AddToCart(product)
     {
@@ -215,7 +231,12 @@ function NavBar({currentUser, handleUser, productList})
                                                     <img className="search-result-brand-icon" src={require('../../img/brands/'+product.brand + "-logo-small.png")} alt="brand icon" />
                                                 </div>
                                             </div>
-                                            <h3 className="search-result-name">{product.name}</h3>
+                                            <div className="search-result-info">
+                                                <h3 className="search-result-name">{product.name}</h3>
+                                                <div className="product-page-review-rating-background">
+                                                    <div className="product-page-review-rating-fill" style={{width: calculateRating(product) * 20 + "%"}}></div>
+                                                </div>
+                                            </div>
                                             <h1 className="search-result-price">{product.price}</h1>
                                         </Link>
                                         {
@@ -286,9 +307,11 @@ function NavBar({currentUser, handleUser, productList})
                     <img className="menu-icon" src={require("../../img/menu-icon.png")}/>
                 </label>
                     <div className="dropdown-menu-container">
-                    <div className="dropdown-menu-option" onClick={function(){console.log("hi")}}>Option</div>
-                    <div className="dropdown-menu-option">Option</div>
-                    <div className="dropdown-menu-option">Option</div>
+                    <div className="nav-bar-link">About us</div>
+                    <div className="border-line"></div>
+                    <div className="nav-bar-link">FAQ</div>
+                    <div className="border-line"></div>
+                    <div className="nav-bar-link">Support</div>
                     </div>
                 </div>
             </div>
