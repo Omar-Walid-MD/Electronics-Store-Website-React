@@ -162,13 +162,28 @@ function EditProfilePage({handleUser})
                 <div className="edit-profile-form-container">
                     <h1 className="edit-profile-form-title">Edit Profile</h1>
                     <form className="edit-profile-form" onSubmit={updateProfile}>
-                        <div className="edit-profile-form-section-group">
+                        
                             <div className="edit-profile-form-section">
-                                {
-                                    userEdited && <img className="edit-profile-picture-display" src={userEdited.image} />
-                                }
-                                <input className="" type="file" name="image" onChange={handleProfilePicture}/>
+                                <div className="edit-profile-picture-container">
+                                    <img className="edit-profile-picture" src={userEdited.image ? userEdited.image : require("../../img/profile-icon.png")}/>
+                                    <div className="edit-profile-picture-overlay">
+                                        <div className="edit-profile-picture-overlay-options">
+
+                                            <label htmlFor="upload-profile-picture" className="edit-profile-picture-overlay-icon-container">
+                                                <img className="edit-profile-picture-overlay-icon" src={require("../../img/edit.png")} />
+                                            </label>
+                                            <p className="edit-profile-picture-overlay-icon-label">Change Profile Picture</p>
+
+                                            <div className="edit-profile-picture-overlay-icon-container" onClick={function(){setUserEdited({...userEdited,image: ""})}}>
+                                                <img className="edit-profile-picture-overlay-icon" src={require("../../img/x.png")} />
+                                            </div>
+                                            <p className="edit-profile-picture-overlay-icon-label">Remove Profile Picture</p> 
+                                        </div>
+                                    </div>
+                                    <input className="edit-profile-picture-input" type="file" name="image" id="upload-profile-picture" onChange={handleProfilePicture}/>
+                                </div>
                             </div>
+                        <div className="edit-profile-form-section-group">
                             <div className="edit-profile-form-section">
                                 <h2 className="edit-profile-form-section-label">First Name:</h2>
                                 <input className="edit-profile-form-input" type="text" name="firstName" value={userEdited.firstName} onChange={handleUserEdit} required />
@@ -204,14 +219,13 @@ function EditProfilePage({handleUser})
                             submitted==="passwordFailed" && <div className="edit-profile-form-warning">Passwords does not match</div>
                             
                         }
-                        <div className="edit-profile-options-container">
+                        <div className="edit-profile-form-end-options">
+                            <input className="edit-profile-form-submit" value="Save Changes" type="submit" disabled={inputEmpty(requiredFields)}/>
+                            <Link to={prevPath} className="home-button">Discard</Link>
                         </div>
-                        <input className="edit-profile-form-submit" value="Save Changes" type="submit" disabled={inputEmpty(requiredFields)}/>
+                        
                         
                     </form>
-                </div>
-                <div className="home-button-container">
-                    <Link to={prevPath} className="home-button">Go Back</Link>
                 </div>
             </div>
         </div>

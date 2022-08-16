@@ -9,6 +9,7 @@ import EditProductPage from './components/Product Database Management Pages/Edit
 import ShoppingPage from './components/Shopping Page/ShoppingPage';
 import EditProfilePage from './components/Account Pages/EditProfilePage';
 import ProductPage from './components/Product Page/ProductPage';
+import CartPage from './components/Account Pages/CartPage';
 
 function App() {
 
@@ -81,15 +82,20 @@ function App() {
     return (
       
       <Routes>
+        {/* Main Pages */}
         <Route path="/" element={<HomePage currentUser={currentUser} handleUser={setCurrentUser} productList={productList} />} />
-        <Route path="/login" element={<LoginPage handleUser={setCurrentUser} userList={userList} />} />
-        <Route path="/register" element={<RegisterPage handleUser={setCurrentUser} userList={userList} handleUserList={setUserList} />} />
         <Route path="/shop" element={<ShoppingPage currentUser={currentUser} handleUser={setCurrentUser} productList={productList} />}/>
         <Route path="/product/:id" element={<ProductPage currentUser={currentUser} handleUser={setCurrentUser} productList={productList} />} />
+        {/* Account Pages */}
+        <Route path="/login" element={<LoginPage handleUser={setCurrentUser} userList={userList} />} />
+        <Route path="/register" element={<RegisterPage handleUser={setCurrentUser} userList={userList} handleUserList={setUserList} />} />
+        <Route path="/edit-profile" element={<EditProfilePage handleUser={setCurrentUser} />} />
+        <Route path="/cart" element={<CartPage currentUser={currentUser} handleUser={setCurrentUser} productList={productList} />} />
+
+        {/* Product Database Pages */}
         <Route path="/products" element={<ProductListPage />} />
         <Route path="/add-product" element={<AddProductPage />} />
         <Route path="/edit-product" element={<EditProductPage />} />
-        <Route path="/edit-profile" element={<EditProfilePage handleUser={setCurrentUser} />} />
       </Routes>
     )
 }

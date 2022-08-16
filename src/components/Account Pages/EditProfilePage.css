@@ -7,7 +7,7 @@
 {
     position: absolute;
     width: 100%; height: 100%;
-    background-color: dimgray;
+    background-color: rgb(21, 24, 56);
 
     display: flex;
     flex-direction: column;
@@ -18,7 +18,7 @@
 {
     width: 800px; height: auto;
 
-    background-color: rgb(32, 32, 32);
+    background-color: rgb(50, 50, 120);
 
     border-radius: 20px;
     box-shadow: 0 0 30px 0px black;
@@ -33,6 +33,10 @@
 }
 .edit-profile-form-title
 {
+    width: 100%;
+
+    text-align: center;
+
     margin: 10px;
 }
 .edit-profile-form
@@ -50,12 +54,12 @@
 }
 .edit-profile-form-section-group
 {
-    height: 400px;
+    height: auto; width: 100%;
 
+    display: grid;
+    grid-template-columns: repeat(2,50%);
 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; align-items: center;
+    margin: 50px 0;
 }
 .edit-profile-form-section
 {
@@ -63,21 +67,116 @@
 
     line-height: 10px;
 }
-.edit-profile-picture-display
+.edit-profile-picture-container
 {
-    height: 100px;
+    height: 150px; width: 150px;
+
+    display: flex;
+    justify-content: center; align-items: center;
+
+    border-radius: 5px;
+
+    box-shadow: 0 0 20px 2px rgb(21, 20, 68);
+
+    overflow: hidden;
+
+    position: relative;
 }
+.edit-profile-picture
+{
+    height: 100%; width: 100%;
+}
+.edit-profile-picture-overlay
+{
+    height: 100%; width: 100%;
+
+    background-color: rgba(75, 75, 85, 0.8);
+
+    opacity: 0;
+
+    position: absolute;
+
+    display: flex;
+    justify-content: center; align-items: center;
+
+    text-align: center;
+    font-size: 15pt;
+    line-height: 20pt;
+
+    /* text-shadow: 0 0 5px black, 0 0 5px black, 0 0 5px black, 0 0 5px black; */
+
+    box-sizing: border-box;
+    padding: 20pt;
+   
+    transition: opacity 0.1s ease-in-out;
+}
+.edit-profile-picture-overlay-options
+{
+    width: 65px;
+    position: absolute;
+    bottom: 5px; right: 5px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; align-items: center;
+}
+.edit-profile-picture-overlay-icon-container
+{
+    height: 30px; width: 30px;
+
+    background-color: white;
+
+    border-radius: 5px;
+
+    display: flex;
+    justify-content: center; align-items: center;
+
+    cursor: pointer;
+
+}
+.edit-profile-picture-overlay-icon
+{
+    height: 20px;
+}
+.edit-profile-picture-overlay-icon-label
+{
+    font-size: 15pt;
+    position: absolute;
+    
+    transform: translate(-57.5%,-80%);
+
+    pointer-events: none;
+    opacity: 0;
+
+    transition: opacity 0.1s ease-in-out;
+}
+.edit-profile-picture-overlay-icon-container:hover +.edit-profile-picture-overlay-icon-label
+{
+    opacity: 1;
+}
+
+.edit-profile-picture-container:hover .edit-profile-picture-overlay
+{
+    opacity: 1;
+}
+.edit-profile-picture-input
+{
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
 .edit-profile-form-section-label
 {
     font-size: 13pt;
 }
 .edit-profile-form-input
 {
-    width: 100%; height: 30px;
+    width: 300px; height: 30px;
 
     font-size: 12pt;
 
-    background-color: lightgray;
+    background-color: rgb(200, 215, 255);
 
     padding: 5px;
 
@@ -113,22 +212,34 @@
     font-size: 12pt;
     margin: 15px 0;
 }
+.edit-profile-form-end-options
+{
+    width: 100%;
 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; align-items: center;
+}
 .edit-profile-form-submit
 {
-    background-color: white;
-    font-size: 20pt;
+    color: white;
+    background-color: rgb(15, 25, 158);
+    font-size: 15pt;
     font-weight: 800;
+
+    border: none;
+    box-shadow: 0 0 10px black;
 
     padding: 5px 15px;
 
-    border: none;
+    border-radius: 10px;
 
     transition: all 0.2s ease-in-out;
 }
 .edit-profile-form-submit:hover
 {
-    background-color: lightgray;
+  background-color: rgb(55, 93, 199);
+  transform: scale(105%);
 }
 .edit-profile-form-submit:disabled
 {

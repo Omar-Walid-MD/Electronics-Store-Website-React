@@ -244,7 +244,9 @@ function NavBar({currentUser, handleUser, productList})
                 loggedIn ?  <div className="profile-menu-container">     
                                 <input className="profile-checkbox" type="checkbox" name="dropdown-checkbox" id="profile-toggle" onChange={manageMenus} />
                                 <label htmlFor="profile-toggle">
-                                    <img className="profile-icon" src={currentUser.image ? currentUser.image : require("../../img/profile-icon.png")}/>
+                                    <div className="profile-icon-container">
+                                        <img className="profile-icon" src={currentUser.image ? currentUser.image : require("../../img/profile-icon.png")}/>
+                                    </div>
                                 </label>
                                 <div className="profile-dropdown-container">
                                     <div className="profile-overview-info-container">
@@ -257,13 +259,13 @@ function NavBar({currentUser, handleUser, productList})
                                     <div className="border-line"></div>
 
                                     <div className="profile-overview-options-container">
-                                        <Link to={"/edit-profile"} state={{currentUser: currentUser, prevPath: location.pathname}} className="nav-bar-link">Edit Profile</Link>
-                                        <div>My Cart</div>
+                                        <Link className="nav-bar-link" to={"/edit-profile"} state={{currentUser: currentUser, prevPath: location.pathname}} >Edit Profile</Link>
+                                        <Link className="nav-bar-link" to={"/cart"} state={{currentUser: currentUser, prevPath: location.pathname}} >My Cart</Link>
                                     </div>
                                     <div className="border-line"></div>
 
                                     <div className="profile-overview-logout-container">
-                                        <button onClick={logOut}>Logout</button>
+                                        <button className="nav-bar-link" onClick={logOut}>Logout</button>
                                     </div>
                                     
                                     

@@ -50,7 +50,7 @@ function SideBar({currentUser, handleUser})
                         )
                     }
                     </div>
-                    : <h1 className="shopping-cart-empty">Shopping cart empty</h1> 
+                    : <div className="shopping-cart-empty"><h1>Shopping cart empty</h1></div> 
                 }
             </div>
             <div className="side-bar-footer">
