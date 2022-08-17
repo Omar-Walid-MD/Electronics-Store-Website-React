@@ -1,6 +1,6 @@
 import searchIcon from "../../img/search.png"
 import { Link, useLocation } from "react-router-dom";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./NavBar.css";
 
 function NavBar({currentUser, handleUser, productList})
@@ -201,6 +201,10 @@ function NavBar({currentUser, handleUser, productList})
         }
         return false;
     }
+
+    // useEffect(()=>{
+    //     setSearchValue("");
+    // },[])
     
 
     return (
@@ -224,7 +228,7 @@ function NavBar({currentUser, handleUser, productList})
                                     SearchProduct().map((product)=>
 
                                     <div className="search-result-container" key={product.id} onMouseOver={function(event){handleProductForInfo(event,product)}} onMouseMove={productForInfo && function(event){moveInfoBox(event,product)}} onMouseLeave={function(){handleProductForInfo(null)}}>
-                                        <Link className="product-link" to={"/product"} state={{product: product}}>
+                                        <Link className="product-link" to={"/product/"+product.id} state={{product: product}} onClick={()=>window.location.assign("/product/"+product.id)}>
                                             <div className="search-result-image-container">
                                                 <img className="search-result-image" src={product.img && require("../../img/products/"+product.img+".png")} />
                                                 <div className="search-result-brand">
@@ -233,8 +237,8 @@ function NavBar({currentUser, handleUser, productList})
                                             </div>
                                             <div className="search-result-info">
                                                 <h3 className="search-result-name">{product.name}</h3>
-                                                <div className="product-page-review-rating-background">
-                                                    <div className="product-page-review-rating-fill" style={{width: calculateRating(product) * 20 + "%"}}></div>
+                                                <div className="search-result-rating-background">
+                                                    <div className="search-result-rating-fill" style={{width: calculateRating(product) * 20 + "%"}}></div>
                                                 </div>
                                             </div>
                                             <h1 className="search-result-price">{product.price}</h1>

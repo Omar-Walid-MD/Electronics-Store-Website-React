@@ -32,6 +32,30 @@ function SideBar({currentUser, handleUser})
         }
     }
 
+    function handleCartList(inputList)
+    {
+        let cartList = []
+        for (let i = 0; i < inputList.length; i++) {
+            const item = inputList[i];
+
+            if(cartList.some((listItem)=>listItem.id==item.id))
+            {
+                cartList.filter((listItem)=>listItem.id==item.id)[0].count++
+            }
+            else
+            {
+                cartList.push({
+                    ...item,
+                    count: 1,
+                })
+            }
+            
+        }
+
+        console.log(cartList);
+        return cartList;
+    }
+
 
     return (
         <div className="side-bar-container">
@@ -45,7 +69,7 @@ function SideBar({currentUser, handleUser})
                 {
                     currentUser.cart && currentUser.cart.length !== 0 ? <div className="shopping-cart-list">
                     {
-                        currentUser.cart.map((item,index)=>
+                        handleCartList(currentUser.cart).map((item,index)=>
                         <CartItem product={item} currentUser={currentUser} handleUser={handleUser} key={"Item"+index}/>
                         )
                     }

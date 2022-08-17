@@ -15,6 +15,8 @@ function ProductPage({productList, currentUser, handleUser})
 
     const [productForInfo,setProductForInfo] = useState(null);
 
+    const [quantity,setQuantity] = useState(2);
+
     const [productReview,setProductReview] = useState({
         user: "",
         title: "",
@@ -39,6 +41,17 @@ function ProductPage({productList, currentUser, handleUser})
         camera: [{name:"Flash",code:"flash"},{name:"Video resolution",code:"videoResolution"},{name:"Touch display",code:"touchDisplay"},{name:"Shutter speed",code:"shutterSpeed"}],
     }
 
+    function handleQuantity(event)
+    {
+        setQuantity(event.target.value);
+    }
+
+    function clampQuantity(event)
+    {
+        if(event.target.value <= 1) setQuantity(1);
+        else if(event.target.value >= 10) setQuantity(10);
+    }
+    
 
     function SimilarProducts(inputList)
     {
@@ -46,13 +59,22 @@ function ProductPage({productList, currentUser, handleUser})
     }
 
 
-    function AddToCart(product)
+    function AddToCart(product,quantity)
     {
         if(loggedIn)
         {
+            let productWithQuantity = []
+            for (let i = 1; i <= quantity; i++) {
+                productWithQuantity.push(product)
+            }
+
+
+            console.log("here: " + quantity)
+            console.log(productWithQuantity);
+
             let profileWithNewProduct = {
                 ...currentUser,
-                cart: [...currentUser.cart,product],
+                cart: [...currentUser.cart,...productWithQuantity],
             };
             
             const axios = require('axios');
@@ -119,6 +141,19 @@ function ProductPage({productList, currentUser, handleUser})
         return false;
     }
 
+    function AmountInCart(product)
+    {
+        let count = 0;
+        if(loggedIn)
+        {    
+            for(let i = 0; i < currentUser.cart.length; i++)
+            {
+                if(product.id===currentUser.cart[i].id) count++;
+            }
+    
+        }
+        return count;
+    }
     const infoBox = useRef(null);
 
     function moveInfoBox(event,product)
@@ -254,7 +289,10 @@ function ProductPage({productList, currentUser, handleUser})
         if(productList) 
         {
             setProduct(productList.filter((product)=>product.id==productIdParam)[0]);
-        }        
+            
+            setQuantity(1);
+            setProductForInfo(null);
+        }
 
     },[productList,productIdParam]);
 
@@ -285,18 +323,30 @@ function ProductPage({productList, currentUser, handleUser})
                                 }
                                 </ul>
                         </div>
+                        
                         <div className="product-overview-availability-container">
+                            <div className="product-overview-quantity-selector">
+                                <h2 className="product-overview-quantity-label">Quantity:</h2>
+                                <input className="product-overview-quantity-input" type="number" min="1" max="10" value={quantity} onChange={handleQuantity} onBlur={clampQuantity}/>
+                            </div>
+                            <button className="product-page-cart-button" onClick={function(){AddToCart(product,quantity);}}>
+                                Add to cart
+                                <img className="product-page-cart-button-icon" src={require("../../img/add-to-cart-icon.png")} />
+                            </button>
                             {
+                                InCart(product) && <h3 className="product-page-in-cart-message">You have {AmountInCart(product)} {AmountInCart(product) === 1 ? "unit" : "units"}  of this product in your cart</h3>
+                            }
+                            {/* {
                                 InCart(product)
                                 ? <button className="product-page-cart-button" state="remove" onClick={function(){RemoveFromCart(product);}}>
                                     Remove from Cart
                                     <img className="product-page-cart-button-icon" src={require("../../img/remove-from-cart-icon.png")} />
                                 </button>
-                                : <button className="product-page-cart-button" onClick={function(){AddToCart(product);}}>
+                                : <button className="product-page-cart-button" onClick={function(){AddToCart(product,quantity);}}>
                                     Add to cart
                                     <img className="product-page-cart-button-icon" src={require("../../img/add-to-cart-icon.png")} />
                                 </button>
-                            }
+                            } */}
                             
                         </div>
                     </div>

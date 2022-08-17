@@ -58,6 +58,10 @@ function CartItem({product,currentUser,handleUser})
             </div>
             <div className="cart-item-name">{product.name}</div>
             <div className="cart-item-price">{product.price}</div>
+            {
+                product.count > 1 && <div className="cart-item-count">{product.count}×</div>
+
+            }
 
             <div className="remove-item-button" onClick={function(){setWarning(true)}}><img className="remove-icon" src={require("../../img/remove-from-cart-icon.png")} /></div>
             <div className="remove-item-warning" ref={removeItemWarning}>

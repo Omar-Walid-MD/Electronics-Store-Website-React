@@ -201,7 +201,24 @@
 .search-result-name
 {
     font-size: 12pt;
-    margin: 10px;
+    margin: 5px;
+}
+.search-result-rating-background
+{
+    background-image: url("../../img/review-stars.png");
+    background-size: 80px;
+    background-repeat: no-repeat;
+    height: 15px; width: 80px;
+
+}
+.search-result-rating-fill
+{
+    background-image: url("../../img/review-stars-fill.png");
+    background-size: 80px;
+    background-repeat: no-repeat;
+    height: 15px; width: 100%;
+
+    pointer-events: none;
 }
 .search-result-price
 {
