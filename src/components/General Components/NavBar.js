@@ -202,6 +202,20 @@ function NavBar({currentUser, handleUser, productList})
         return false;
     }
 
+    function AmountInCart(product)
+    {
+        let count = 0;
+        if(loggedIn)
+        {    
+            for(let i = 0; i < currentUser.cart.length; i++)
+            {
+                if(product.id===currentUser.cart[i].id) count++;
+            }
+    
+        }
+        return count;
+    }
+
     // useEffect(()=>{
     //     setSearchValue("");
     // },[])
@@ -243,10 +257,14 @@ function NavBar({currentUser, handleUser, productList})
                                             </div>
                                             <h1 className="search-result-price">{product.price}</h1>
                                         </Link>
+                                        
+                                        <button className="product-result-option-button" onClick={function(){AddToCart(product);}} disabled={AmountInCart(product) >= 10}><img className="product-result-cart-icon" src={require("../../img/add-to-cart-icon.png")} alt="remove from cart icon" /></button>
+                                
                                         {
-                                            InCart(product)
-                                            ? <div className="product-result-option-button" state="remove" onClick={function(){RemoveFromCart(product);}}><img className="product-result-cart-icon" src={require("../../img/remove-from-cart-icon.png")} alt="add to cart icon" /></div>
-                                            : <div className="product-result-option-button" onClick={function(){AddToCart(product);}}><img className="product-result-cart-icon" src={require("../../img/add-to-cart-icon.png")} alt="remove from cart icon" /></div>
+                                            InCart(product) && <div className="product-result-cart-count">
+                                                <div className="product-result-cart-count-label">{AmountInCart(product)}×</div>
+                                                <img className="product-result-cart-count-icon" src={require("../../img/cart-icon.png")} alt="add to cart icon" />
+                                            </div>
                                         }
                                 
                                     </div>

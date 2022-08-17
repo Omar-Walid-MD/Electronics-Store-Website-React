@@ -1,17 +1,55 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 function CartItem({product,currentUser,handleUser})
 {
 
     const removeItemWarning = useRef(null);
 
+    const [quantity,setQuantity] = useState(1);
+
+    function handleQuantity(event)
+    {
+        setQuantity(event.target.value);
+
+        
+
+    }
+
+    function clampQuantity(event)
+    {
+        if(event.target.value <= 1) setQuantity(1);
+        else if(event.target.value >= product.count) setQuantity(product.count);
+    }
+
     function removeItem()
     {
         setWarning(false);
 
+        let count = 0;
+        let test = ["wrong","wrong","wrong","right","right","right","wrong"]
+
+        
+
         let profileWithNewProduct = {
             ...currentUser,
-            cart: currentUser.cart.filter((item)=>item.id!==product.id),
+            cart: currentUser.cart.filter((item)=>{
+                if(item.id==product.id)
+                {
+                    if(count < quantity)
+                    {
+                        count++;
+                        return false;
+                    }
+                    else
+                    {
+                        return true
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+            }),
         };
         
         const axios = require('axios');
@@ -27,6 +65,9 @@ function CartItem({product,currentUser,handleUser})
 
         //To update state and trigger re-render
         handleUser(profileWithNewProduct);
+
+        //To reset quantity
+        setQuantity(1);
     }
 
     function setWarning(visible)
@@ -50,19 +91,24 @@ function CartItem({product,currentUser,handleUser})
 
     return (
         <div className="cart-item-container">
-            <div className="cart-item-image-container">
-                <img className="cart-item-image" src={product.img && require("../../img/products/"+product.img+".png")} />
-                <div className="cart-item-brand">
-                    <img className="cart-item-brand-icon" src={require('../../img/brands/'+product.brand + "-logo-small.png")} alt="brand icon" />
+            <div className="cart-item-info">
+                <div className="cart-item-image-container">
+                    <img className="cart-item-image" src={product.img && require("../../img/products/"+product.img+".png")} />
+                    <div className="cart-item-brand">
+                        <img className="cart-item-brand-icon" src={require('../../img/brands/'+product.brand + "-logo-small.png")} alt="brand icon" />
+                    </div>
                 </div>
+                <div className="cart-item-name">{product.name}</div>
+
+                
             </div>
-            <div className="cart-item-name">{product.name}</div>
             <div className="cart-item-price">{product.price}</div>
             {
                 product.count > 1 && <div className="cart-item-count">{product.count}×</div>
-
             }
-
+            {
+                product.count > 1 && <input className="remove-item-count-input" type="number" min="1" max={product.count} value={quantity} onChange={handleQuantity} onKeyDown={function(event){event.preventDefault()}}/>
+            }
             <div className="remove-item-button" onClick={function(){setWarning(true)}}><img className="remove-icon" src={require("../../img/remove-from-cart-icon.png")} /></div>
             <div className="remove-item-warning" ref={removeItemWarning}>
                 <h3 className="remove-item-warning-label">Are you sure you want to remove this item?</h3>

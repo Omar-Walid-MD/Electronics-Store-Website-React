@@ -59,7 +59,7 @@ function ProductPage({productList, currentUser, handleUser})
     }
 
 
-    function AddToCart(product,quantity)
+    function AddToCart(product,quantity=1)
     {
         if(loggedIn)
         {
@@ -91,6 +91,8 @@ function ProductPage({productList, currentUser, handleUser})
 
             //To update state and trigger re-render
             handleUser(profileWithNewProduct);
+
+            setQuantity(1);
         }
         else
         {
@@ -154,6 +156,7 @@ function ProductPage({productList, currentUser, handleUser})
         }
         return count;
     }
+    
     const infoBox = useRef(null);
 
     function moveInfoBox(event,product)
@@ -327,9 +330,9 @@ function ProductPage({productList, currentUser, handleUser})
                         <div className="product-overview-availability-container">
                             <div className="product-overview-quantity-selector">
                                 <h2 className="product-overview-quantity-label">Quantity:</h2>
-                                <input className="product-overview-quantity-input" type="number" min="1" max="10" value={quantity} onChange={handleQuantity} onBlur={clampQuantity}/>
+                                <input className="product-overview-quantity-input" type="number" min="1" max={10-AmountInCart(product)} value={quantity} onChange={handleQuantity} onBlur={clampQuantity}/>
                             </div>
-                            <button className="product-page-cart-button" onClick={function(){AddToCart(product,quantity);}}>
+                            <button className="product-page-cart-button" onClick={function(){AddToCart(product,quantity);}} disabled={AmountInCart(product) >= 10} >
                                 Add to cart
                                 <img className="product-page-cart-button-icon" src={require("../../img/add-to-cart-icon.png")} />
                             </button>
@@ -403,17 +406,26 @@ function ProductPage({productList, currentUser, handleUser})
                                         </div>
                                     </div>
                                     <div className="product-page-similar-product-info">
-                                        <h3 className="product-page-similar-product-name">{product.name}</h3>
+                                        <h3 className="product-page-similar-product-name">{similarProduct.name}</h3>
                                         <div className="product-page-review-rating-background">
-                                            <div className="product-page-review-rating-fill" style={{width: calculateRating(product) * 20 + "%"}}></div>
+                                            <div className="product-page-review-rating-fill" style={{width: calculateRating(similarProduct) * 20 + "%"}}></div>
                                         </div>
                                     </div>
                                     <h1 className="product-page-similar-product-price">{similarProduct.price}</h1>
                                     </Link>
                                     {
-                                        InCart(similarProduct)
-                                        ? <div className="product-page-similar-product-option-button" state="remove" onClick={function(){RemoveFromCart(similarProduct);}}><img className="product-page-similar-product-cart-icon" src={require("../../img/remove-from-cart-icon.png")} alt="add to cart icon" /></div>
-                                        : <div className="product-page-similar-product-option-button" onClick={function(){AddToCart(similarProduct);}}><img className="product-page-similar-product-cart-icon" src={require("../../img/add-to-cart-icon.png")} alt="remove from cart icon" /></div>
+                                        // InCart(similarProduct)
+                                        // ? <div className="product-page-similar-product-option-button" state="remove" onClick={function(){RemoveFromCart(similarProduct);}}><img className="product-page-similar-product-cart-icon" src={require("../../img/remove-from-cart-icon.png")} alt="add to cart icon" /></div>
+                                        // : <div className="product-page-similar-product-option-button" onClick={function(){AddToCart(similarProduct);}}><img className="product-page-similar-product-cart-icon" src={require("../../img/add-to-cart-icon.png")} alt="remove from cart icon" /></div>
+                                    }
+
+                                    <button className="product-page-similar-product-option-button" onClick={function(){AddToCart(similarProduct);}} disabled={AmountInCart(similarProduct) >= 10}><img className="product-result-cart-icon" src={require("../../img/add-to-cart-icon.png")} alt="remove from cart icon" /></button>
+                                    
+                                    {
+                                        InCart(similarProduct) && <div className="product-result-cart-count">
+                                            <div className="product-result-cart-count-label">{AmountInCart(similarProduct)}×</div>
+                                            <img className="product-result-cart-count-icon" src={require("../../img/cart-icon.png")} alt="add to cart icon" />
+                                        </div>
                                     }
 
                                 </div>

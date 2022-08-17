@@ -151,6 +151,8 @@
     padding: 20px;
     margin-bottom: 50px;
 
+    position: relative;
+
     transition: transform 0.2s ease-in-out;
 }
 .search-result-container:hover
@@ -182,7 +184,7 @@
     
     position: absolute;
     
-    bottom: -15px;
+    bottom: 0px;
     right: -15px;
 
     display: flex;
@@ -314,7 +316,9 @@
 {
   height: 60px; width: 60px;
 
+  border: 2px solid black;
   border-radius: 50%;
+  box-shadow: 0 0 5px 2px white;
 
   overflow: hidden;
 
