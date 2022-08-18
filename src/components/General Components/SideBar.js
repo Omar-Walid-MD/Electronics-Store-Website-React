@@ -52,7 +52,6 @@ function SideBar({currentUser, handleUser})
             
         }
 
-        console.log(cartList);
         return cartList;
     }
 

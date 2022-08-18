@@ -182,6 +182,29 @@
     font-size: 35pt;
     font-weight: 700;
 }
+.cart-page-cart-item-count
+{
+    height: 60px; width: 60px;
+
+    font-size: 30pt;
+    font-weight: 600;
+
+    color: white;
+    background-color: rgb(83, 102, 143);
+
+    border: 5px outset rgb(69, 87, 124);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgb(10, 10, 60), inset 0 0 10px rgb(69, 87, 124);
+
+    position: absolute;
+    top: -30px; right: -30px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center; align-items: center;
+
+    z-index: 2;
+}
 /* ---------------------------------------------------------- */
 .cart-page-remove-item-button
 {

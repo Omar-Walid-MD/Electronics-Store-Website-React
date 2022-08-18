@@ -23,7 +23,8 @@ function CartPageItem({product,currentUser,handleUser})
         headphone: [{name:"Design",code:"design"},{name:"Connection",code:"connection"},{name:"Microphone",code:"microphone"},{name:"Noise Cancelling",code:"noiseCancelling"}],
         earphone: [{name:"Design",code:"design"},{name:"Connection",code:"connection"},{name:"Microphone",code:"microphone"},{name:"Noise Cancelling",code:"noiseCancelling"}],
         camera: [{name:"Flash",code:"flash"},{name:"Video resolution",code:"videoResolution"},{name:"Touch display",code:"touchDisplay"},{name:"Shutter speed",code:"shutterSpeed"}],
-    }
+    };
+
 
     function removeItem()
     {
@@ -88,9 +89,13 @@ function CartPageItem({product,currentUser,handleUser})
                 </div>
             </div>
             
-            <div className="cart-page-cart-item-price">{product.price}</div>
 
+            <div className="cart-page-cart-item-price">{product.price}</div>
+            {
+                product.count > 1 && <div className="cart-page-cart-item-count">{product.count}×</div>
+            }
             <div className="cart-page-remove-item-button" onClick={function(){setWarning(true)}}>Remove from Cart<img className="cart-page-remove-icon" src={require("../../img/remove-from-cart-icon.png")} /></div>
+
             <div className="cart-page-remove-item-warning" ref={removeItemWarning}>
                 <h3 className="cart-page-remove-item-warning-label">Are you sure you want to remove this item?</h3>
                 <div className="cart-page-remove-item-warning-buttons">
@@ -122,6 +127,29 @@ function CartPage({currentUser,handleUser,productList})
         return total;
     }
 
+    function handleCartList(inputList)
+    {
+        let cartList = []
+        for (let i = 0; i < inputList.length; i++) {
+            const item = inputList[i];
+
+            if(cartList.some((listItem)=>listItem.id==item.id))
+            {
+                cartList.filter((listItem)=>listItem.id==item.id)[0].count++
+            }
+            else
+            {
+                cartList.push({
+                    ...item,
+                    count: 1,
+                })
+            }
+            
+        }
+
+        return cartList;
+    }
+
     return (
     <div className="cart-page">
         <header>
@@ -138,7 +166,7 @@ function CartPage({currentUser,handleUser,productList})
                 {
                     currentUser ? currentUser.cart.length !== 0 ? <div className="cart-page-shopping-cart-list">
                     {
-                        currentUser.cart.map((item,index)=>
+                        handleCartList(currentUser.cart).map((item,index)=>
                         <CartPageItem product={item} currentUser={currentUser} handleUser={handleUser} key={"Item"+index}/>
                         )
                     }

@@ -106,10 +106,26 @@ function CartItem({product,currentUser,handleUser})
             {
                 product.count > 1 && <div className="cart-item-count">{product.count}×</div>
             }
-            {
-                product.count > 1 && <input className="remove-item-count-input" type="number" min="1" max={product.count} value={quantity} onChange={handleQuantity} onKeyDown={function(event){event.preventDefault()}}/>
-            }
-            <div className="remove-item-button" onClick={function(){setWarning(true)}}><img className="remove-icon" src={require("../../img/remove-from-cart-icon.png")} /></div>
+            
+            <div className="remove-item-button-container">
+                <div className="remove-item-button" onClick={function(){setWarning(true)}}>
+                    <img className="remove-icon" src={require("../../img/remove-from-cart-icon.png")} />
+                </div>
+                {
+                    product.count > 1 &&
+                    <div className="remove-item-count-container">
+                        Count:
+                        <input className="remove-item-count-input" type="number" min="1" max={product.count} value={quantity} onChange={handleQuantity} onKeyDown={function(event){event.preventDefault()}}/>
+                        <div className="remove-item-count-all-container">
+                        {
+                            quantity != product.count && <button className="remove-item-count-all-button" onClick={function(){setQuantity(product.count)}}>All</button>
+                        }
+                        </div>
+                        
+                    </div>
+                }
+            </div>
+
             <div className="remove-item-warning" ref={removeItemWarning}>
                 <h3 className="remove-item-warning-label">Are you sure you want to remove this item?</h3>
                 <div className="remove-item-warning-buttons">
