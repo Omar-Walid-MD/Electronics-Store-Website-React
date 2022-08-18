@@ -228,6 +228,42 @@
     z-index: 2;
 }
 /* ---------------------------------------------------------- */
+
+.remove-item-button-container
+{
+  position: absolute;
+  bottom: 10px; right: 10px;
+}
+.remove-item-button
+{
+  height: 25px; width: 25px;
+  background-color: rgb(168, 0, 0);
+  
+  padding: 5px;
+  border-radius: 5px;
+
+  display: flex;
+  justify-content: center; align-items: center;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease-in-out;
+
+}
+.remove-item-button:hover
+{
+  background-color: rgb(223, 0, 0);
+  box-shadow: 0 0 10px gray;
+}
+.remove-icon
+{
+  height: 22px;
+}
+.remove-item-button-container:hover .remove-item-count-container
+{
+  opacity: 1;
+  pointer-events: all;
+}
 .remove-item-count-container
 {
   width: auto;
@@ -294,41 +330,6 @@
 .remove-item-count-all-button:hover
 {
   background-color: rgb(160, 185, 255);
-}
-.remove-item-button-container
-{
-  position: absolute;
-  bottom: 10px; right: 10px;
-}
-.remove-item-button
-{
-  height: 25px; width: 25px;
-  background-color: rgb(168, 0, 0);
-  
-  padding: 5px;
-  border-radius: 5px;
-
-  display: flex;
-  justify-content: center; align-items: center;
-
-  cursor: pointer;
-
-  transition: all 0.2s ease-in-out;
-
-}
-.remove-item-button:hover
-{
-  background-color: rgb(223, 0, 0);
-  box-shadow: 0 0 10px gray;
-}
-.remove-icon
-{
-  height: 22px;
-}
-.remove-item-button-container:hover .remove-item-count-container
-{
-  opacity: 1;
-  pointer-events: all;
 }
 /* ---------------------------------------------------------- */
 .remove-item-warning

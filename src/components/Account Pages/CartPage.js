@@ -1,12 +1,13 @@
 import SideBar from '../General Components/SideBar';
 import Footer from "../General Components/Footer";
 import NavBar from "../General Components/NavBar";
-import { useRef } from 'react';
+import Popup from "../General Components/Popup"
+import { useState, useRef } from 'react';
 import "./CartPage.css";
 
 
 
-function CartPageItem({product,currentUser,handleUser})
+function CartPageItem({product,currentUser,handleUser,popUpMessage})
 {
 
     const removeItemWarning = useRef(null);
@@ -25,14 +26,40 @@ function CartPageItem({product,currentUser,handleUser})
         camera: [{name:"Flash",code:"flash"},{name:"Video resolution",code:"videoResolution"},{name:"Touch display",code:"touchDisplay"},{name:"Shutter speed",code:"shutterSpeed"}],
     };
 
+    const [quantity,setQuantity] = useState(1);
+
+    function handleQuantity(event)
+    {
+        setQuantity(event.target.value);
+    }
+
 
     function removeItem()
     {
         setWarning(false);
 
+        let count = 0;
+
         let profileWithNewProduct = {
             ...currentUser,
-            cart: currentUser.cart.filter((item)=>item.id!==product.id),
+            cart: currentUser.cart.filter((item)=>{
+                if(item.id==product.id)
+                {
+                    if(count < quantity)
+                    {
+                        count++;
+                        return false;
+                    }
+                    else
+                    {
+                        return true
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+            }),
         };
         
         const axios = require('axios');
@@ -42,12 +69,16 @@ function CartPageItem({product,currentUser,handleUser})
         )
         .then(resp =>{
             console.log("Removed product from your cart");
+            popUpMessage("Product removed from your cart");
         }).catch(error => {
             console.log(error);
         });
 
         //To update state and trigger re-render
         handleUser(profileWithNewProduct);
+
+        //To reset quantity
+        setQuantity(1);
     }
 
     function setWarning(visible)
@@ -94,8 +125,26 @@ function CartPageItem({product,currentUser,handleUser})
             {
                 product.count > 1 && <div className="cart-page-cart-item-count">{product.count}×</div>
             }
-            <div className="cart-page-remove-item-button" onClick={function(){setWarning(true)}}>Remove from Cart<img className="cart-page-remove-icon" src={require("../../img/remove-from-cart-icon.png")} /></div>
 
+            <div className="cart-page-remove-item-button-container">
+                <div className="cart-page-remove-item-button" onClick={function(){setWarning(true)}}>
+                    Remove from Cart
+                    <img className="cart-page-remove-icon" src={require("../../img/remove-from-cart-icon.png")} />
+                </div>
+                {
+                    product.count > 1 &&
+                    <div className="cart-page-remove-item-count-container">
+                        Count:
+                        <input className="cart-page-remove-item-count-input" type="number" min="1" max={product.count} value={quantity} onChange={handleQuantity} onKeyDown={function(event){event.preventDefault()}}/>
+                        <div className="cart-page-remove-item-count-all-container">
+                        {
+                            quantity != product.count && <button className="cart-page-remove-item-count-all-button" onClick={function(){setQuantity(product.count)}}>All</button>
+                        }
+                        </div>
+                        
+                    </div>
+                }
+            </div>
             <div className="cart-page-remove-item-warning" ref={removeItemWarning}>
                 <h3 className="cart-page-remove-item-warning-label">Are you sure you want to remove this item?</h3>
                 <div className="cart-page-remove-item-warning-buttons">
@@ -112,6 +161,10 @@ function CartPageItem({product,currentUser,handleUser})
 function CartPage({currentUser,handleUser,productList})
 {
     var loggedIn = currentUser && currentUser.userId !== 0;
+
+    const [popUps,setPopups] = useState([]);
+
+    
 
     function calculateTotal()
     {
@@ -150,6 +203,22 @@ function CartPage({currentUser,handleUser,productList})
         return cartList;
     }
 
+    function popUpMessage(message)
+    {
+        setPopups([]);
+        setPopups([{id: makeId(5), message: message}]);
+    }
+
+    function makeId(length)
+    {
+        let result = "";
+        let chars = "123456789";
+        for (var i = 0; i < length; i++) {
+        result += chars[Math.floor(Math.random() * 9)];
+        }
+        return result;
+    }
+
     return (
     <div className="cart-page">
         <header>
@@ -167,7 +236,7 @@ function CartPage({currentUser,handleUser,productList})
                     currentUser ? currentUser.cart.length !== 0 ? <div className="cart-page-shopping-cart-list">
                     {
                         handleCartList(currentUser.cart).map((item,index)=>
-                        <CartPageItem product={item} currentUser={currentUser} handleUser={handleUser} key={"Item"+index}/>
+                        <CartPageItem product={item} currentUser={currentUser} handleUser={handleUser} popUpMessage={popUpMessage} key={"Item"+index}/>
                         )
                     }
                     </div>
@@ -185,6 +254,15 @@ function CartPage({currentUser,handleUser,productList})
                     <button className="cart-page-checkout-button" disabled={!currentUser || currentUser && currentUser.cart.length===0}>Checkout</button>
                 </div>
             </div>
+        </div>
+
+        <div className="popups-container">
+        {
+            
+            popUps.map((popup)=>(
+                <Popup popup={popup} key={"popup-"+popup.id}/>
+            ))
+        }
         </div>
 
         <Footer />

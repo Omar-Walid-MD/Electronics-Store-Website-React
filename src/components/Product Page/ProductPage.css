@@ -452,5 +452,5 @@
 {
     height: 100px;
 
-    animation: loading-animation 2s infinite;
+    animation: loading-animation 1s infinite linear;
 }

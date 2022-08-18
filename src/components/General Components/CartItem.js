@@ -10,9 +10,6 @@ function CartItem({product,currentUser,handleUser})
     function handleQuantity(event)
     {
         setQuantity(event.target.value);
-
-        
-
     }
 
     function clampQuantity(event)
@@ -26,9 +23,6 @@ function CartItem({product,currentUser,handleUser})
         setWarning(false);
 
         let count = 0;
-        let test = ["wrong","wrong","wrong","right","right","right","wrong"]
-
-        
 
         let profileWithNewProduct = {
             ...currentUser,
