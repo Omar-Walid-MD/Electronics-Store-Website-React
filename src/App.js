@@ -19,6 +19,8 @@ function App() {
 
     const [productList,setProductList] = useState(null);
 
+    const [branchList,setBranchList] = useState(null);
+
     function handleCurrentUser()
     {
       fetch('http://localhost:8000/currentUser/0')
@@ -70,8 +72,19 @@ function App() {
         setProductList(data);
       })
 
+      fetch('http://localhost:8000/branches')
+      .then(res => {
+        return res.json()
+      })
+      .then((data)=>{
+      //   console.log(data);
+        setBranchList(data);
+      })
+      
+
       
     },[]);
+
 
     
 
@@ -83,9 +96,9 @@ function App() {
       
       <Routes>
         {/* Main Pages */}
-        <Route path="/" element={<HomePage currentUser={currentUser} handleUser={setCurrentUser} productList={productList} />} />
+        <Route path="/" element={<HomePage currentUser={currentUser} handleUser={setCurrentUser} productList={productList} branchList={branchList} />} />
         <Route path="/shop" element={<ShoppingPage currentUser={currentUser} handleUser={setCurrentUser} productList={productList} />}/>
-        <Route path="/product/:id" element={<ProductPage currentUser={currentUser} handleUser={setCurrentUser} productList={productList} />} />
+        <Route path="/product/:id" element={<ProductPage currentUser={currentUser} handleUser={setCurrentUser} productList={productList} branchList={branchList} />} />
         {/* Account Pages */}
         <Route path="/login" element={<LoginPage handleUser={setCurrentUser} userList={userList} />} />
         <Route path="/register" element={<RegisterPage handleUser={setCurrentUser} userList={userList} handleUserList={setUserList} />} />

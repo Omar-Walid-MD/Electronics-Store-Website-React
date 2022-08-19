@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useParams } from 'react-router-dom';
 import "./ProductPage.css";
 
-function ProductPage({productList, currentUser, handleUser})
+function ProductPage({productList, currentUser, handleUser, branchList})
 {
     var loggedIn = currentUser && currentUser.userId !== 0;
 
@@ -67,10 +67,6 @@ function ProductPage({productList, currentUser, handleUser})
             for (let i = 1; i <= quantity; i++) {
                 productWithQuantity.push(product)
             }
-
-
-            console.log("here: " + quantity)
-            console.log(productWithQuantity);
 
             let profileWithNewProduct = {
                 ...currentUser,
@@ -224,12 +220,8 @@ function ProductPage({productList, currentUser, handleUser})
         }).catch(error => {
             console.log(error);
         });
-        // })
-
-       
 
     }
-
 
     function handleProductForInfo(event,product)
     {
@@ -263,15 +255,97 @@ function ProductPage({productList, currentUser, handleUser})
                 rating += review.rating;
             }
             rating = rating / product.productReviews.length;
-            console.log(product.productReviews.length)
         }
         return rating;
+    }
+
+    function setAvailabilityWindow(enabled)
+    {
+        document.querySelector(".product-availability-window-checkbox").checked = enabled;
     }
 
     function popUpMessage(message)
     {
         setPopups([]);
         setPopups([{id: makeId(5), message: message}]);
+    }
+
+    // const branchPointers = [
+    //     {
+    //         top: 100,
+    //         left: 335,
+
+    //         name: "Main Branch",
+    //         desc: "This is our first and main branch with the largest building. It's located next to the city's university.",
+    //         img: "branch-1.png",
+
+    //     },
+    //     {
+    //         top: 320,
+    //         left: 425,
+
+    //         name: "East Branch",
+    //         desc: "This branch is located on Street 49. As our second grand opening, this branch is as likely as the main branch to have the variety and quailty of products our customers desire.",
+    //         img: "branch-2.png",
+
+    //     },
+    //     {
+    //         top: 153,
+    //         left: 127,
+
+    //         name: "West Branch",
+    //         desc: "You can find this branch at the intersection of the King Road and Green Lane.",
+    //         img: "branch-3.png",
+
+    //     },
+    //     {
+    //         top: 394,
+    //         left: 195,
+
+    //         name: "South Branch",
+    //         desc: "This is the south branch, located at the northeast corner of the schools block. In this branch, you are likely to find our collection of smaller basic products.",
+    //         img: "branch-4.png",
+
+    //     },
+    // ];
+
+    const [currentBranch,setCurrentBranch] = useState();
+
+    const pointerGroup = useRef(null);
+    const infoContainer = useRef(null);
+
+    function pointerPosition(input,dimension)
+    {
+        let map = document.querySelector(".product-availability-window-branches-map");
+        if(map)
+        { 
+            let x = 0;
+            if(dimension==="y")
+            {
+                x = parseInt(getComputedStyle(map).height.slice(0,-2));
+            }
+            else if(dimension==="x")
+            {
+                x = parseInt(getComputedStyle(map).width.slice(0,-2));
+            }
+            return input * x/100;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+
+    function selectBranch(index)
+    {
+        setCurrentBranch(branchList[index]);
+    }
+
+    function selectBranchFromList(index)
+    {   
+        setCurrentBranch(branchList[index]);
+        pointerGroup.current.children[index].querySelector(".product-availability-window-branches-radio").checked = true;
     }
 
     function makeId(length)
@@ -299,6 +373,13 @@ function ProductPage({productList, currentUser, handleUser})
 
     },[productList,productIdParam]);
 
+    useEffect(()=>{
+        if(branchList)
+        {
+            setCurrentBranch(branchList[0]);
+        }    
+    },[branchList]);
+
     return (
         <div className="product-page">
             <header>
@@ -310,7 +391,7 @@ function ProductPage({productList, currentUser, handleUser})
 
             {
                 product ?
-                <div className="product-page-container">
+                <div className="product-page-container" onKeyDown={function(event){if(event.key === "Escape")setAvailabilityWindow(false);}}>
                     <div className="product-overview-container">
                         <div className="product-overview-image-container" onMouseOver={moveInfoBox}>
                             <img className="product-overview-image" src={product.img && require("../../img/products/"+product.img+".png")} />
@@ -327,7 +408,11 @@ function ProductPage({productList, currentUser, handleUser})
                                 </ul>
                         </div>
                         
-                        <div className="product-overview-availability-container">
+                        <div className="product-overview-options-container">
+                            <button className="product-overview-availability-button product-page-cart-button" onClick={function(){setAvailabilityWindow(true);}}>
+                                Check availability
+                                <img className="product-overview-availability-shop-icon" src={require("../../img/shop-icon.png")} />
+                            </button>
                             <div className="product-overview-quantity-selector">
                                 <h2 className="product-overview-quantity-label">Quantity:</h2>
                                 <input className="product-overview-quantity-input" type="number" min="1" max={10-AmountInCart(product)} value={quantity} onChange={handleQuantity} onBlur={clampQuantity}/>
@@ -463,6 +548,60 @@ function ProductPage({productList, currentUser, handleUser})
                     <img className="loading" src={require("../../img/loading.png")} />
                 </div>
             }
+            <input className="product-availability-window-checkbox" type="checkbox" />
+            <div className="product-availability-window-container">
+                <div className="product-availability-window-overlay" onClick={function(){setAvailabilityWindow(false);}}></div>
+                <div className="product-availability-window">
+                    <div className="product-availability-window-branch-list">
+                        {
+                            product && branchList && branchList.map((branch)=>
+
+                            <div className="product-availability-window-branch-container" key={"av-window-branch-"+branch.id} onClick={function(event){selectBranchFromList(branch.id)}}>
+                                <div className="product-availability-window-branch-info">
+                                    <h2>{branch.name}</h2>
+                                    <h3 className="product-availability-window-branch-address">{branch.address}</h3>
+                                </div>
+                                <h2 className="product-availability-window-branch-state branch-state" state={product.availability[branch.id]}>{product.availability[branch.id]}</h2>
+                            </div>
+                            
+                            )
+                        }
+                        
+                    </div>
+                    <div className="product-availability-window-map-container">
+                        {
+                            currentBranch &&
+
+                            <div className="product-availability-window-current-branch-info">
+                                <div className="product-availability-window-current-branch-details">
+                                    <h2>{currentBranch.name}</h2>
+                                    <h3 className="product-availability-window-branch-address">{currentBranch.address}</h3>
+                                </div>
+                                <img className="product-availability-window-branch-image" src={require("../../img/branches/"+currentBranch.img)} alt="branch" />
+                            </div>
+
+                        }
+                        <div className="product-availability-window-branches-map">
+                            <img className="product-availability-window-branches-map-image" src={require("../../img/branches/city-map.png")} alt="map"/>
+                            <div className="product-availability-window-branches-map-pointer-group" ref={pointerGroup}>
+                                {
+                                    branchList && branchList.map((pointer,index)=>(
+                                        
+                                        <label className="product-availability-window-branches-map-pointer" key={index} htmlFor={"branch-" + index} style={{top: pointerPosition(pointer.y,"y") + "px", left: pointerPosition(pointer.x,"x") + "px"}}>
+                                            <input className="product-availability-window-branches-radio" type="radio" name="branches" id={"branch-" + index} onClick={function(){selectBranch(index)}} />
+                                            <img className="product-availability-window-branches-map-pointer-image" src={require("../../img/pointer.png")} alt="pointer" />
+
+                                                <div className="product-availability-window-branches-map-pointer-state branch-state" state={product.availability[pointer.id]}>{product.availability[pointer.id]}</div>
+                                            
+                                        </label>
+                                    ))
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <button className="product-availability-window-close-button" onClick={function(){setAvailabilityWindow(false);}} >×</button>
+                </div>
+            </div>
            
             <Footer />
         </div>

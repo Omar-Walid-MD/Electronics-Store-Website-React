@@ -8,7 +8,7 @@ import SideBar from '../General Components/SideBar';
 import Footer from "../General Components/Footer";
 import NavBar from "../General Components/NavBar";
 
-function HomePage({currentUser, handleUser, productList})
+function HomePage({currentUser, handleUser, productList, branchList})
 {
     
     var loggedIn = currentUser && currentUser.userId !== 0;
@@ -27,7 +27,7 @@ function HomePage({currentUser, handleUser, productList})
             <OfferDisplay />
             <CategorySection />
             <BrandSection />
-            <BranchSection />
+            <BranchSection branchList={branchList}/>
         </div>
 
         <Footer />
