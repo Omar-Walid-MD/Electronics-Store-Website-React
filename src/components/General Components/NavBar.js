@@ -294,7 +294,7 @@ function NavBar({currentUser, handleUser, productList})
                                 <div className="profile-dropdown-container">
                                     <div className="profile-overview-info-container">
                                         <div className="profile-picture-container">
-                                            <img src={currentUser.image} />
+                                            <img src={currentUser.image ? currentUser.image : require("../../img/profile-icon.png")}/>
                                         </div>
                                         <h2>{currentUser.firstName + " " + currentUser.lastName}</h2>
                                         <h3>{currentUser.email}</h3>

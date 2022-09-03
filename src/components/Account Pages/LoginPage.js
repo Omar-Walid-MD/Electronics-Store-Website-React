@@ -123,8 +123,8 @@ function LoginPage({handleUser,userList})
                         
                     </form>
                 </div>
-                <div className="home-button-container">
-                    <Link to={"/"} className="home-button">Back to Home</Link>
+                <div className="back-button-container">
+                    <Link to={prevPath} className="home-button">Back</Link>
                 </div>
             </div>
             

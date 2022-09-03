@@ -168,15 +168,17 @@ function EditProfilePage({handleUser})
                                     <img className="edit-profile-picture" src={userEdited.image ? userEdited.image : require("../../img/profile-icon.png")}/>
                                     <div className="edit-profile-picture-overlay">
                                         <div className="edit-profile-picture-overlay-options">
-
                                             <label htmlFor="upload-profile-picture" className="edit-profile-picture-overlay-icon-container">
                                                 <img className="edit-profile-picture-overlay-icon" src={require("../../img/edit.png")} />
                                             </label>
                                             <p className="edit-profile-picture-overlay-icon-label">Change Profile Picture</p>
+                                            {
+                                                userEdited.image !== "" &&
 
-                                            <div className="edit-profile-picture-overlay-icon-container" onClick={function(){setUserEdited({...userEdited,image: ""})}}>
-                                                <img className="edit-profile-picture-overlay-icon" src={require("../../img/x.png")} />
-                                            </div>
+                                                <div className="edit-profile-picture-overlay-icon-container" onClick={function(){setUserEdited({...userEdited,image: ""})}}>
+                                                    <img className="edit-profile-picture-overlay-icon" src={require("../../img/x.png")} />
+                                                </div>
+                                            }
                                             <p className="edit-profile-picture-overlay-icon-label">Remove Profile Picture</p> 
                                         </div>
                                     </div>

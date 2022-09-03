@@ -10,6 +10,7 @@ import ShoppingPage from './components/Shopping Page/ShoppingPage';
 import EditProfilePage from './components/Account Pages/EditProfilePage';
 import ProductPage from './components/Product Page/ProductPage';
 import CartPage from './components/Account Pages/CartPage';
+import CheckoutPage from "./components/Account Pages/CheckoutPage";
 
 function App() {
 
@@ -99,6 +100,7 @@ function App() {
         <Route path="/" element={<HomePage currentUser={currentUser} handleUser={setCurrentUser} productList={productList} branchList={branchList} />} />
         <Route path="/shop" element={<ShoppingPage currentUser={currentUser} handleUser={setCurrentUser} productList={productList} />}/>
         <Route path="/product/:id" element={<ProductPage currentUser={currentUser} handleUser={setCurrentUser} productList={productList} branchList={branchList} />} />
+        <Route path="/checkout" element={<CheckoutPage currentUser={currentUser} />} />
         {/* Account Pages */}
         <Route path="/login" element={<LoginPage handleUser={setCurrentUser} userList={userList} />} />
         <Route path="/register" element={<RegisterPage handleUser={setCurrentUser} userList={userList} handleUserList={setUserList} />} />

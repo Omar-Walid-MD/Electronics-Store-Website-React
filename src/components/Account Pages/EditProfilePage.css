@@ -112,19 +112,22 @@
 }
 .edit-profile-picture-overlay-options
 {
-    width: 65px;
+    width: auto;
     position: absolute;
     bottom: 5px; right: 5px;
 
     display: flex;
     flex-direction: row;
     justify-content: space-between; align-items: center;
+
 }
 .edit-profile-picture-overlay-icon-container
 {
     height: 30px; width: 30px;
 
     background-color: white;
+
+    margin: 0 2px;
 
     border-radius: 5px;
 
@@ -140,10 +143,14 @@
 }
 .edit-profile-picture-overlay-icon-label
 {
+    width: 80px;
+
     font-size: 15pt;
+    text-align: center;
+
     position: absolute;
     
-    transform: translate(-57.5%,-80%);
+    bottom: 25px; right: 30px;
 
     pointer-events: none;
     opacity: 0;
