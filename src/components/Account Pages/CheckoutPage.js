@@ -122,7 +122,7 @@ function CheckOutPage({currentUser})
                                         </div>
                                         <div className="checkout-form-section">
                                             <h2 className="checkout-form-section-label">Security Code:</h2>
-                                            <input className="checkout-form-input" type="text" name="creditCardCode" value={info.creditCardCode} onChange={function(event){handleInfo(event)}} />
+                                            <input className="checkout-form-input" type="password" name="creditCardCode" value={info.creditCardCode} onChange={function(event){handleInfo(event)}} />
                                         </div>
                                         <div className="checkout-form-section">
                                             <h2 className="checkout-form-section-label">Expiration Date:</h2>
@@ -148,7 +148,7 @@ function CheckOutPage({currentUser})
                                     <div className="checkout-page-cart-overview-container">
                                         <h2>Cart Overview</h2>
                                         <div className="border-line"></div>
-                                        <table className="checkout-page-cart-overview-list">
+                                        <div className="checkout-page-cart-overview-list">
                                             <tbody>
                                                 {
                                                     currentUser && handleCartList(currentUser.cart).map((item)=>
@@ -162,7 +162,7 @@ function CheckOutPage({currentUser})
                                                     )
                                                 }
                                             </tbody>
-                                        </table>
+                                        </div>
                                         <br></br>
                                         <div className="border-line"></div>
                                         <div className="checkout-page-cart-overview-total">

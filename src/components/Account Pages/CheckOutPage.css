@@ -128,7 +128,9 @@
 }
 .checkout-page-cart-overview-list
 {
-    width: auto;
+    max-height: 400px; width: auto;
+
+    overflow-y: scroll;
 
 
 }
@@ -199,6 +201,8 @@
     border-radius: 10px;
 
     transition: all 0.2s ease-in-out;
+
+    cursor: pointer;
 }
 
 .checkout-page-form-submit:hover

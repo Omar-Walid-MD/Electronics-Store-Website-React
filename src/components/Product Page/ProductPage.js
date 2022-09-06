@@ -86,6 +86,7 @@ function ProductPage({productList, currentUser, handleUser, branchList})
             });
 
             //To update state and trigger re-render
+            localStorage.setItem('currentUser', JSON.stringify(profileWithNewProduct));
             handleUser(profileWithNewProduct);
 
             setQuantity(1);
@@ -118,6 +119,7 @@ function ProductPage({productList, currentUser, handleUser, branchList})
             });
 
             //To update state and trigger re-render
+            localStorage.setItem('currentUser', JSON.stringify(profileWithNewProduct));
             handleUser(profileWithNewProduct);
         }
         else
@@ -197,16 +199,6 @@ function ProductPage({productList, currentUser, handleUser, branchList})
 
         let updatedProductWithReview = {...product,productReviews: [...product.productReviews, review]};
 
-        // fetch('http://localhost:8000/reviews/'+product.id)
-        // .then(res => {
-        // return res.json()
-        // })
-        // .then((data)=>{
-        //     console.log(data);
-        //     updatedProductWithReview = {
-        //         ...data,
-        //         productReviews: [...data.productReviews,review]
-        //     }
     
         const axios = require('axios');
 
@@ -270,44 +262,6 @@ function ProductPage({productList, currentUser, handleUser, branchList})
         setPopups([{id: makeId(5), message: message}]);
     }
 
-    // const branchPointers = [
-    //     {
-    //         top: 100,
-    //         left: 335,
-
-    //         name: "Main Branch",
-    //         desc: "This is our first and main branch with the largest building. It's located next to the city's university.",
-    //         img: "branch-1.png",
-
-    //     },
-    //     {
-    //         top: 320,
-    //         left: 425,
-
-    //         name: "East Branch",
-    //         desc: "This branch is located on Street 49. As our second grand opening, this branch is as likely as the main branch to have the variety and quailty of products our customers desire.",
-    //         img: "branch-2.png",
-
-    //     },
-    //     {
-    //         top: 153,
-    //         left: 127,
-
-    //         name: "West Branch",
-    //         desc: "You can find this branch at the intersection of the King Road and Green Lane.",
-    //         img: "branch-3.png",
-
-    //     },
-    //     {
-    //         top: 394,
-    //         left: 195,
-
-    //         name: "South Branch",
-    //         desc: "This is the south branch, located at the northeast corner of the schools block. In this branch, you are likely to find our collection of smaller basic products.",
-    //         img: "branch-4.png",
-
-    //     },
-    // ];
 
     const [currentBranch,setCurrentBranch] = useState();
 
@@ -585,7 +539,7 @@ function ProductPage({productList, currentUser, handleUser, branchList})
                             <img className="product-availability-window-branches-map-image" src={require("../../img/branches/city-map.png")} alt="map"/>
                             <div className="product-availability-window-branches-map-pointer-group" ref={pointerGroup}>
                                 {
-                                    branchList && branchList.map((pointer,index)=>(
+                                    product && branchList && branchList.map((pointer,index)=>(
                                         
                                         <label className="product-availability-window-branches-map-pointer" key={index} htmlFor={"branch-" + index} style={{top: pointerPosition(pointer.y,"y") + "px", left: pointerPosition(pointer.x,"x") + "px"}}>
                                             <input className="product-availability-window-branches-radio" type="radio" name="branches" id={"branch-" + index} onClick={function(){selectBranch(index)}} />

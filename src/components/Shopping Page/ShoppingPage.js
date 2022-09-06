@@ -277,6 +277,7 @@ function ShoppingPage({productList, currentUser, handleUser})
             });
 
             //To update state and trigger re-render
+            localStorage.setItem('currentUser', JSON.stringify(profileWithNewProduct));
             handleUser(profileWithNewProduct);
         }
         else

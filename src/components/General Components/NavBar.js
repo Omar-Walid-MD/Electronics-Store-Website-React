@@ -91,17 +91,7 @@ function NavBar({currentUser, handleUser, productList})
 
         localStorage.setItem('currentUser', JSON.stringify(null));
 
-        // const axios = require('axios');
 
-        // axios.put('http://localhost:8000/currentUser/0',
-        //     nullUser
-        // )
-        // .then(resp =>{
-        //     //console.log(resp.data);
-        //     window.location.reload();
-        // }).catch(error => {
-        //     console.log(error);
-        // });
     }
 
     function manageMenus(event)
@@ -153,6 +143,7 @@ function NavBar({currentUser, handleUser, productList})
             });
 
             //To update state and trigger re-render
+            localStorage.setItem('currentUser', JSON.stringify(profileWithNewProduct));
             handleUser(profileWithNewProduct);
         }
         else

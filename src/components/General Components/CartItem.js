@@ -58,6 +58,7 @@ function CartItem({product,currentUser,handleUser})
         });
 
         //To update state and trigger re-render
+        localStorage.setItem('currentUser', JSON.stringify(profileWithNewProduct));
         handleUser(profileWithNewProduct);
 
         //To reset quantity
