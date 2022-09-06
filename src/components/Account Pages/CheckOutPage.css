@@ -131,8 +131,6 @@
     max-height: 400px; width: auto;
 
     overflow-y: scroll;
-
-
 }
 .checkout-page-cart-overview-list-item-row
 {
@@ -184,6 +182,22 @@
     flex-direction: row;
     justify-content: space-between; align-items: center;
 
+
+}
+@keyframes warning-animation {
+    0% {transform: translateX(-10px);}
+    50% {transform: translateX(10px);}
+    100% {transform: translateX(0);}
+}
+.checkout-form-password-incorrect-warning
+{
+    font-size: 15pt;
+    font-weight: 500;
+    color: red;
+
+    margin: 10px 0 0 15px;
+
+    animation: warning-animation 1s ease-in-out;
 
 }
 

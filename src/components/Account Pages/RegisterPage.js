@@ -137,7 +137,7 @@ function RegisterPage({handleUser,userList,handleUserList})
                         
                         {
                             submitted==="emailFailed" ? <div className="register-form-warning">Email already registered</div> :
-                            submitted==="passwordFailed" && <div className="register-form-warning">Passwords does not match</div>
+                            submitted==="passwordFailed" && <div className="register-form-warning">Passwords do not match</div>
                             
                         }
                         <div className="register-options-container">

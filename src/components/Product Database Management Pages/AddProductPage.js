@@ -118,15 +118,6 @@ function AddProductPage()
             console.log("New Product Added.");
             navigate("/products");
         })
-
-        fetch('http://localhost:8000/reviews',{
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                id: newId,
-                productReviews: []
-            })
-        }).then(()=>{console.log("New Review list Added.")})
             
             return
 

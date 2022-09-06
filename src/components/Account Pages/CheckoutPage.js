@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router";
 import "./CheckOutPage.css"
 
-function CheckOutPage({currentUser})
+function CheckOutPage({currentUser,handleUser})
 {
+    const location = useLocation();
+    const { prevPath } = location.state;
+
+    const navigate = useNavigate();
 
     const [info,setInfo] = useState({
         firstName: "",
@@ -16,6 +21,8 @@ function CheckOutPage({currentUser})
         password: "",
         confirmPassword: ""
     })
+
+    const [submitted,setSubmitted] = useState("none");
 
     const [requiredFields,setRequiredFields] = useState(document.querySelectorAll(".checkout-form-input"));
 
@@ -74,6 +81,60 @@ function CheckOutPage({currentUser})
         return false;
     }
 
+    function performCheckout(e)
+    {
+        e.preventDefault();
+
+        if(info.password!==currentUser.password)
+        {
+            setSubmitted("passwordFailed")
+        }
+        else
+        {
+            if(info.password!==info.confirmPassword)
+            {
+                setSubmitted("confirmPasswordFailed")
+            }
+            else
+            {
+                const { password, confirmPassword, ...purchaseInfo } = info;
+
+                purchaseInfo["total"] = calculateTotal();
+                purchaseInfo["purchasedProducts"] = handleCartList(currentUser.cart);
+
+                let profileWithNewProduct = {
+                    ...currentUser,
+                    cart: [],
+                };
+                
+                fetch('http://localhost:8000/purchases',{
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({purchaseInfo})
+                }).then(()=>{
+                    console.log("New Purchase Added.");
+
+                })
+
+                localStorage.setItem('currentUser', JSON.stringify(profileWithNewProduct));
+                handleUser(profileWithNewProduct);
+
+                navigate(prevPath);
+                return;
+
+            }
+        }
+    }
+
+    function makeId(length) {
+        let result = "";
+        let chars = "123456789";
+        for (var i = 0; i < length; i++) {
+        result += chars[Math.floor(Math.random() * 9)];
+        }
+        return result;
+      }
+
     useEffect(()=>{
         setRequiredFields(document.querySelectorAll(".checkout-form-input"));
     },[info])
@@ -83,7 +144,7 @@ function CheckOutPage({currentUser})
             <div className="checkout-page-container">
                 <div className="checkout-form-container">
                     <h1 className="checkout-form-title">Checkout</h1>
-                        <form className="checkout-form" >
+                        <form className="checkout-form" onSubmit={performCheckout} >
 
                             <div className="checkout-form-wrapper">
                                 <div className="checkout-form-info-column">
@@ -143,6 +204,15 @@ function CheckOutPage({currentUser})
                                         </div>
                                         
                                     </div>
+
+                                    {
+                                        submitted==="passwordFailed" && <div className="checkout-form-password-incorrect-warning" key={"password-incorrect-warning-"+makeId(10)}>Password Incorrect</div>  
+                                    }
+
+                                    {
+                                        submitted==="confirmPasswordFailed" && <div className="checkout-form-password-incorrect-warning" key={"password-mismatch-warning-"+makeId(10)}>Passwords do not match</div>  
+                                    }
+
                                 </div>
                                 <div className="checkout-page-cart-overview-column">
                                     <div className="checkout-page-cart-overview-container">
@@ -172,6 +242,7 @@ function CheckOutPage({currentUser})
                                     </div>
                                 </div>
                             </div>
+                            
                             
                             <input className="checkout-page-form-submit" type="submit" value="Confirm Payment" disabled={InputEmpty(requiredFields)}/>
                             

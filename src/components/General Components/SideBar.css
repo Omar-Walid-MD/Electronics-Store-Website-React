@@ -442,7 +442,7 @@
 {
   background-color: darkblue;
 }
-.checkout-button:disabled
+.checkout-button[disabled]
 {
   pointer-events: none;
   background-color: dimgray;

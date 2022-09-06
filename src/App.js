@@ -72,7 +72,7 @@ function App()
       <Route path="/" element={<HomePage currentUser={currentUser} handleUser={setCurrentUser} productList={productList} branchList={branchList} />} />
       <Route path="/shop" element={<ShoppingPage currentUser={currentUser} handleUser={setCurrentUser} productList={productList} />}/>
       <Route path="/product/:id" element={<ProductPage currentUser={currentUser} handleUser={setCurrentUser} productList={productList} branchList={branchList} />} />
-      <Route path="/checkout" element={<CheckoutPage currentUser={currentUser} />} />
+      <Route path="/checkout" element={<CheckoutPage currentUser={currentUser} handleUser={setCurrentUser} />} />
       {/* Account Pages */}
       <Route path="/login" element={<LoginPage handleUser={setCurrentUser} userList={userList} />} />
       <Route path="/register" element={<RegisterPage handleUser={setCurrentUser} userList={userList} handleUserList={setUserList} />} />

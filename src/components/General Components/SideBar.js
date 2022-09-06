@@ -1,10 +1,11 @@
 import {useRef} from "react";
-import {Link} from "react-router-dom";
+import { Link, useLocation} from "react-router-dom";
 import CartItem from "./CartItem";
 import "./SideBar.css";
 
 function SideBar({currentUser, handleUser})
 {
+    const location = useLocation();
     
     function calculateTotal()
     {
@@ -81,7 +82,7 @@ function SideBar({currentUser, handleUser})
                         <h2>Total:</h2><h2>{calculateTotal()}</h2>
                     </div>
             
-                    <Link to={"/checkout"} className="checkout-button" disabled={currentUser.cart && currentUser.cart.length===0}>Checkout</Link>
+                    <Link to={"/checkout"} state={{prevPath: location.pathname}} className="checkout-button" disabled={currentUser.cart && currentUser.cart.length===0}>Checkout</Link>
                     
                 </div>
                 <label htmlFor="cart-toggle" className="cart-button-container">
