@@ -44,34 +44,11 @@ function LoginPage({handleUser,userList})
             {
                 if(userList[i].password===passwordValue)
                 {
-                    let userId = userList[i].id;
-                    let loggedUser = {id: 0, userId: userId};
                     console.log("Successfully logged in");
                     setSubmitted("success");
-
-                    const axios = require('axios');
-
-                    axios.put('http://localhost:8000/currentUser/0',
-                        loggedUser
-                    )
-                    .then(resp =>{
-                        console.log(resp.data);
-                    }).catch(error => {
-                        console.log(error);
-                    });
-
-                    fetch('http://localhost:8000/users/'+userId)
-                    .then(res => {
-                        return res.json()
-                    })
-                    .then((data)=>{
-                        console.log("Current user: ");
-                        console.log(data);
-                    handleUser(data);
-                    
-                    })
-
-                    handleUser(loggedUser);
+                
+                    localStorage.setItem('currentUser', JSON.stringify(userList[i]));
+                    handleUser(userList[i]);
                     navigate(prevPath);
                     return;
                 }

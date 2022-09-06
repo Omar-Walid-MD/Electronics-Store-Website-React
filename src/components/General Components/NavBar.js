@@ -89,17 +89,19 @@ function NavBar({currentUser, handleUser, productList})
         let nullUser = {id: 0, userId: 0};
         handleUser(nullUser);
 
-        const axios = require('axios');
+        localStorage.setItem('currentUser', JSON.stringify(null));
 
-        axios.put('http://localhost:8000/currentUser/0',
-            nullUser
-        )
-        .then(resp =>{
-            //console.log(resp.data);
-            window.location.reload();
-        }).catch(error => {
-            console.log(error);
-        });
+        // const axios = require('axios');
+
+        // axios.put('http://localhost:8000/currentUser/0',
+        //     nullUser
+        // )
+        // .then(resp =>{
+        //     //console.log(resp.data);
+        //     window.location.reload();
+        // }).catch(error => {
+        //     console.log(error);
+        // });
     }
 
     function manageMenus(event)
