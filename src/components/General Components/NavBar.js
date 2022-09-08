@@ -295,8 +295,9 @@ function NavBar({currentUser, handleUser, productList})
                                     <div className="border-line"></div>
 
                                     <div className="profile-overview-options-container">
-                                        <Link className="nav-bar-link" to={"/edit-profile"} state={{currentUser: currentUser, prevPath: location.pathname}} >Edit Profile</Link>
-                                        <Link className="nav-bar-link" to={"/cart"} state={{currentUser: currentUser, prevPath: location.pathname}} >My Cart</Link>
+                                        <Link className="nav-bar-link" to={"/edit-profile"} state={{currentUser: currentUser, prevPath: location.pathname}}>Edit Profile</Link>
+                                        <Link className="nav-bar-link" to={"/cart"} state={{currentUser: currentUser, prevPath: location.pathname}}>My Cart</Link>
+                                        <Link className="nav-bar-link" to={"/purchase-history"} state={{currentUser: currentUser, prevPath: location.pathname}}>Purchase History</Link>
                                     </div>
                                     <div className="border-line"></div>
 

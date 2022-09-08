@@ -407,7 +407,17 @@
 .border-line
 {
   width: 100%; height: 2px;
-  background-color: white;
+
+  margin: 5px 0;
+
+  display: flex;
+
+  border-bottom: 2px solid white;
+}
+.border-line[color="black"]
+{
+  border-bottom: 2px solid black;
+
 }
 /* ---------------------------------------------------------- */
 .menu-container

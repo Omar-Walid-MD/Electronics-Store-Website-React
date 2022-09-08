@@ -11,6 +11,7 @@ import EditProfilePage from './components/Account Pages/EditProfilePage';
 import ProductPage from './components/Product Page/ProductPage';
 import CartPage from './components/Account Pages/CartPage';
 import CheckoutPage from "./components/Account Pages/CheckoutPage";
+import PurchaseHistory from './components/Account Pages/PurchaseHistoryPage';
 
 function App()
 {
@@ -20,6 +21,8 @@ function App()
   const [currentUser,setCurrentUser] = useState(null);
 
   const [productList,setProductList] = useState(null);
+
+  const [purchaseList,setPurchaseList] = useState(null);
 
   const [branchList,setBranchList] = useState(null);
 
@@ -53,6 +56,15 @@ function App()
     //   console.log(data);
       setBranchList(data);
     })
+
+    fetch('http://localhost:8000/purchases')
+    .then(res => {
+      return res.json()
+    })
+    .then((data)=>{
+    //   console.log(data);
+      setPurchaseList(data);
+    })
     
 
     
@@ -78,6 +90,7 @@ function App()
       <Route path="/register" element={<RegisterPage handleUser={setCurrentUser} userList={userList} handleUserList={setUserList} />} />
       <Route path="/edit-profile" element={<EditProfilePage handleUser={setCurrentUser} />} />
       <Route path="/cart" element={<CartPage currentUser={currentUser} handleUser={setCurrentUser} productList={productList} />} />
+      <Route path="/purchase-history" element={<PurchaseHistory currentUser={currentUser} handleUser={setCurrentUser} purchaseList={purchaseList} productList={productList} />} />
 
       {/* Product Database Pages */}
       <Route path="/products" element={<ProductListPage />} />

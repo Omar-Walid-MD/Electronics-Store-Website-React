@@ -97,20 +97,27 @@ function CheckOutPage({currentUser,handleUser})
             }
             else
             {
-                const { password, confirmPassword, ...purchaseInfo } = info;
+                let { password, confirmPassword, ...purchaseInfo } = info;
 
-                purchaseInfo["total"] = calculateTotal();
-                purchaseInfo["purchasedProducts"] = handleCartList(currentUser.cart);
+                purchaseInfo = {
+                    ...purchaseInfo,
+                    id: "purchase-"+makeId(10),
+                    total: calculateTotal(),
+                    purchasedProducts: handleCartList(currentUser.cart),
+                    purchaseDate: Date()
+                }
+
 
                 let profileWithNewProduct = {
                     ...currentUser,
                     cart: [],
+                    purchases: [...currentUser.purchases, purchaseInfo.id]
                 };
                 
                 fetch('http://localhost:8000/purchases',{
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({purchaseInfo})
+                    body: JSON.stringify(purchaseInfo)
                 }).then(()=>{
                     console.log("New Purchase Added.");
 
@@ -219,19 +226,21 @@ function CheckOutPage({currentUser,handleUser})
                                         <h2>Cart Overview</h2>
                                         <div className="border-line"></div>
                                         <div className="checkout-page-cart-overview-list">
-                                            <tbody>
-                                                {
-                                                    currentUser && handleCartList(currentUser.cart).map((item)=>
+                                            <table>
+                                                <tbody>
+                                                    {
+                                                        currentUser && handleCartList(currentUser.cart).map((item)=>
 
-                                                    <tr className="checkout-page-cart-overview-list-item-row" key={"checkout-page-cart-item-"+item.id}>
-                                                        <td className="checkout-page-cart-overview-list-item-name">{item.name}</td>
-                                                        <td className="checkout-page-cart-overview-list-item-count">{item.count}</td>
-                                                        <td className="checkout-page-cart-overview-list-item-price">{item.price}</td>
-                                                    </tr>
-                                                    
-                                                    )
-                                                }
-                                            </tbody>
+                                                        <tr className="checkout-page-cart-overview-list-item-row" key={"checkout-page-cart-item-"+item.id}>
+                                                            <td className="checkout-page-cart-overview-list-item-name">{item.name}</td>
+                                                            <td className="checkout-page-cart-overview-list-item-count">{item.count}</td>
+                                                            <td className="checkout-page-cart-overview-list-item-price">{item.price}</td>
+                                                        </tr>
+                                                        
+                                                        )
+                                                    }
+                                                </tbody>
+                                            </table>
                                         </div>
                                         <br></br>
                                         <div className="border-line"></div>

@@ -4,7 +4,7 @@ function Footer()
     return (
         <footer className="footer-container">
                 <div className="footer-list">
-                    <h2>Store Title</h2>
+                    <h2>Techni Cart</h2>
                     <p>
                         Welcome to our store where you can <br/>
                         find the electronics of your dreams.

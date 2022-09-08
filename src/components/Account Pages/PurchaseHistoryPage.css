@@ -1,0 +1,169 @@
+.purchase-history-item-container
+{
+    height: auto; width: 100%;
+
+    background-color: rgb(220, 224, 255);
+    color: black;
+
+    box-sizing: border-box;
+    padding: 20px;
+    margin: 20px 0;
+
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; align-items: flex-start;
+
+}
+.purchase-history-item-section-group
+{
+    height: 220px; width: 100%;
+
+    margin: 15px 0;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; align-items: center;
+}
+.purchase-history-item-date
+{
+    font-size: 15pt;
+    font-weight: 600;
+}
+.purchase-history-item-personal-info-section
+{
+    height: 100%; width: 34%;
+    
+    background-color: rgb(183, 190, 243);
+
+    border-radius: 10px;
+
+    box-sizing: border-box;
+    padding: 10px;
+}
+.purchase-history-item-section-label
+{
+    margin: 0;
+}
+.purchase-history-item-personal-info-list
+{
+    font-size: 13pt;
+    line-height: 22pt;
+
+    list-style: none;
+    padding-left: 20px;
+}
+.purchase-history-item-purchase-overview-section
+{
+    height: 100%; width: 34%;
+
+    background-color: rgb(183, 190, 243);
+
+    border-radius: 10px;
+    
+    box-sizing: border-box;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; align-items: flex-start;
+
+    /* border: 2px solid black; */
+}
+.purchase-history-item-overview-list
+{
+    max-height: 400px; width: auto;
+
+    overflow-y: scroll;
+}
+.purchase-history-item-overview-list-item-row
+{
+    box-sizing: border-box;
+    padding: 5px 10px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; align-items: center;
+}
+.purchase-history-item-overview-list-item-name
+{
+    color: rgb(45, 45, 163);
+    text-decoration: none;
+
+    width: 150px;
+
+    text-align: left;
+
+    font-size: 13pt;
+    font-weight: 500;
+    margin: 0;
+}
+.purchase-history-item-overview-list-item-name:hover
+{
+    color: rgb(67, 67, 223);
+    transform: scale(105%);
+
+}
+.purchase-history-item-overview-list-item-count
+{
+
+    width: 80px;
+
+    text-align: right;
+
+    font-size: 14pt;
+    font-weight: 700;
+    margin: 0;
+}
+.purchase-history-item-overview-list-item-price
+{
+    width: 100px;
+    text-align: right;
+
+    font-size: 16pt;
+    font-weight: 700;
+    margin: 0;
+}
+.purchase-history-item-overview-total
+{
+    font-size: 22pt;
+    margin: 0;
+}
+.purchase-history-item-purchase-status-section
+{
+    height: 100%; width: 30%;
+
+    display: flex;
+    justify-content: center; align-items: center;
+
+    /* border: 2px solid black; */
+
+    box-sizing: border-box;
+    padding: 10px;
+}
+.purchase-history-item-purchase-status
+{
+    font-size: 25pt;
+    font-weight: 500;
+
+    text-transform: capitalize;
+
+    padding: 10px 25px;
+    border-radius: 10px;
+}
+.purchase-history-item-purchase-status[state="pending"]
+{
+    color: rgb(134, 75, 36);
+    background-color: rgb(252, 205, 119);
+}
+.purchase-history-item-purchase-status[state="delivered"]
+{
+    color: rgb(0, 105, 0);
+    background-color: rgb(143, 219, 108);
+}
+.purchase-history-item-purchase-status[state="cancelled"]
+{
+    color: rgb(99, 0, 0);
+    background-color: rgb(255, 115, 115);
+}
