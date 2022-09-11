@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router";
+import { Link } from "react-router-dom"
 import "./CheckOutPage.css"
 
 function CheckOutPage({currentUser,handleUser})
 {
     const location = useLocation();
     const { prevPath } = location.state;
-
-    const navigate = useNavigate();
 
     const [info,setInfo] = useState({
         firstName: "",
@@ -22,7 +21,7 @@ function CheckOutPage({currentUser,handleUser})
         confirmPassword: ""
     })
 
-    const [submitted,setSubmitted] = useState("none");
+    const [submitted,setSubmitted] = useState("`none`");
 
     const [requiredFields,setRequiredFields] = useState(document.querySelectorAll(".checkout-form-input"));
 
@@ -94,6 +93,8 @@ function CheckOutPage({currentUser,handleUser})
             if(info.password!==info.confirmPassword)
             {
                 setSubmitted("confirmPasswordFailed")
+                console.log(prevPath)
+
             }
             else
             {
@@ -126,7 +127,7 @@ function CheckOutPage({currentUser,handleUser})
                 localStorage.setItem('currentUser', JSON.stringify(profileWithNewProduct));
                 handleUser(profileWithNewProduct);
 
-                navigate(prevPath);
+                setSubmitted("submitted");
                 return;
 
             }
@@ -149,10 +150,13 @@ function CheckOutPage({currentUser,handleUser})
     return (
         <div className="checkout-page">
             <div className="checkout-page-container">
-                <div className="checkout-form-container">
-                    <h1 className="checkout-form-title">Checkout</h1>
+                
+                {
+                    submitted !== "submitted"
+                    ? 
+                    <div className="checkout-form-container">
+                        <h1 className="checkout-form-title">Checkout</h1>
                         <form className="checkout-form" onSubmit={performCheckout} >
-
                             <div className="checkout-form-wrapper">
                                 <div className="checkout-form-info-column">
                                     <h2 className="checkout-form-section-group-label">Personal Information:</h2>
@@ -251,14 +255,48 @@ function CheckOutPage({currentUser,handleUser})
                                     </div>
                                 </div>
                             </div>
-                            
-                            
                             <input className="checkout-page-form-submit" type="submit" value="Confirm Payment" disabled={InputEmpty(requiredFields)}/>
-                            
                         </form>
-                       
-                </div>
+                    </div>
+                    : <CheckoutCompletedWindow prevPath={prevPath} />
+                }
+            
             </div>
+        </div>
+    )
+}
+
+
+function CheckoutCompletedWindow(prevPath)
+{
+    const [processingState,setProcessingState] = useState("processing")
+
+    useEffect(()=>{
+
+        setTimeout(() => {
+            setProcessingState("completed")
+        }, 5000);
+
+    },[])
+
+    return (
+        <div className="checkout-completed-window-container">
+            {
+                processingState === "processing"
+                ?
+                <div className="checkout-processing-container">
+                    <img className="checkout-processing-loading loading" src={require("../../img/loading.png")} />
+                    <h1>Processing Payment...</h1>
+                </div>
+                :
+                processingState === "completed" &&
+                <div className="checkout-completed-container">
+                    <img className="checkout-completed-animation" src={require("../../img/check animation.gif")}/>
+                    <Link to={prevPath["prevPath"]} className="checkout-finish-button" >Finish</Link>
+                </div>
+
+            }
+            
         </div>
     )
 }
