@@ -426,6 +426,12 @@ function ShoppingPage({productList, currentUser, handleUser})
 
         console.log("re rendered");
 
+        let currentTime = new Date();
+        let newTime = new Date(currentTime.getTime() + 2 * 60 * 60 * 1000);
+        console.log(currentTime);
+        console.log(newTime);
+        
+
         return function()
         {
             window.removeEventListener('mousemoved',moveInfoBox);

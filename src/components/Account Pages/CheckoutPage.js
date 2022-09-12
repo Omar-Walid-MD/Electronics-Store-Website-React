@@ -105,9 +105,9 @@ function CheckOutPage({currentUser,handleUser})
                     id: "purchase-"+makeId(10),
                     total: calculateTotal(),
                     purchasedProducts: handleCartList(currentUser.cart),
-                    purchaseDate: Date()
+                    purchaseDate: new Date(),
+                    estimatedDeliveryDate: new Date(new Date().getTime() + 2 * 60 * 60 * 1000)
                 }
-
 
                 let profileWithNewProduct = {
                     ...currentUser,
@@ -115,14 +115,28 @@ function CheckOutPage({currentUser,handleUser})
                     purchases: [...currentUser.purchases, purchaseInfo.id]
                 };
                 
-                fetch('http://localhost:8000/purchases',{
+                const axios = require('axios');
+
+                axios.put('http://localhost:8000/users/'+currentUser.id,
+                    profileWithNewProduct
+                )
+                .then(resp =>{
+                    console.log("Updated user data");
+                    
+                    fetch('http://localhost:8000/purchases',{
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(purchaseInfo)
-                }).then(()=>{
-                    console.log("New Purchase Added.");
+                    }).then(()=>{
+                        console.log("New Purchase Added.");
 
-                })
+                    })
+                }).catch(error => {
+                    console.log(error);
+                });
+
+                
+
 
                 localStorage.setItem('currentUser', JSON.stringify(profileWithNewProduct));
                 handleUser(profileWithNewProduct);
